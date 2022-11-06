@@ -4,7 +4,8 @@ namespace ToolsMarket.Business.Interfaces
 {
     public interface IUsuarioRepository : IRepository<Usuario>
     {
-        Task<IEnumerable<Usuario>> ObterPedidosUsuario(Guid usuarioId);
-        Task<IEnumerable<Usuario>> ObterPedidosUsuarios();
+        Task<Usuario> ObterUsuarioEndereco(Guid id);
+        Task<Usuario> ObterUsuarioPedido(Guid id);
+        Task<IEnumerable<Usuario>> ObterUsuarioPedidos();
     }
 }

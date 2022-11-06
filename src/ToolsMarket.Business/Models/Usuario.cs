@@ -4,6 +4,7 @@ namespace ToolsMarket.Business.Models
 {
     public class Usuario : Entity
     {
+        public Guid PedidoId { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Genero { get; set; }
@@ -14,6 +15,6 @@ namespace ToolsMarket.Business.Models
 
         // Relations
         public Endereco Endereco { get; set; }
-        public IEnumerable<Pedido>? Pedidos { get; set; } = new List<Pedido>();
+        public IEnumerable<Pedido>? Pedido { get; set; } = new List<Pedido>();
     }
 }

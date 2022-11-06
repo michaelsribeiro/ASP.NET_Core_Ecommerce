@@ -31,7 +31,7 @@ namespace ToolsMarket.Data.Mapping
                    .WithOne(u => u.Usuario);
 
             // Relação 1:N Usuário => Pedidos
-            builder.HasMany(p => p.Pedidos)
+            builder.HasMany(p => p.Pedido)
                    .WithOne(u => u.Usuario)
                    .HasForeignKey(u => u.UsuarioId);
 

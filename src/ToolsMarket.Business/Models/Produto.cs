@@ -9,7 +9,7 @@ namespace ToolsMarket.Business.Models
 {
     public class Produto : Entity
     {
-        public int CategoriaId { get; set; }
+        public Guid CategoriaId { get; set; }
         public Guid FornecedorId { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
