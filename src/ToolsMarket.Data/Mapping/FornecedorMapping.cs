@@ -25,6 +25,8 @@ namespace ToolsMarket.Data.Mapping
             builder.HasMany(p => p.Produtos)
                    .WithOne(c => c.Fornecedor)
                    .HasForeignKey(c => c.FornecedorId);
+
+            builder.ToTable("Fornecedores");
         }
     }
 }

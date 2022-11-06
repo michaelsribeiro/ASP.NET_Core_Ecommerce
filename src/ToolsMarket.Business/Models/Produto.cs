@@ -11,6 +11,7 @@ namespace ToolsMarket.Business.Models
     {
         public Guid CategoriaId { get; set; }
         public Guid FornecedorId { get; set; }
+        public Guid CarrinhoId { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string Marca { get; set; }
@@ -22,5 +23,6 @@ namespace ToolsMarket.Business.Models
         // Relations
         public Categoria Categoria { get; set; }
         public Fornecedor Fornecedor { get; set; }
+        public Carrinho Carrinho { get; set; }
     }
 }

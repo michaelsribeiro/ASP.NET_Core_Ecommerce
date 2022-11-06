@@ -14,6 +14,13 @@ namespace ToolsMarket.Data.Mapping
                    .IsRequired()
                    .HasColumnType("int");
 
+            builder.HasOne(p => p.Pedido)
+                   .WithOne(c => c.Carrinho);
+
+            builder.HasMany(p => p.Produtos)
+                   .WithOne(c => c.Carrinho)
+                   .HasForeignKey(c => c.CarrinhoId);
+
             builder.ToTable("Carrinhos");
         }
     }

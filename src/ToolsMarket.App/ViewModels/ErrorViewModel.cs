@@ -1,4 +1,4 @@
-namespace ToolsMarket.App.Models
+namespace ToolsMarket.App.ViewModels
 {
     public class ErrorViewModel
     {

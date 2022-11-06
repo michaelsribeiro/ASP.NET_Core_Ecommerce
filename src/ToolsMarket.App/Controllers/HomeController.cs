@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using ToolsMarket.App.Models;
+using ToolsMarket.App.ViewModels;
 
 namespace ToolsMarket.App.Controllers
 {

@@ -12,7 +12,7 @@ BEGIN TRANSACTION;
 GO
 
 CREATE TABLE [Categorias] (
-    [Id] int NOT NULL IDENTITY,
+    [Id] uniqueidentifier NOT NULL,
     [NomeCategoria] varchar(100) NOT NULL,
     CONSTRAINT [PK_Categorias] PRIMARY KEY ([Id])
 );
@@ -29,6 +29,7 @@ GO
 
 CREATE TABLE [Usuarios] (
     [Id] uniqueidentifier NOT NULL,
+    [PedidoId] uniqueidentifier NOT NULL,
     [Nome] varchar(100) NOT NULL,
     [Cpf] varchar(11) NOT NULL,
     [Genero] nvarchar(max) NOT NULL,
@@ -57,10 +58,6 @@ CREATE TABLE [Pedidos] (
     [Id] uniqueidentifier NOT NULL,
     [UsuarioId] uniqueidentifier NOT NULL,
     [DataVenda] datetime NOT NULL,
-    [NomeCliente] varchar(100) NOT NULL,
-    [Quantidade] int NOT NULL,
-    [ValorUnitario] decimal(18,2) NOT NULL,
-    [ValorTotal] decimal(18,2) NOT NULL,
     [Frete] decimal(18,2) NULL,
     [StatusPedido] int NOT NULL,
     CONSTRAINT [PK_Pedidos] PRIMARY KEY ([Id]),
@@ -72,6 +69,7 @@ CREATE TABLE [Carrinhos] (
     [Id] uniqueidentifier NOT NULL,
     [PedidoId] uniqueidentifier NOT NULL,
     [Quantidade] int NOT NULL,
+    [ValorTotal] decimal(18,2) NOT NULL,
     CONSTRAINT [PK_Carrinhos] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Carrinhos_Pedidos_PedidoId] FOREIGN KEY ([PedidoId]) REFERENCES [Pedidos] ([Id])
 );
@@ -79,8 +77,9 @@ GO
 
 CREATE TABLE [Produtos] (
     [Id] uniqueidentifier NOT NULL,
-    [CategoriaId] int NOT NULL,
+    [CategoriaId] uniqueidentifier NOT NULL,
     [FornecedorId] uniqueidentifier NOT NULL,
+    [CarrinhoId] uniqueidentifier NOT NULL,
     [Nome] varchar(100) NOT NULL,
     [Descricao] varchar(1000) NOT NULL,
     [Marca] varchar(100) NOT NULL,
@@ -88,15 +87,14 @@ CREATE TABLE [Produtos] (
     [ValorUnitario] decimal(18,2) NOT NULL,
     [Imagem] varchar(100) NOT NULL,
     [Status] int NOT NULL,
-    [CarrinhoId] uniqueidentifier NULL,
     CONSTRAINT [PK_Produtos] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Produtos_Carrinhos_CarrinhoId] FOREIGN KEY ([CarrinhoId]) REFERENCES [Carrinhos] ([Id]),
-    CONSTRAINT [FK_Produtos_Categorias_CategoriaId] FOREIGN KEY ([CategoriaId]) REFERENCES [Categorias] ([Id]),
+    CONSTRAINT [FK_Produtos_Categorias_CategoriaId] FOREIGN KEY ([CategoriaId]) REFERENCES [Categorias] ([Id]) ON DELETE NO ACTION,
     CONSTRAINT [FK_Produtos_Fornecedores_FornecedorId] FOREIGN KEY ([FornecedorId]) REFERENCES [Fornecedores] ([Id]) ON DELETE NO ACTION
 );
 GO
 
-CREATE INDEX [IX_Carrinhos_PedidoId] ON [Carrinhos] ([PedidoId]);
+CREATE UNIQUE INDEX [IX_Carrinhos_PedidoId] ON [Carrinhos] ([PedidoId]);
 GO
 
 CREATE UNIQUE INDEX [IX_Enderecos_UsuarioId] ON [Enderecos] ([UsuarioId]);
@@ -115,7 +113,7 @@ CREATE INDEX [IX_Produtos_FornecedorId] ON [Produtos] ([FornecedorId]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20221105195503_Initial', N'6.0.10');
+VALUES (N'20221106231429_Initial', N'6.0.10');
 GO
 
 COMMIT;

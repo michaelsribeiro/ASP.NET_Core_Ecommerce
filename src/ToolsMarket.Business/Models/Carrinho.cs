@@ -10,9 +10,10 @@ namespace ToolsMarket.Business.Models
     {
         public Guid PedidoId { get; set; }
         public int Quantidade { get; set; }
+        public decimal ValorTotal { get; set; }
 
         // Relations
         public Pedido? Pedido { get; set; }
-        public IEnumerable<Produto> ItensPedido { get; set; } = new List<Produto>();
+        public IEnumerable<Produto> Produtos { get; set; } = new List<Produto>();
     }
 }

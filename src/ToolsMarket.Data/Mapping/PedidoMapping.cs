@@ -14,17 +14,8 @@ namespace ToolsMarket.Data.Mapping
                    .IsRequired()
                    .HasColumnType("datetime");
 
-            builder.Property(p => p.NomeCliente)
-                   .IsRequired()
-                   .HasColumnType("varchar(100)");
-
-            builder.Property(p => p.Quantidade)
-                   .IsRequired()
-                   .HasColumnType("int");
-
-            builder.HasMany(c => c.Carrinhos)
-                   .WithOne(p => p.Pedido)
-                   .HasForeignKey(p => p.PedidoId);
+            builder.HasOne(c => c.Carrinho)
+                   .WithOne(p => p.Pedido);
 
             builder.ToTable("Pedidos");
             

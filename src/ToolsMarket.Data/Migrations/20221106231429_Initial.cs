@@ -13,8 +13,7 @@ namespace ToolsMarket.Data.Migrations
                 name: "Categorias",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NomeCategoria = table.Column<string>(type: "varchar(100)", nullable: false)
                 },
                 constraints: table =>
@@ -41,6 +40,7 @@ namespace ToolsMarket.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PedidoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     Cpf = table.Column<string>(type: "varchar(11)", nullable: false),
                     Genero = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -83,10 +83,6 @@ namespace ToolsMarket.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DataVenda = table.Column<DateTime>(type: "datetime", nullable: false),
-                    NomeCliente = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
-                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Frete = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     StatusPedido = table.Column<int>(type: "int", nullable: false)
                 },
@@ -106,7 +102,8 @@ namespace ToolsMarket.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PedidoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false)
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,16 +120,16 @@ namespace ToolsMarket.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoriaId = table.Column<int>(type: "int", nullable: false),
+                    CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FornecedorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CarrinhoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(1000)", nullable: false),
                     Marca = table.Column<string>(type: "varchar(100)", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
                     ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Imagem = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    CarrinhoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -157,7 +154,8 @@ namespace ToolsMarket.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Carrinhos_PedidoId",
                 table: "Carrinhos",
-                column: "PedidoId");
+                column: "PedidoId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Enderecos_UsuarioId",
