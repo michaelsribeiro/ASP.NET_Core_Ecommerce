@@ -9,6 +9,7 @@ namespace ToolsMarket.Business.Models
 {
     public class Pedido : Entity
     {
+        public Guid UsuarioId { get; set; }
         public DateTime DataVenda { get; set; }
         public string NomeCliente { get; set; }
         public int Quantidade { get; set; }

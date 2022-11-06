@@ -1,4 +1,6 @@
-﻿namespace ToolsMarket.Business.Models
+﻿using ToolsMarket.Business.Models.Enum;
+
+namespace ToolsMarket.Business.Models
 {
     public class Usuario : Entity
     {
@@ -8,6 +10,7 @@
         public string Telefone { get; set; }
         public string Email { get; set; }
         public string? Imagem { get; set; }
+        public TipoUsuario TipoUsuario { get; set; }
 
         // Relations
         public Endereco Endereco { get; set; }

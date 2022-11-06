@@ -8,8 +8,7 @@ namespace ToolsMarket.Business.Models.Enum
 {
     public enum TipoUsuario : int
     {
-        Comum = 0,
-        Funcionario = 1,
-        Administrador = 10
+        Cliente = 1,
+        Administrador = 2
     }
 }

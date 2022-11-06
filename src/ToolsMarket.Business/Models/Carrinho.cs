@@ -8,6 +8,7 @@ namespace ToolsMarket.Business.Models
 {
     public class Carrinho : Entity
     {
+        public Guid PedidoId { get; set; }
         public int Quantidade { get; set; }
 
         // Relations

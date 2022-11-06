@@ -1,9 +1,8 @@
 ﻿
 namespace ToolsMarket.Business.Models
 {
-    public class Categoria
+    public class Categoria : Entity
     {
-        public int Id { get; set; }
         public string NomeCategoria { get; set; }
 
         // Relations
