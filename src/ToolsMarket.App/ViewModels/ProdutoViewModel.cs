@@ -41,6 +41,9 @@ namespace ToolsMarket.App.ViewModels
         public decimal ValorUnitario { get; set; }
         public string Imagem { get; set; }
 
+        [DisplayName("Imagem")]
+        public IFormFile ImageProduto { get; set; }
+
         public StatusProduto Status { get; set; }
 
         // Relations

@@ -1,45 +1,140 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="vh-100">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ToolsMarket.App</title>
+    <title>@ViewData["Title"] - Show de Ferramentas</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ToolsMarket.App.styles.css" asp-append-version="true" />
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
 </head>
-<body>
+<body class="d-flex flex-column">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ToolsMarket.App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
+        <div class="container pt-4 pb-4 d-flex flex-row justify-content-between">
+            <div class="logo">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img style="width: 150px" src="~/images/logo.png"></a>
+            </div>
+            <div class="searchbox" style="width: 50%">
+                <div class="input-group d-flex justify-content-center align-items-center">
+                    <div class="form-outline" style="max-width: 90%; width: 100%">
+                        <input type="search" id="form1" class="form-control" placeholder="Search" />
+                    </div>
+                    <button type="submit" class="btn text-white outline-none" style="background-color: #ffd333;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="options-header d-flex flex-row">
+                <partial name="_LoginPartial" />
+            </div>
+
+        </div>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow d-flex flex-column p-0">
+            <div class="container-fluid w-100 pt-2 pb-2" style="background-color: #ffd333">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex w-80">
+                        <ul class="navbar-nav w-100 justify-content-evenly">
+                            <li class="nav-item">
+                                <a class="nav-link text-black-50 fw-bold" asp-area="" asp-controller="Categoria" asp-action="Ferramentas">Ferramentas Manuais</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-black-50 fw-bold" asp-area="" asp-controller="Categoria" asp-action="Ferramentas">Pneumáticas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-black-50 fw-bold" asp-area="" asp-controller="Categoria" asp-action="Automotiva">Automotivas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-black-50 fw-bold" asp-area="" asp-controller="Categoria" asp-action="Acessorios">Acessórios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-black-50 fw-bold" asp-area="" asp-controller="Categoria" asp-action="Utilidades">Casa e Utilidades</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/images/banner.webp" class="d-block w-100">
+            </div>
+        </div>
+    </div>
+    <div class="container" style="overflow: none">
+        <div class="banner-sm w-100 d-flex justify-content-center p-3">
+            <img src="~/images/banner-pgt.webp" />
+            </div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - ToolsMarket.App - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer position-static">
+        <div class="container-fluid" style="background-color: #ffd333 !important">
+            <div class="container pt-5 pb-5 d-flex flex-row justify-content-between">
+                <div class="link-group">
+                    <ul class="navbar-nav">
+                        <h6 class="mb-3 text-uppercase">Categorias</h6>
+                        <li class="nav-item" style="line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Ferramentas">Ferramentas</a>
+                        </li>
+                        <li class="nav-item" style=" line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Acessorios">Acessórios</a>
+                        </li>
+                        <li class="nav-item" style=" line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Automotiva">Automotivas</a>
+                        </li>
+                        <li class="nav-item" style=" line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Utilidades">Casa e Utilidades</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <ul class="navbar-nav">
+                        <h6 class="mb-3 text-uppercase">Institucional</h6>
+                        <li class="nav-item" style="line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Ferramentas">Ferramentas</a>
+                        </li>
+                        <li class="nav-item" style=" line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Acessorios">Acessórios</a>
+                        </li>
+                        <li class="nav-item" style=" line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Automotiva">Automotivas</a>
+                        </li>
+                        <li class="nav-item" style=" line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Utilidades">Casa e Utilidades</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <ul class="navbar-nav">
+                        <h6 class="mb-3 text-uppercase">Atendimento</h6>
+                        <li class="nav-item" style="line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Ferramentas">Ferramentas</a>
+                        </li>
+                        <li class="nav-item" style=" line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Acessorios">Acessórios</a>
+                        </li>
+                        <li class="nav-item" style=" line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Automotiva">Automotivas</a>
+                        </li>
+                        <li class="nav-item" style=" line-height: 1.5">
+                            <a class="nav-link text-dark p-0" style="font-size: .8rem" asp-area="" asp-controller="Categoria" asp-action="Utilidades">Casa e Utilidades</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-white">
+            <div class="container text-center" style="font-size: .7rem;">
+                Show de Ferramentas LTDA - CNPJ 12.345.678/0001-99 &copy; Todos os direitos reservados. 2022
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

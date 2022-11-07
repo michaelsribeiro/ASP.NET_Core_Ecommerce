@@ -10,8 +10,6 @@ namespace ToolsMarket.App.ViewModels
         [Key]
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-        [DisplayName("Pedido")]
         public Guid PedidoId { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
@@ -35,6 +33,9 @@ namespace ToolsMarket.App.ViewModels
         public string Email { get; set; }
 
         public string? Imagem { get; set; }
+
+        [DisplayName("Imagem")]
+        public IFormFile ImageUsuario { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
 
         // Relations
