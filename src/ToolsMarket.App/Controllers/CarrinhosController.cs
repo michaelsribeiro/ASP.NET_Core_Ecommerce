@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ToolsMarket.App.Data;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;

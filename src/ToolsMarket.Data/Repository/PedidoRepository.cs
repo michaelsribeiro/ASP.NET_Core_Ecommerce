@@ -15,5 +15,18 @@ namespace ToolsMarket.Data.Repository
                              .Include(u => u.Carrinho)
                              .ToListAsync();
         }
+
+        public async Task<IEnumerable<Pedido>> ObterPedidos()
+        {
+            return await Db.Pedidos.AsNoTracking()
+                                   .ToListAsync();
+        }
+
+        public async Task<Pedido> ObterPedidoUsuario(Guid id)
+        {
+            return await Db.Pedidos.AsNoTracking()
+                                   .Include(u => u.Usuario)
+                                   .FirstOrDefaultAsync(p => p.Id == id);
+        }
     }
 }

@@ -34,8 +34,8 @@ namespace ToolsMarket.App.ViewModels
 
         public string? Imagem { get; set; }
 
-        [DisplayName("Imagem")]
-        public IFormFile ImageUsuario { get; set; }
+        //[DisplayName("Imagem")]
+        //public IFormFile ImageUsuario { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
 
         // Relations
