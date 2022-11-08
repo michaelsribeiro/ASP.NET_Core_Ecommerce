@@ -8,7 +8,7 @@ namespace ToolsMarket.App.AutoMapper
     {
         public AutoMapperConfig()
         {
-            CreateMap<Usuario, UsuarioViewModel>().ReverseMap();
+            //CreateMap<Usuario, UsuarioViewModel>().ReverseMap();
             CreateMap<Produto, ProdutoViewModel>().ReverseMap();
             CreateMap<Pedido, PedidoViewModel>().ReverseMap();
             CreateMap<Fornecedor, FornecedorViewModel>().ReverseMap();

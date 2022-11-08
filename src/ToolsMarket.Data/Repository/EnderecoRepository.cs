@@ -14,10 +14,24 @@ namespace ToolsMarket.Data.Repository
     {
         public EnderecoRepository(CustomDbContext db) : base(db) {}
 
-        public Task<Endereco> ObterEnderecoPorUsuario(Guid usuarioId)
+        public async Task<Endereco> ObterEnderecoPorUsuario(Guid usuarioId)
         {
-            return Db.Enderecos.AsNoTracking()
+            return await Db.Enderecos.AsNoTracking()
                                .FirstOrDefaultAsync(e => e.Id == usuarioId);
+        }
+
+        public async Task<IEnumerable<Endereco>> ObterEnderecos()
+        {
+            return await Db.Enderecos.AsNoTracking()
+                               .OrderBy(c => c.Bairro)
+                               .ToListAsync();
+        }
+
+        public async Task<Endereco> ObterEnderecoUsuario(Guid id)
+        {
+            return await Db.Enderecos.AsNoTracking()
+                                     .Include(u => u.Usuario)
+                                     .FirstOrDefaultAsync(e => e.Id == id);
         }
     }
 }

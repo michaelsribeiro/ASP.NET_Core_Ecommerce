@@ -5,6 +5,7 @@ namespace ToolsMarket.Business.Interfaces
     public interface ICarrinhoRepository : IRepository<Carrinho>
     {
         Task<IEnumerable<Carrinho>> ObterCarrinhoProdutos();
+        Task<Carrinho> ObterCarrinhoProduto(Guid id);
     }
 }
  

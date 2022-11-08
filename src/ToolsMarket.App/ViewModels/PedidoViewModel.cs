@@ -23,7 +23,7 @@ namespace ToolsMarket.App.ViewModels
         public StatusPedido StatusPedido { get; set; }
 
         // Relations
-        public UsuarioViewModel Usuario { get; set; }
+        //public UsuarioViewModel Usuario { get; set; }
         public CarrinhoViewModel Carrinho { get; set; }
     }
 }

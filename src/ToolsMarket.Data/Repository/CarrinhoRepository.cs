@@ -12,8 +12,15 @@ namespace ToolsMarket.Data.Repository
         public async Task<IEnumerable<Carrinho>> ObterCarrinhoProdutos()
         {
             return await Db.Carrinhos.AsNoTracking()
-                               .Include(p => p.Produtos)
-                               .ToListAsync();
+                                     .Include(p => p.Produtos)
+                                     .ToListAsync();
+        }
+
+        public async Task<Carrinho> ObterCarrinhoProduto(Guid id)
+        {
+            return await Db.Carrinhos.AsNoTracking()
+                                     .Include(p => p.Produtos)
+                                     .FirstOrDefaultAsync(c => c.Id == id);
         }
     }
 }

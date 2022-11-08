@@ -15,5 +15,19 @@ namespace ToolsMarket.Data.Repository
                                 .Include(p => p.Produtos)
                                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Categoria>> ObterCategorias()
+        {
+            return await Db.Categorias.AsNoTracking()
+                                      .OrderBy(c => c.NomeCategoria)
+                                      .ToListAsync();
+        }
+
+        public async Task<Categoria> ObterCategoriaProduto(Guid id)
+        {
+            return await Db.Categorias.AsNoTracking()
+                                      .Include(p => p.Produtos)
+                                      .FirstOrDefaultAsync(c => c.Id == id);                                      
+        }
     }
 }
