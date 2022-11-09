@@ -29,7 +29,7 @@ namespace ToolsMarket.App.ViewModels
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [StringLength(100, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres.", MinimumLength = 3)]
-        [DisplayName("Marca")]
+        [DisplayName("Marca:")]
         public string Marca { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
@@ -39,11 +39,12 @@ namespace ToolsMarket.App.ViewModels
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [DisplayName("Valor Unitário")]
         public decimal ValorUnitario { get; set; }
-        public string Imagem { get; set; }
+        public string? Imagem { get; set; }
 
-        //[DisplayName("Imagem")]
-        //public IFormFile ImageProduto { get; set; }
+        [DisplayName("Imagem")]        
+        public IFormFile? ImageProduto { get; set; }
 
+        [DisplayName("Disponibilidade:")]
         public StatusProduto? Status { get; set; }
 
         // Relations

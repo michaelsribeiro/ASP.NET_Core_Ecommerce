@@ -30,6 +30,10 @@ namespace ToolsMarket.Data.Mapping
                    .WithMany(p => p.Produtos)
                    .HasForeignKey(f => f.FornecedorId);
 
+            builder.HasOne(f => f.Categoria)
+                    .WithMany(p => p.Produtos)
+                    .HasForeignKey(f => f.CategoriaId);
+
             builder.ToTable("Produtos");
         }
     }

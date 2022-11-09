@@ -1,72 +1,39 @@
 ﻿@model ToolsMarket.App.ViewModels.ProdutoViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = @Html.DisplayFor(model => model.Nome);
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>ProdutoViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
+<div class="container mt-5 mb-5">
+    <div class="row mb-5">
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <img src="~/images/produtos/@Model.Imagem" alt="@Model.Imagem" style="width:400px; height:400px;" />
+        </div>
+        <div class="col-md-6">
+            <div>
+                <h6 style="font-size: 1.05rem">@Html.DisplayFor(model => model.Nome)</h6>
+            </div>           
+            <div class="text-end" style="padding: 15px 0; font-size: .8rem; border-bottom: 2px solid #dbdee1">
+                @Html.DisplayNameFor(model => model.Marca)
+                <strong class="fw-bolder">@Html.DisplayFor(model => model.Fornecedor.Nome)</strong>
+            </div>   
+            <div class="pt-3 pb-3">
+                <strong class="fs-2 text-warning">@Html.DisplayFor(model => model.ValorUnitario)</strong>
+            </div>
+            <div class="action">
+                <input class="qtd" type="text" value="1" placeholder="1"/>
+                <button type="buttom" class="btn" value="Comprar" asp-action="Comprar">Comprar</button>
+            </div>
+            <div class="pt-3 pb-3" style="font-size: .8rem;">
+                <span style="font-size: .7rem">@Html.DisplayNameFor(model => model.Status)</span>
+                <strong style="font-size: .9rem; font-weight: bold; color: #f7812b">@Html.DisplayFor(model => model.Status)</strong>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-2">
+        <h5 class="fw-normal">DESCRIÇÃO DO PRODUTO</h5>
+        <div class="col-sm-12" contenteditable="true">
             @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Marca)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Marca)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantidade)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantidade)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ValorUnitario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ValorUnitario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Imagem)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Imagem)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.NomeCategoria)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fornecedor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fornecedor.Cnpj)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+        </div>
+    </div>   
 </div>

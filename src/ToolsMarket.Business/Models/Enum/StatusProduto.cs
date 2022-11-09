@@ -8,7 +8,7 @@ namespace ToolsMarket.Business.Models.Enum
 {
     public enum StatusProduto
     {
-        Indisponivel,
-        Estoque
+        Indisponível,
+        Imediata
     }
 }

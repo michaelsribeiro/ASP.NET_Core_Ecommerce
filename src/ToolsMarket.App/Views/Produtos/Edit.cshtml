@@ -10,18 +10,29 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form enctype="multipart-formdata" asp-action="Edit">
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="CategoriaId" class="control-label"></label>
-                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
+                <select asp-for="CategoriaId" class="form-control" asp-items="@(new SelectList(Model.Categorias, "Id", "NomeCategoria"))">
+                    <option></option>
+                </select>
                 <span asp-validation-for="CategoriaId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FornecedorId" class="control-label"></label>
-                <select asp-for="FornecedorId" class="form-control" asp-items="ViewBag.FornecedorId"></select>
+                <select asp-for="FornecedorId" class="form-control" asp-items="@(new SelectList(Model.Fornecedores, "Id", "Nome"))">
+                    <option></option>
+                </select>
                 <span asp-validation-for="FornecedorId" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ImageProduto" class="control-label"></label>
+                <div class="custom-file">
+                    <input type="file" class="form-control" id="ImageProduto" asp-for="ImageProduto" />
+                    <label style="display: none" id="img_nome"></label>
+                </div>
+                <span asp-validation-for="ImageProduto" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
@@ -30,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
+                <textarea rows="5" asp-for="Descricao" class="form-control" ></textarea>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,28 +58,21 @@
                 <label asp-for="ValorUnitario" class="control-label"></label>
                 <input asp-for="ValorUnitario" class="form-control" />
                 <span asp-validation-for="ValorUnitario" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imagem" class="control-label"></label>
-                <input asp-for="Imagem" class="form-control" />
-                <span asp-validation-for="Imagem" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control"></select>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
+            </div>            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $("#ImageProduto").change(() => {
+            $("img_nome").text(this.files[0].name);
+            $("img_nome")[0].style.display = block;
+        });
+        $("#ImageProduto").attr("data-val", "true");
+    </script>
 }

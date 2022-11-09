@@ -14,10 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddDbContext<CustomDbContext>(options =>
-{
-    options.UseSqlServer(connectionString);
-    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-});    
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

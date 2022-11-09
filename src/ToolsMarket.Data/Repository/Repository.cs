@@ -34,15 +34,22 @@ namespace ToolsMarket.Data.Repository
 
         public virtual async Task Adicionar(TEntity entity)
         {
-            Db.Entry(entity).State = EntityState.Detached;
-            Db.Set<TEntity>().Add(entity);
-            await Db.SaveChangesAsync();
+            //Db.Entry(entity).State = EntityState.Detached;
+            //Db.Set<TEntity>().Add(entity);
+            //await Db.SaveChangesAsync();
+
+            DbSet.Add(entity);
+            await SaveChanges();
         }
 
         public virtual async Task Atualizar(TEntity entity)
         {
-            DbSet.Update(entity);
-            await SaveChanges();
+            Db.Entry(entity).State = EntityState.Detached;
+            Db.Set<TEntity>().Update(entity);
+            await Db.SaveChangesAsync();
+
+            //DbSet.Update(entity);
+            //await SaveChanges();
         }
 
         public virtual async Task Remover(Guid id)

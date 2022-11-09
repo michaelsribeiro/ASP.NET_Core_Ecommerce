@@ -18,7 +18,7 @@ body {
 }
 
 .mid-banner:hover {
-    filter: blur(5px);
+    filter: blur(.8px);
     transition: .3s ease;
 }
 
@@ -82,7 +82,7 @@ body {
             margin: 0;
             padding: 0 10px;
             font-size: .7rem;
-            text-align: center; 
+            text-align: center;
             color: #545454;
         }
 
@@ -101,3 +101,39 @@ body {
                 border-radius: 10px;
                 border: 1px solid #dbdee1;
             }
+
+            .card-group .container .card-action .btn {
+                background: #f7812b;
+                color: #fff;
+                border: none;
+            }
+
+main .container .action {
+    display: flex;
+    flex-direction: row;
+    justify-content: initial;
+}
+
+
+    main .container .action input {
+        width: 80px;
+        height: 50px;
+        margin-right: 20px;
+        text-align: center;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        background: #eee;
+    }
+
+    main .container .action .btn {
+        padding: 10px 50px;
+        margin-right: 20px;
+        text-align: center;
+        outline: none;
+        border-radius: 5px;
+        background: #f7812b;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+    }

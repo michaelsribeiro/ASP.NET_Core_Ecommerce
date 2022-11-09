@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
@@ -47,18 +48,52 @@ namespace ToolsMarket.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ProdutoViewModel produtoViewModel)
+        public async Task<IActionResult> Create([FromForm]ProdutoViewModel produtoViewModel)
         {
-            if (!ModelState.IsValid) return View(produtoViewModel);
+            try
+            {
+                produtoViewModel = await ObterCategorias(produtoViewModel);
 
-            await _produtoRepository.Adicionar(_mapper.Map<Produto>(produtoViewModel));
+                if (!ModelState.IsValid) return View(produtoViewModel);
 
-            return RedirectToAction(nameof(Index));
+                var imgPrefixo = Guid.NewGuid() + "_";
+
+                if (!await UploadArquivo(produtoViewModel.ImageProduto, imgPrefixo))
+                {
+                    return View(produtoViewModel);
+                }
+
+                produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImageProduto.FileName;
+
+                var domain = new Produto(
+                    produtoViewModel.CategoriaId,
+                    produtoViewModel.FornecedorId,
+                    produtoViewModel.Nome,
+                    produtoViewModel.Descricao,
+                    produtoViewModel.Marca,
+                    produtoViewModel.Quantidade,
+                    produtoViewModel.ValorUnitario,
+                    produtoViewModel.Imagem
+                    );
+
+                await _produtoRepository.Adicionar(domain);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception err)
+            {
+                ModelState.AddModelError("erro", err.Message);
+                return View(produtoViewModel);
+            }
         }
 
         public async Task<IActionResult> Edit(Guid id)
         {
+            var produto= await ObterCategorias(new ProdutoViewModel());
+
             var produtoViewModel = await ObterProdutoFornecedor(id);
+            produtoViewModel.Categorias = produto.Categorias;
+            produtoViewModel.Fornecedores = produto.Fornecedores;
 
             if (produtoViewModel == null) return NotFound();
 
@@ -71,10 +106,29 @@ namespace ToolsMarket.App.Controllers
         {
             if (id != produtoViewModel.Id) return NotFound();
 
+            var produtoAtualizacao = await ObterProdutoFornecedor(id);
+            produtoViewModel.Fornecedor = produtoAtualizacao.Fornecedor;
+            produtoViewModel.Categoria = produtoAtualizacao.Categoria;
+            produtoViewModel.Imagem = produtoAtualizacao.Imagem;
+
             if (!ModelState.IsValid) return NotFound();
 
-            var produto = _mapper.Map<Produto>(produtoViewModel);
-            await _produtoRepository.Atualizar(produto);
+            if (produtoViewModel.ImageProduto != null)
+            {
+                var imgPrefixo = Guid.NewGuid() + "_";
+                if (!await UploadArquivo(produtoViewModel.ImageProduto, imgPrefixo))
+                {
+                    return View(produtoViewModel);
+                }
+
+                produtoAtualizacao.Imagem = imgPrefixo + produtoViewModel.ImageProduto.FileName;
+            }
+
+            produtoAtualizacao.Nome = produtoViewModel.Nome;
+            produtoAtualizacao.Descricao = produtoViewModel.Descricao;
+            produtoAtualizacao.ValorUnitario = produtoViewModel.ValorUnitario;
+
+            await _produtoRepository.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));
 
             return RedirectToAction(nameof(Index));
         }
@@ -101,7 +155,9 @@ namespace ToolsMarket.App.Controllers
 
         private async Task<ProdutoViewModel> ObterProdutoFornecedor(Guid id)
         {
-            return _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedor(id));
+            var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedor(id));
+            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
+            return produto;
         }
 
         private async Task<ProdutoViewModel> ObterCategorias(ProdutoViewModel produto)
@@ -109,6 +165,25 @@ namespace ToolsMarket.App.Controllers
             produto.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
             produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
             return produto;
+        }
+
+        private async Task<bool> UploadArquivo(IFormFile arquivo, string imgPrefixo)
+        {
+            if (arquivo.Length <= 0) return false;
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/produtos", imgPrefixo + arquivo.FileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                ModelState.AddModelError(string.Empty, "Já existe um arquivo com este nome!");
+                return false;
+            }
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await arquivo.CopyToAsync(stream);
+            }
+
+            return true;
         }
     }
 }
