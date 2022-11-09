@@ -50,10 +50,12 @@ namespace ToolsMarket.App.ViewModels
 
         [DisplayName("Categoria")]
         public CategoriaViewModel Categoria { get; set; }
+        public IEnumerable<CategoriaViewModel> Categorias { get; set; } = new List<CategoriaViewModel>();
 
         [DisplayName("Fornecedor")]
         public FornecedorViewModel Fornecedor { get; set; }
+        public IEnumerable<FornecedorViewModel> Fornecedores { get; set; } = new List<FornecedorViewModel>();
 
-        public Carrinho Carrinho { get; set; }
+        public Carrinho? Carrinho { get; set; }
     }
 }

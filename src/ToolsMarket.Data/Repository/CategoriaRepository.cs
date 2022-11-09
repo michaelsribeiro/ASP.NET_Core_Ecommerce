@@ -19,7 +19,6 @@ namespace ToolsMarket.Data.Repository
         public async Task<IEnumerable<Categoria>> ObterCategorias()
         {
             return await Db.Categorias.AsNoTracking()
-                                      .OrderBy(c => c.NomeCategoria)
                                       .ToListAsync();
         }
 

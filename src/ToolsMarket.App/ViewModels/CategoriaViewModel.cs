@@ -15,6 +15,6 @@ namespace ToolsMarket.App.ViewModels
 
         // Relations
 
-        public IEnumerable<ProdutoViewModel>? Produtos { get; set; }
+        public IEnumerable<ProdutoViewModel> Produtos { get; set; }
     }
 }

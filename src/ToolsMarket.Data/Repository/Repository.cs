@@ -11,7 +11,7 @@ namespace ToolsMarket.Data.Repository
         protected readonly CustomDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        public Repository(CustomDbContext db)
+        protected Repository(CustomDbContext db)
         {
             Db = db;
             DbSet = Db.Set<TEntity>();

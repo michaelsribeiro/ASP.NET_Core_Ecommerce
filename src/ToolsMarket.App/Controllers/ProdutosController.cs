@@ -9,11 +9,15 @@ namespace ToolsMarket.App.Controllers
     public class ProdutosController : BaseController
     {
         private readonly IProdutoRepository _produtoRepository;
+        private readonly ICategoriaRepository _categoriaRepository;
+        private readonly IFornecedorRepository _fornecedorRepository;
         private readonly IMapper _mapper;
 
-        public ProdutosController(IProdutoRepository produtoRepository, IMapper mapper)
+        public ProdutosController(IProdutoRepository produtoRepository, ICategoriaRepository categoriaRepository, IFornecedorRepository fornecedorRepository, IMapper mapper)
         {
             _produtoRepository = produtoRepository;
+            _categoriaRepository = categoriaRepository;
+            _fornecedorRepository = fornecedorRepository;
             _mapper = mapper;
         }
 
@@ -31,9 +35,10 @@ namespace ToolsMarket.App.Controllers
             return View(produtoViewModel);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var productViewModel = await ObterFornecedores(new ProdutoViewModel());
+            return View(productViewModel);
         }
 
         [HttpPost]
@@ -94,6 +99,18 @@ namespace ToolsMarket.App.Controllers
         private async Task<ProdutoViewModel> ObterProdutoFornecedor(Guid id)
         {
             return _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedor(id));
+        }
+
+        private async Task<ProdutoViewModel> ObterCategorias(ProdutoViewModel produto)
+        {
+            produto.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
+            return produto;
+        }
+
+        private async Task<ProdutoViewModel> ObterFornecedores(ProdutoViewModel produto)
+        {
+            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterFornecedores());
+            return produto;
         }
     }
 }

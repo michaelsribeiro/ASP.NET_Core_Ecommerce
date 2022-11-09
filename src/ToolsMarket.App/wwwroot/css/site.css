@@ -1,18 +1,101 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+.mid-banner:hover {
+    filter: brightness(1.15);
+    transition: .3s ease;
+}
+
+.card-group {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .card-group .container {
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
+
+        .card-group .container .card {
+            box-sizing: border-box;
+            border-radius: 10px;
+            border: 1px solid #dbdee1;
+            transition: .2s ease;
+        }
+
+            .card-group .container .card:hover {
+                box-shadow: 0 2px 5px rgba(0,0,0,.2);
+            }
+
+        .card-group .container .card-title {
+            margin: 0;
+        }
+
+            .card-group .container .card-title a {
+                text-decoration: none;
+            }
+
+            .card-group .container .card-title h6 {
+                margin: 0;
+                padding: 7px;
+                text-align: center;
+                color: #545454;
+                font-weight: normal;
+            }
+
+        .card-group .container .card-preco {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #f7812b;
+        }
+
+            .card-group .container .card-preco p {
+                margin: 0;
+                padding-top: 10px;
+            }
+
+        .card-group .container .card-forma-pgt {
+            margin: 0;
+            padding: 0 10px;
+            font-size: .7rem;
+            color: #545454;
+        }
+
+        .card-group .container .card-action {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 0 15px 15px;
+        }
+
+
+            .card-group .container .card-action input {
+                width: 60px;
+                text-align: center;
+                outline: none;
+                border-radius: 10px;
+                border: 1px solid #dbdee1;
+            }
