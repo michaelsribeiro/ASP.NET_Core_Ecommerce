@@ -44,18 +44,16 @@ namespace ToolsMarket.App.ViewModels
         //[DisplayName("Imagem")]
         //public IFormFile ImageProduto { get; set; }
 
-        public StatusProduto Status { get; set; }
+        public StatusProduto? Status { get; set; }
 
         // Relations
 
         [DisplayName("Categoria")]
-        public CategoriaViewModel Categoria { get; set; }
-        public IEnumerable<CategoriaViewModel> Categorias { get; set; } = new List<CategoriaViewModel>();
+        public CategoriaViewModel? Categoria { get; set; }
+        public IEnumerable<CategoriaViewModel>? Categorias { get; set; } = new List<CategoriaViewModel>();
 
         [DisplayName("Fornecedor")]
-        public FornecedorViewModel Fornecedor { get; set; }
-        public IEnumerable<FornecedorViewModel> Fornecedores { get; set; } = new List<FornecedorViewModel>();
-
-        public Carrinho? Carrinho { get; set; }
+        public FornecedorViewModel? Fornecedor { get; set; }
+        public IEnumerable<FornecedorViewModel>? Fornecedores { get; set; } = new List<FornecedorViewModel>();
     }
 }

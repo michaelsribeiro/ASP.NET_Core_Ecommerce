@@ -14,6 +14,6 @@ namespace ToolsMarket.Business.Models
 
         // Relations
 
-        public IEnumerable<Produto>? Produtos { get; set; } = new List<Produto>();
+        public IEnumerable<Produto> Produtos { get; set; }
     }
 }

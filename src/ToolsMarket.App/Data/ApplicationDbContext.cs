@@ -10,8 +10,5 @@ namespace ToolsMarket.App.Data
             : base(options)
         {
         }
-        public DbSet<ToolsMarket.App.ViewModels.CarrinhoViewModel> CarrinhoViewModel { get; set; }
-        public DbSet<ToolsMarket.App.ViewModels.FornecedorViewModel> FornecedorViewModel { get; set; }
-        public DbSet<ToolsMarket.App.ViewModels.PedidoViewModel> PedidoViewModel { get; set; }
     }
 }

@@ -10,9 +10,7 @@ namespace ToolsMarket.Data.Context
 {
     public class CustomDbContext : DbContext
     {
-        public CustomDbContext(DbContextOptions options) : base(options)
-        {
-        }
+        public CustomDbContext(DbContextOptions options) : base(options)  { }
         
         public DbSet<Carrinho> Carrinhos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }

@@ -161,7 +161,7 @@ namespace ToolsMarket.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CarrinhoId")
+                    b.Property<Guid?>("CarrinhoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoriaId")
@@ -293,10 +293,9 @@ namespace ToolsMarket.Data.Migrations
 
             modelBuilder.Entity("ToolsMarket.Business.Models.Produto", b =>
                 {
-                    b.HasOne("ToolsMarket.Business.Models.Carrinho", "Carrinho")
+                    b.HasOne("ToolsMarket.Business.Models.Carrinho", null)
                         .WithMany("Produtos")
-                        .HasForeignKey("CarrinhoId")
-                        .IsRequired();
+                        .HasForeignKey("CarrinhoId");
 
                     b.HasOne("ToolsMarket.Business.Models.Categoria", "Categoria")
                         .WithMany("Produtos")
@@ -307,8 +306,6 @@ namespace ToolsMarket.Data.Migrations
                         .WithMany("Produtos")
                         .HasForeignKey("FornecedorId")
                         .IsRequired();
-
-                    b.Navigation("Carrinho");
 
                     b.Navigation("Categoria");
 

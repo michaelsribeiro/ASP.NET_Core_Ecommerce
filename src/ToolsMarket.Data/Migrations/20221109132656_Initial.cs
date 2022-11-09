@@ -10,32 +10,6 @@ namespace ToolsMarket.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Categorias",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NomeCategoria = table.Column<string>(type: "varchar(100)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categorias", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Fornecedores",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cnpj = table.Column<string>(type: "varchar(14)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fornecedores", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
                 {
@@ -116,20 +90,48 @@ namespace ToolsMarket.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categorias",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NomeCategoria = table.Column<string>(type: "varchar(100)", nullable: false),
+                    ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categorias", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fornecedores",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cnpj = table.Column<string>(type: "varchar(14)", nullable: false),
+                    ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fornecedores", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Produtos",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FornecedorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CarrinhoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(1000)", nullable: false),
                     Marca = table.Column<string>(type: "varchar(100)", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
                     ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Imagem = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    CarrinhoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -158,10 +160,20 @@ namespace ToolsMarket.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Categorias_ProdutoId",
+                table: "Categorias",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Enderecos_UsuarioId",
                 table: "Enderecos",
                 column: "UsuarioId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fornecedores_ProdutoId",
+                table: "Fornecedores",
+                column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_UsuarioId",
@@ -182,12 +194,44 @@ namespace ToolsMarket.Data.Migrations
                 name: "IX_Produtos_FornecedorId",
                 table: "Produtos",
                 column: "FornecedorId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Categorias_Produtos_ProdutoId",
+                table: "Categorias",
+                column: "ProdutoId",
+                principalTable: "Produtos",
+                principalColumn: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Fornecedores_Produtos_ProdutoId",
+                table: "Fornecedores",
+                column: "ProdutoId",
+                principalTable: "Produtos",
+                principalColumn: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Carrinhos_Pedidos_PedidoId",
+                table: "Carrinhos");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Categorias_Produtos_ProdutoId",
+                table: "Categorias");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Fornecedores_Produtos_ProdutoId",
+                table: "Fornecedores");
+
             migrationBuilder.DropTable(
                 name: "Enderecos");
+
+            migrationBuilder.DropTable(
+                name: "Pedidos");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "Produtos");
@@ -200,12 +244,6 @@ namespace ToolsMarket.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Fornecedores");
-
-            migrationBuilder.DropTable(
-                name: "Pedidos");
-
-            migrationBuilder.DropTable(
-                name: "Usuarios");
         }
     }
 }

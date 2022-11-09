@@ -17,6 +17,6 @@ namespace ToolsMarket.App.ViewModels
         // Relations
 
         public PedidoViewModel? Pedido { get; set; }
-        public IEnumerable<ProdutoViewModel> Produtos { get; set; }
+        public IEnumerable<ProdutoViewModel>? Produtos { get; set; } = new List<ProdutoViewModel>();
     }
 }

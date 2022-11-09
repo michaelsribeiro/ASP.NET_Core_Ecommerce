@@ -22,10 +22,6 @@ namespace ToolsMarket.Data.Mapping
                    .IsRequired()
                    .HasColumnType("varchar(100)");
 
-            builder.HasMany(p => p.Produtos)
-                   .WithOne(c => c.Fornecedor)
-                   .HasForeignKey(c => c.FornecedorId);
-
             builder.ToTable("Fornecedores");
         }
     }

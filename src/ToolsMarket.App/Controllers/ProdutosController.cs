@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
+using ToolsMarket.Business.Models.Enum;
 
 namespace ToolsMarket.App.Controllers
 {
@@ -23,7 +24,7 @@ namespace ToolsMarket.App.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
+            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos()));
         }
 
         public async Task<IActionResult> Details(Guid id)
@@ -37,8 +38,11 @@ namespace ToolsMarket.App.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var productViewModel = await ObterFornecedores(new ProdutoViewModel());
-            return View(productViewModel);
+            var produtoViewModel =  await ObterCategorias(new ProdutoViewModel());
+
+            if (produtoViewModel == null) return NotFound();
+
+            return View(produtoViewModel);
         }
 
         [HttpPost]
@@ -47,8 +51,7 @@ namespace ToolsMarket.App.Controllers
         {
             if (!ModelState.IsValid) return View(produtoViewModel);
 
-            var produto = _mapper.Map<Produto>(produtoViewModel);
-            await _produtoRepository.Adicionar(produto);
+            await _produtoRepository.Adicionar(_mapper.Map<Produto>(produtoViewModel));
 
             return RedirectToAction(nameof(Index));
         }
@@ -92,7 +95,7 @@ namespace ToolsMarket.App.Controllers
             var produtoViewModel = await ObterProdutoFornecedor(id);
 
             if (produtoViewModel != null) await _produtoRepository.Remover(id);
-            
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -104,12 +107,7 @@ namespace ToolsMarket.App.Controllers
         private async Task<ProdutoViewModel> ObterCategorias(ProdutoViewModel produto)
         {
             produto.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
-            return produto;
-        }
-
-        private async Task<ProdutoViewModel> ObterFornecedores(ProdutoViewModel produto)
-        {
-            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterFornecedores());
+            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
             return produto;
         }
     }

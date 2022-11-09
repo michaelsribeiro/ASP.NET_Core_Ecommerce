@@ -12,7 +12,7 @@ using ToolsMarket.Data.Context;
 namespace ToolsMarket.Data.Migrations
 {
     [DbContext(typeof(CustomDbContext))]
-    [Migration("20221106231429_Initial")]
+    [Migration("20221109132656_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,12 @@ namespace ToolsMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<Guid?>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
 
                     b.ToTable("Categorias", (string)null);
                 });
@@ -113,11 +118,16 @@ namespace ToolsMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<Guid?>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
 
                     b.ToTable("Fornecedores", (string)null);
                 });
@@ -153,7 +163,7 @@ namespace ToolsMarket.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CarrinhoId")
+                    b.Property<Guid?>("CarrinhoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoriaId")
@@ -249,6 +259,13 @@ namespace ToolsMarket.Data.Migrations
                     b.Navigation("Pedido");
                 });
 
+            modelBuilder.Entity("ToolsMarket.Business.Models.Categoria", b =>
+                {
+                    b.HasOne("ToolsMarket.Business.Models.Produto", null)
+                        .WithMany("Categorias")
+                        .HasForeignKey("ProdutoId");
+                });
+
             modelBuilder.Entity("ToolsMarket.Business.Models.Endereco", b =>
                 {
                     b.HasOne("ToolsMarket.Business.Models.Usuario", "Usuario")
@@ -257,6 +274,13 @@ namespace ToolsMarket.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("ToolsMarket.Business.Models.Fornecedor", b =>
+                {
+                    b.HasOne("ToolsMarket.Business.Models.Produto", null)
+                        .WithMany("Fornecedores")
+                        .HasForeignKey("ProdutoId");
                 });
 
             modelBuilder.Entity("ToolsMarket.Business.Models.Pedido", b =>
@@ -271,10 +295,9 @@ namespace ToolsMarket.Data.Migrations
 
             modelBuilder.Entity("ToolsMarket.Business.Models.Produto", b =>
                 {
-                    b.HasOne("ToolsMarket.Business.Models.Carrinho", "Carrinho")
+                    b.HasOne("ToolsMarket.Business.Models.Carrinho", null)
                         .WithMany("Produtos")
-                        .HasForeignKey("CarrinhoId")
-                        .IsRequired();
+                        .HasForeignKey("CarrinhoId");
 
                     b.HasOne("ToolsMarket.Business.Models.Categoria", "Categoria")
                         .WithMany("Produtos")
@@ -285,8 +308,6 @@ namespace ToolsMarket.Data.Migrations
                         .WithMany("Produtos")
                         .HasForeignKey("FornecedorId")
                         .IsRequired();
-
-                    b.Navigation("Carrinho");
 
                     b.Navigation("Categoria");
 
@@ -312,6 +333,13 @@ namespace ToolsMarket.Data.Migrations
                 {
                     b.Navigation("Carrinho")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ToolsMarket.Business.Models.Produto", b =>
+                {
+                    b.Navigation("Categorias");
+
+                    b.Navigation("Fornecedores");
                 });
 
             modelBuilder.Entity("ToolsMarket.Business.Models.Usuario", b =>

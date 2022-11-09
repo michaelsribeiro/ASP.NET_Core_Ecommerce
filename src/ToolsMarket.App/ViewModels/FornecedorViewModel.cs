@@ -20,6 +20,7 @@ namespace ToolsMarket.App.ViewModels
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+        [StringLength(14, ErrorMessage = "O campo {0} precisa ter {1} caracteres.")]
         [DisplayName("CNPJ")]
         public string Cnpj { get; set; }
 

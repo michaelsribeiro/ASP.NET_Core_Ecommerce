@@ -34,8 +34,9 @@ namespace ToolsMarket.Data.Repository
 
         public virtual async Task Adicionar(TEntity entity)
         {
-            DbSet.Add(entity);
-            await SaveChanges();
+            Db.Entry(entity).State = EntityState.Detached;
+            Db.Set<TEntity>().Add(entity);
+            await Db.SaveChangesAsync();
         }
 
         public virtual async Task Atualizar(TEntity entity)

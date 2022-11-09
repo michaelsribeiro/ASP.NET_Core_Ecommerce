@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.App.ViewModels
 {
@@ -9,12 +8,13 @@ namespace ToolsMarket.App.ViewModels
         [Key]
         public Guid Id { get; set; }
 
+
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [DisplayName("Nome")]
         public string NomeCategoria { get; set; }
 
         // Relations
 
-        public IEnumerable<ProdutoViewModel> Produtos { get; set; }
+        public IEnumerable<ProdutoViewModel>? Produtos { get; set; }
     }
 }

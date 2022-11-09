@@ -13,7 +13,7 @@ namespace ToolsMarket.Business.Models
         public decimal ValorTotal { get; set; }
 
         // Relations
-        public Pedido? Pedido { get; set; }
-        public IEnumerable<Produto> Produtos { get; set; } = new List<Produto>();
+        public Pedido Pedido { get; set; }
+        public IEnumerable<Produto> Produtos { get; set; }
     }
 }

@@ -36,5 +36,6 @@ namespace ToolsMarket.Data.Repository
         {
             return await Buscar(p => p.FornecedorId == fornecedorId);
         }
+
     }
 }
