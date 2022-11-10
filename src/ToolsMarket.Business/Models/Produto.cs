@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using ToolsMarket.Business.Models.Enum;
+﻿using ToolsMarket.Business.Models.Enum;
 
 namespace ToolsMarket.Business.Models
 {

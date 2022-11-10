@@ -17,6 +17,22 @@
         "webfonts/fa-v4compatibility.woff2",
         "js/all.min.js"
       ]
+    },
+    {
+      "library": "NicEdit@0.93",
+      "destination": "wwwroot/lib/NicEdit/"
+    },
+    {
+      "library": "froala-editor@4.0.15",
+      "destination": "wwwroot/lib/froala-editor/"
+    },
+    {
+      "library": "ckeditor5@35.3.0",
+      "destination": "wwwroot/lib/ckeditor5/",
+      "files": [
+        "ckeditor.min.js",
+        "ckeditor.js"
+      ]
     }
   ]
 }

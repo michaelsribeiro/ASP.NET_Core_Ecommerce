@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
-                <textarea rows="5" asp-for="Descricao" class="form-control"></textarea>
+                <textarea id="editor" style="resize: none;" asp-for="Descricao" class="form-control" placeholder="Insira a descrição do produto"></textarea>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -79,5 +79,9 @@
 
         $("#ImageProduto").attr("data-val", "true");
         $("#ImageProduto").attr("data-val-required", "Preencha o campo Imagem");
+
+        CKEDITOR.replace('editor', {
+            height: 220
+        });
     </script>
 }

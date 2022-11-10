@@ -14,6 +14,7 @@ namespace ToolsMarket.App.Controllers
         private readonly ICategoriaRepository _categoriaRepository;
         private readonly IFornecedorRepository _fornecedorRepository;
         private readonly IMapper _mapper;
+        public IEnumerable<ProdutoViewModel> produtos { get; set; }
 
         public ProdutosController(IProdutoRepository produtoRepository, ICategoriaRepository categoriaRepository, IFornecedorRepository fornecedorRepository, IMapper mapper)
         {
@@ -184,6 +185,11 @@ namespace ToolsMarket.App.Controllers
             }
 
             return true;
+        }
+
+        public async Task<IActionResult> Destaque()
+        {
+            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
         }
     }
 }

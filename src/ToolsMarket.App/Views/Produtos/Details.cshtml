@@ -7,18 +7,18 @@
 <div class="container mt-5 mb-5">
     <div class="row mb-5">
         <div class="col-md-6 d-flex align-items-center justify-content-center">
-            <img src="~/images/produtos/@Model.Imagem" alt="@Model.Imagem" style="width:400px; height:400px;" />
+            <img src="~/images/produtos/@Model.Imagem" alt="@Model.Imagem" style="width:42 0px; height:420px;" />
         </div>
         <div class="col-md-6">
             <div>
                 <h6 style="font-size: 1.05rem">@Html.DisplayFor(model => model.Nome)</h6>
             </div>           
-            <div class="text-end" style="padding: 15px 0; font-size: .8rem; border-bottom: 2px solid #dbdee1">
+            <div style="padding: 15px 0; font-size: .8rem; border-bottom: 2px solid #dbdee1">
                 @Html.DisplayNameFor(model => model.Marca)
                 <strong class="fw-bolder">@Html.DisplayFor(model => model.Fornecedor.Nome)</strong>
             </div>   
             <div class="pt-3 pb-3">
-                <strong class="fs-2 text-warning">@Html.DisplayFor(model => model.ValorUnitario)</strong>
+                <strong class="fs-2 text-warning" style="font-size: .9rem;">@Html.DisplayFor(model => model.ValorUnitario)</strong>
             </div>
             <div class="action">
                 <input class="qtd" type="text" value="1" placeholder="1"/>
@@ -31,9 +31,9 @@
         </div>
     </div>
     <div class="col-12 mt-2">
-        <h5 class="fw-normal">DESCRIÇÃO DO PRODUTO</h5>
+        <h5 class="fw-normal mb-4">DESCRIÇÃO DO PRODUTO</h5>
         <div class="col-sm-12" contenteditable="true">
-            @Html.DisplayFor(model => model.Descricao)
+            @Html.Raw(Model.Descricao)
         </div>
     </div>   
 </div>

@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToolsMarket.Business.Models.Enum;
+﻿using ToolsMarket.Business.Models.Enum;
 
 namespace ToolsMarket.Business.Models
 {
     public class Pedido : Entity
     {
+        public Pedido(Guid usuarioId, DateTime dataVenda, decimal? frete, StatusPedido statusPedido)
+        {
+            UsuarioId = usuarioId;
+            DataVenda = new DateTime();
+            Frete = frete;
+            StatusPedido = StatusPedido.Aberto;
+        }
+
         public Guid UsuarioId { get; set; }
         public DateTime DataVenda { get; set; }
         public decimal? Frete { get; set; }

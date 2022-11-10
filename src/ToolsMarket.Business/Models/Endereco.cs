@@ -4,6 +4,16 @@ namespace ToolsMarket.Business.Models
 {
     public class Endereco : Entity
     {
+        public Endereco(Guid usuarioId, string cep, string logradouro, string bairro, string cidade, string uf)
+        {
+            UsuarioId = usuarioId;
+            Cep = cep;
+            Logradouro = logradouro;
+            Bairro = bairro;
+            Cidade = cidade;
+            Uf = uf;
+        }
+
         public Guid UsuarioId { get; set; }
         public string Cep { get; set; }
         public string Logradouro { get; set; }

@@ -16,7 +16,7 @@ namespace ToolsMarket.Data.Mapping
 
             builder.Property(p => p.Descricao)
                    .IsRequired()
-                   .HasColumnType("varchar(1000)");
+                   .HasColumnType("varchar(3000)");
 
             builder.Property(p => p.Marca)
                    .IsRequired()

@@ -1,21 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ToolsMarket.App.ViewModels;
+using ToolsMarket.Business.Interfaces;
+using ToolsMarket.Data.Context;
+using ToolsMarket.Data.Repository;
 
 namespace ToolsMarket.App.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IMapper _mapper;
+        private readonly IProdutoRepository _produtoRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IMapper mapper, IProdutoRepository produtoRepository)
         {
-            _logger = logger;
+            _mapper = mapper;
+            _produtoRepository = produtoRepository;
         }
 
-        public IActionResult Index()
-        {
-            return View();
+        public async Task<IActionResult> IndexAsync()
+        {            
+            return View(await _produtoRepository.ObterTodos());
         }
 
         public IActionResult Privacy()
@@ -27,6 +33,11 @@ namespace ToolsMarket.App.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public async Task<IActionResult> Destaques()
+        {
+            return View(await _produtoRepository.ObterProdutos());
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ToolsMarket.App.ViewModels;
 
 namespace ToolsMarket.App.Data
 {
