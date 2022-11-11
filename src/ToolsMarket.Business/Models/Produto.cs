@@ -17,6 +17,10 @@ namespace ToolsMarket.Business.Models
             Status = StatusProduto.Indisponível;
         }
 
+        public Produto()
+        {
+        }
+
         public void DefinirQuantidade(int quantidade)
         {
             if (quantidade <= 0)

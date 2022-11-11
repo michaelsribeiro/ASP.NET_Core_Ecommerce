@@ -1,0 +1,30 @@
+﻿<div class="container">
+    <h3 class="text-center mb-4">Ferramentas Elétricas</h3>
+    <div class="owl-carousel owl-theme">
+        @foreach (var item in Model)
+        {
+            <div class="item">
+                <div class="card" style="box-sizing: border-box">
+                    <div class="card-img-top d-flex align-items-center justify-content-center" style="max-width: 320px; width: 100%; height: 320px; overflow: hidden;">
+                        <a href="@Url.Action("Details", "Produtos", new { id = item.Id })"> <img src="~/images/produtos/@item.Imagem" alt="@item.Imagem " class="w-100" /></a>
+                    </div>
+                    <a href="@Url.Action("Details", "Produtos", new { id = item.Id })">
+                        <div class="card-title">
+                            <h6 class="product-name">@item.Nome</h6>
+                        </div>
+                        <div class="card-preco">
+                            <p class="produto-preco">@item.ValorUnitario.ToString("C")</p>
+                        </div>
+                        <div class="card-forma-pgt">
+                            <p class="forma-pgt"><strong>à vista com desconto</strong> ou <strong>10x</strong> de <strong>R$</strong> sem Tarifa</p>
+                        </div>
+                    </a>
+                    <div class="card-action">
+                        <input class="qtd" type="text" />
+                        <button type="buttom" class="btn" value="Adicionar ao Carrinho" asp-action="AdicionarCarrinho">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

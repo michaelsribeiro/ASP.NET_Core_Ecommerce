@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ToolsMarket.App.styles.css" asp-append-version="true" />
     <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" 
+          integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" 
+          integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="~/ckeditor/ckeditor.js"></script>
     <script src="~/ckeditor/config.js"></script>
 </head>
@@ -22,7 +28,7 @@
                     <div class="form-outline" style="max-width: 90%; width: 100%">
                         <input type="search" id="form" class="form-control" style="font-size: .8rem; line-height: 1.8" placeholder="Pesquise em toda a loja" />
                     </div>
-                    <button type="submit" class="btn text-white outline-none" style="background-color: #ffd333;">
+                    <button type="submit" class="btn text-white outline-none" style="background-color: #fdb827;">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -33,7 +39,7 @@
 
         </div>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow d-flex flex-column p-0">
-            <div class="container-fluid w-100 pt-2 pb-2" style="background-color: #ffd333">
+            <div class="container-fluid w-100 pt-2 pb-2" style="background-color: #fdb827">
                 <div class="container">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -42,19 +48,19 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex w-80">
                         <ul class="navbar-nav w-100 justify-content-evenly">
                             <li class="nav-item">
-                                <a class="nav-link text-black-50 fw-bold" asp-area="" asp-controller="Categoria" asp-action="Manuais">Ferramentas Manuais</a>
+                                <a class="nav-link text-black fw-bold" asp-area="" asp-controller="Categoria" asp-action="Manuais">Ferramentas Manuais</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-black-50 fw-bold" asp-area="" asp-controller="Categoria" asp-action="Pneumaticas">Ferramentas Pneumáticas</a>
+                                <a class="nav-link text-black fw-bold" asp-area="" asp-controller="Categoria" asp-action="Pneumaticas">Ferramentas Pneumáticas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-black-50 fw-bold" asp-area="" asp-controller="Categoria" asp-action="Automotivas">Automotivas</a>
+                                <a class="nav-link text-black fw-bold" asp-area="" asp-controller="Categoria" asp-action="Automotivas">Automotivas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-black-50 fw-bold" asp-area="" asp-controller="Categoria" asp-action="Acessorios">Acessórios</a>
+                                <a class="nav-link text-black fw-bold" asp-area="" asp-controller="Categoria" asp-action="Acessorios">Acessórios</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-black-50 fw-bold" asp-area="" asp-controller="Categoria" asp-action="Utilidades">Casa e Utilidades</a>
+                                <a class="nav-link text-black fw-bold" asp-area="" asp-controller="Categoria" asp-action="Utilidades">Casa e Utilidades</a>
                             </li>
                         </ul>
                     </div>
@@ -68,7 +74,7 @@
         </main>
     </div>
     <footer class="footer position-static" style="line-height: 1;">
-        <div class="container-fluid" style="background-color: #ffd333 !important">
+        <div class="container-fluid" style="background-color: #fdb827 !important">
             <div class="container pt-5 pb-5 d-flex flex-row justify-content-between">
                 <div class="link-group">
                     <ul class="navbar-nav">
@@ -159,9 +165,15 @@
             </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" 
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" 
+            integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

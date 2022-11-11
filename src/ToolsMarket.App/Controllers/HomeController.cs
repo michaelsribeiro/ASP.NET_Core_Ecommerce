@@ -10,18 +10,16 @@ namespace ToolsMarket.App.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMapper _mapper;
-        private readonly IProdutoRepository _produtoRepository;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IMapper mapper, IProdutoRepository produtoRepository)
+        public HomeController(ILogger<HomeController> logger)
         {
-            _mapper = mapper;
-            _produtoRepository = produtoRepository;
+            _logger = logger;
         }
 
         public async Task<IActionResult> IndexAsync()
-        {            
-            return View(await _produtoRepository.ObterTodos());
+        {
+            return View();
         }
 
         public IActionResult Privacy()
@@ -33,11 +31,6 @@ namespace ToolsMarket.App.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public async Task<IActionResult> Destaques()
-        {
-            return View(await _produtoRepository.ObterProdutos());
         }
     }
 }

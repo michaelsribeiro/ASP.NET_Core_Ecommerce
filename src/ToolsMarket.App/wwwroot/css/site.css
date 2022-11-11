@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
 html {
     font-size: 14px;
 }
@@ -15,6 +17,8 @@ html {
 
 body {
     margin-bottom: 60px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .9rem;
 }
 
 .mid-banner:hover {
@@ -22,91 +26,83 @@ body {
     transition: .3s ease;
 }
 
-.card-group {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
+main .container {
+    margin: 40px auto;
 }
 
-    .card-group .container {
-        padding: 0;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-gap: 10px;
+.container .card {
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    transition: .2s ease;
+}
+
+    .container .card:hover {
+        border: 1px solid #dbdee1;
     }
 
-        .card-group .container .card {
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 1px solid #dbdee1;
-            transition: .2s ease;
-        }
+    .container .card a {
+        text-decoration: none;
+    }
 
-            .card-group .container .card:hover {
-                box-shadow: 0 2px 5px rgba(0,0,0,.2);
-                border: 1px solid #fff;
-            }
-
-        .card-group .container .card-title {
-            margin: 0;
-        }
-
-            .card-group .container .card-title a {
-                text-decoration: none;
-            }
-
-            .card-group .container .card-title h6 {
-                margin: 0;
-                padding: 7px;
-                text-align: center;
-                color: #545454;
-                font-weight: normal;
-            }
-
-        .card-group .container .card-preco {
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #f7812b;
-        }
-
-            .card-group .container .card-preco p {
-                margin: 0;
-                padding-top: 10px;
-            }
-
-        .card-group .container .card-forma-pgt {
-            margin: 0;
-            padding: 0 10px;
-            font-size: .7rem;
-            text-align: center;
-            color: #545454;
-        }
-
-        .card-group .container .card-action {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 0 25px 15px;
-        }
+.container .card-title {
+    margin: 0;
+}
 
 
-            .card-group .container .card-action input {
-                width: 60px;
-                text-align: center;
-                outline: none;
-                border-radius: 10px;
-                border: 1px solid #dbdee1;
-            }
 
-            .card-group .container .card-action .btn {
-                background: #f7812b;
-                color: #fff;
-                border: none;
-            }
+    .container .card-title h6 {
+        margin: 0;
+        padding: 7px;
+        text-align: center;
+        color: #545454;
+        font-weight: normal;
+        font-size: .9rem;
+    }
+
+.container .card-preco {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #f7812b;
+}
+
+    .container .card-preco p {
+        margin: 0;
+        padding-top: 10px;
+    }
+
+.container .card-forma-pgt {
+    margin: 0;
+    padding: 0 10px;
+    font-size: .7rem;
+    text-align: center;
+    color: #545454;
+}
+
+.container .card-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 25px 15px;
+}
+
+
+    .container .card-action input {
+        width: 60px;
+        text-align: center;
+        outline: none;
+        border-radius: 10px;
+        border: 1px solid #dbdee1;
+    }
+
+    .container .card-action .btn {
+        background: #f7812b;
+        color: #fff;
+        border: none;
+    }
 
 main .container .action {
     display: flex;
