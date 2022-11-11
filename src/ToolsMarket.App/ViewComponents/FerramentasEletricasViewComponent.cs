@@ -27,9 +27,9 @@ namespace ToolsMarket.App.ViewComponents
 
         private async Task<IEnumerable<ProdutoViewModel>> ObterFerramentasEletricas()
         {
-            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _context.Produtos.AsNoTracking()
-                                                                                     .Where(c => c.Categoria.NomeCategoria == c.Categoria.NomeCategoria)
-                                                                                     .ToListAsync());
+            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _context.Produtos.GroupBy(p => p.CategoriaId).Select(g => 
+            
+            .FirstOrDefault()).ToListAsync());
         }
     }
 }
