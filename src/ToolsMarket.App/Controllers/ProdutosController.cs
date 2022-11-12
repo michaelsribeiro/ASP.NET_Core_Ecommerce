@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
@@ -154,6 +155,42 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Manuais()
+        {
+            var produtosManuais = await ObterProdutosManuais();
+            return View(produtosManuais);
+        }
+
+        public async Task<IActionResult> Eletricos()
+        {
+            var produtosEletricos = await ObterProdutosEletricos();
+            return View(produtosEletricos);
+        }
+
+        public async Task<IActionResult> Pneumaticos()
+        {
+            var produtosPneumaticos = await ObterProdutosPneumaticos();
+            return View(produtosPneumaticos);
+        }
+
+        public async Task<IActionResult> Automotivos()
+        {
+            var produtosPneumaticos = await ObterProdutosAutomotivos();
+            return View(produtosPneumaticos);
+        }
+
+        public async Task<IActionResult> Acessorios()
+        {
+            var acessorios = await ObterProdutosAcessorios();
+            return View(acessorios);
+        }
+
+        public async Task<IActionResult> Utilidades()
+        {
+            var utilidades = await ObterProdutosUtilidades();
+            return View(utilidades);
+        }
+
         private async Task<ProdutoViewModel> ObterProdutoFornecedor(Guid id)
         {
             var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedor(id));
@@ -187,9 +224,34 @@ namespace ToolsMarket.App.Controllers
             return true;
         }
 
-        public async Task<IActionResult> Destaque()
+        private async Task<IEnumerable<ProdutoViewModel>> ObterProdutosManuais()
         {
-            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
+            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosManuais());
+        }
+
+        private async Task<IEnumerable<ProdutoViewModel>> ObterProdutosEletricos()
+        {
+            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosEletricos());
+        }
+
+        private async Task<IEnumerable<ProdutoViewModel>> ObterProdutosPneumaticos()
+        {
+            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosPneumaticos());
+        }
+
+        private async Task<IEnumerable<ProdutoViewModel>> ObterProdutosAutomotivos()
+        {
+            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosAutomotivos());
+        }
+
+        private async Task<IEnumerable<ProdutoViewModel>> ObterProdutosAcessorios()
+        {
+            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosAcessorios());
+        }
+
+        private async Task<IEnumerable<ProdutoViewModel>> ObterProdutosUtilidades()
+        {
+            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosUtilidades());
         }
     }
 }

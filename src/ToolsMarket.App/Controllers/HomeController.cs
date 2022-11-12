@@ -17,7 +17,7 @@ namespace ToolsMarket.App.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public IActionResult Index()
         {
             return View();
         }

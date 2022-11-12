@@ -27,8 +27,7 @@ namespace ToolsMarket.App.ViewComponents
         private async Task<IEnumerable<ProdutoViewModel>> ObterProdutos()
         {
             return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _context.Produtos.AsNoTracking()
-                                                                                     .OrderByDescending(p => p.Nome)
-                                                                                     .Take(4)
+                                                                                     .OrderBy(p => p.Nome)
                                                                                      .ToListAsync());
         }
     }

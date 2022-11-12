@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ToolsMarket.App.ViewModels.ProdutoViewModel>
+
+@{
+    ViewData["Title"] = "Ferramentas Automotivas -";
+}
+
+<div class="container manuais">
+    <h3 class="text-center mb-4">Ferramentas Automotivas</h3>
+    <div class="card-group">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-img-top">
+                    <a href="@Url.Action("Details", "Produtos", new { id=item.Id })"> <img src="~/images/produtos/@item.Imagem" alt="@item.Imagem" /></a>
+                </div>
+                <a href="@Url.Action("Details", "Produtos", new { id=item.Id })">
+                    <div class="card-title">
+                        <h6 class="product-name">@item.Nome</h6>
+                    </div>
+                    <div class="card-preco">
+                        <p class="produto-preco">@item.ValorUnitario.ToString("C")</p>
+                    </div>
+                    <div class="card-forma-pgt">
+                        <p class="forma-pgt"><strong>à vista com desconto</strong> ou <strong>10x</strong> de <strong>R$</strong> sem Tarifa</p>
+                    </div>
+                </a>
+                <div class="card-action">
+                    <input class="qtd" type="text" value="1" placeholder="1" />
+                    <button type="buttom" class="btn" value="Adicionar ao Carrinho" asp-action="AdicionarCarrinho">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

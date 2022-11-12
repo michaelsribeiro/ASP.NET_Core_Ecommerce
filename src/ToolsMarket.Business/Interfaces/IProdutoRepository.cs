@@ -8,5 +8,11 @@ namespace ToolsMarket.Business.Interfaces
         Task<IEnumerable<Produto>> ObterProdutosFornecedores();
         Task<Produto> ObterProdutoFornecedor(Guid id);
         Task<IEnumerable<Produto>> ObterProdutos();
+        Task<IEnumerable<Produto>> ObterProdutosManuais();
+        Task<IEnumerable<Produto>> ObterProdutosEletricos();
+        Task<IEnumerable<Produto>> ObterProdutosPneumaticos();
+        Task<IEnumerable<Produto>> ObterProdutosAutomotivos();
+        Task<IEnumerable<Produto>> ObterProdutosAcessorios();
+        Task<IEnumerable<Produto>> ObterProdutosUtilidades();
     }
 }

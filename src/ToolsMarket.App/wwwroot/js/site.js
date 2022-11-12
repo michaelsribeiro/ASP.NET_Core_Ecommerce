@@ -6,8 +6,12 @@ var carousel = new bootstrap.Carousel(myCarousel, {
 
 $('.owl-carousel').owlCarousel({
     loop: true,
+    autoplay: true,
+    autoplayTimeout: 5000,
+    dots: false,
     margin: 10,
-    nav: true,
+    nav: false,
+    autoplayHoverPause: true,
     responsive: {
         0: {
             items: 1
