@@ -6,10 +6,10 @@
 
 <div class="container details">
     <div class="row">
-        <div class="col-md-6 d-flex align-items-center justify-content-center mb-5">
-            <img src="~/images/produtos/@Model.Imagem" alt="@Model.Imagem" style="width:42 0px; height:420px;" />
+        <div class="imagem col-md-6">
+            <img src="~/images/produtos/@Model.Imagem" alt="@Model.Imagem" />
         </div>
-        <div class="col-md-6">
+        <div class="info col-md-6">
             <div>
                 <h6 style="font-size: 1.1rem">@Html.DisplayFor(model => model.Nome)</h6>
             </div>
@@ -36,17 +36,17 @@
             </div>
             <div class="frete">
                 <div class="frete-title mb-2">
-                    <span style="font-size: 1.1rem; color: #fdb827;"><i class="fa fa-truck"></i></span>
-                    <strong style="font-size: .9rem; font-weight: 500; margin-left: 10px;">CALCULAR FRETE E PRAZO</strong>
+                    <span><i class="fa fa-truck"></i></span>
+                    <strong>CALCULAR FRETE E PRAZO</strong>
                 </div>
                 <div class="frete-input">
-                    <input name="cep" type="tel" placeholder="DIGITE SEU CEP" maxlength="9" />
+                    <input name="cep" type="tel" placeholder="Digite seu CEP" maxlength="9" />
                     <button type="submit" class="btn">calcular</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-12 mt-5">
+    <div class="descricao col-12">
         <h5 class="fw-normal mb-4">DESCRIÇÃO DO PRODUTO</h5>
         <div class="col-sm-12" contenteditable="true">
             @Html.Raw(Model.Descricao)

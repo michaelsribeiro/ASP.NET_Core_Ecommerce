@@ -25,6 +25,23 @@ nav navbar-light .navbar-nav .nav-link:any-link {
     margin: 20px 0;
 }
 
+/* BANNERS PEQUENOS */
+
+.banner-info {
+    display: flex;
+    justify-content: center;
+    padding: 15px 10px;
+}
+
+.mid-banners {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+    border-radius: 20px;
+    grid-gap: 35px;
+}
+
 /* PRODUTOS DESTAQUE HOME */
 
 main .container .item {
@@ -263,53 +280,113 @@ footer .copyright .container {
     margin: 50px auto;
 }
 
-.details .row {
-    margin-bottom: 15px;
-}
-
-.details .row .comprar {
-    width: 350px;
-    margin-bottom: 30px;
-    text-align: end;
-}
-
-    .details .row .comprar .action {
+    .details .row {
         margin-bottom: 15px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
     }
 
-    .details .row .comprar .action .qtd{
-        width: 90px;
-        height: 55px;
-        background-color: #eee;
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-        .details .row .comprar .action .btn {
-            max-width: 250px;
-            width: 100%;
-            height: 55px;
-            background-color: #fdb827;
-            border: 1px solid #efa200;
-            border-radius: 5px;
-            color: #fff;
-            text-align: center;
-            text-transform: uppercase;
-            font-weight: 500;
-            font-size: 1.2rem;
-            letter-spacing: 1.2px;
+        .details .row .imagem {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
+            .details .row .imagem img {
+                width: 420px;
+            }
 
+        .details .row .comprar {
+            width: 350px;
+            margin-bottom: 30px;
+            text-align: end;
+        }
+
+            .details .row .comprar .action {
+                margin-bottom: 15px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+                .details .row .comprar .action .qtd {
+                    width: 90px;
+                    height: 55px;
+                    background-color: #eee;
+                    border: none;
+                    border-radius: 5px;
+                    text-align: center;
+                    outline: none;
+                }
+
+                .details .row .comprar .action .btn {
+                    max-width: 250px;
+                    width: 100%;
+                    height: 55px;
+                    background-color: #fdb827;
+                    border: 1px solid #efa200;
+                    border-radius: 5px;
+                    color: #fff;
+                    text-align: center;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    font-size: 1.2rem;
+                    letter-spacing: 1.2px;
+                    box-shadow: none;
+                }
+
+        .details .row .frete {
+            width 100%;
+        }
+
+            .details .row .frete .frete-title i {
+                margin-bottom: 10px;
+                font-size: 1.1rem;
+                color: #fdb827;
+            }
+
+            .details .row .frete .frete-title strong {
+                font-size: .9rem;
+                font-weight: 500;
+                margin-left: 10px;
+            }
+
+            .details .row .frete .frete-input {
+                width: 100%;
+            }
+
+                .details .row .frete .frete-input input {
+                    width: 250px;
+                    height: 60px;
+                    outline: none;
+                    border: 0;
+                    border-bottom: 1px solid #ddd;
+                }
+
+                .details .row .frete .frete-input .btn {
+                    color: #fff;
+                    font-weight: 500;
+                    background-color: #fdb827;
+                    position: relative;
+                    left: -93px;
+                    box-shadow: none;
+                }
+
+    .details .descricao {
+        margin-top: 50px;
+    }
 
 /* MEDIA QUERYS */
 
 @media screen and (max-width: 1000px) {
+    .header {
+        padding: 20px;
+    }
+
+        .header .searchbox {
+            display: none;
+        }
+
     footer .container-fluid .container {
         grid-template-areas: "link-group link-group";
     }
@@ -322,8 +399,43 @@ footer .copyright .container {
 }
 
 @media screen and (max-width: 580px) {
+    .mid-banners {
+        flex-direction: column;
+        justify-content: unset;
+        padding: 0 20px;
+        grid-gap: 20px;
+    }
+
+        /*.mid-banners img {
+            margin-bottom: 10px;
+        }*/
+
     .manuais .card-group {
         grid-template-areas: "card";
+    }
+
+    .details .row .imagem img {
+        width: 100%;
+    }
+
+    .details .row .info {
+        padding: 0 20px;
+    }
+
+    .details .row .comprar {
+        width: 100%;
+    }
+
+        .details .row .comprar .action .btn {
+            margin-left: 10px;
+        }
+
+    .details .row .frete .frete-input .btn {
+        left: -83px;
+    }
+
+    .details .descricao {
+        padding: 15px 8px;
     }
 
     footer .container-fluid .container {
