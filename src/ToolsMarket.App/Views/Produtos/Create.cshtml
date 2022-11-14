@@ -54,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ValorUnitario" class="control-label"></label>
-                <input asp-for="ValorUnitario" class="form-control" />
+                <input onkeypress="$(this).mask('R$ #.##0,00', {reverse: true});" asp-for="ValorUnitario" class="form-control inputPreco" />
                 <span asp-validation-for="ValorUnitario" class="text-danger"></span>
             </div>            
             <div class="form-group">

@@ -18,11 +18,13 @@ namespace ToolsMarket.App.Controllers
             _mapper = mapper;
         }
 
+        [Route("todas-as-categorias")]
         public async Task<IActionResult> Index()
         {
               return View(_mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterCategorias()));
         }
 
+        [Route("categoria/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var categoriaViewModel = await ObterCategoriaProduto(id);
@@ -32,16 +34,13 @@ namespace ToolsMarket.App.Controllers
             return View(categoriaViewModel);
         }
 
-        private Task<IEnumerable> ObterCategoria(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
+        [Route("criar-categoria")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Route("criar-categoria")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoriaViewModel categoriaViewModel)
@@ -53,6 +52,7 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));           
         }
 
+        [Route("editar-categoria/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var categoriaViewModel = await ObterCategoriaProduto(id);
@@ -62,6 +62,7 @@ namespace ToolsMarket.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [Route("editar-categoria/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, CategoriaViewModel categoriaViewModel)
@@ -75,6 +76,7 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("deletar-categoria/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var categoriaViewModel = await ObterCategoriaProduto(id);
@@ -84,6 +86,7 @@ namespace ToolsMarket.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [Route("deletar-categoria/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

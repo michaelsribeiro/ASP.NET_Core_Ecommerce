@@ -17,6 +17,7 @@ namespace ToolsMarket.App.Controllers
             _mapper = mapper;
         }
 
+        [Route("carrinho")]
         public async Task<IActionResult> Index()
         {            
             return View(_mapper.Map<IEnumerable<CarrinhoViewModel>>(await _carrinhoRepository.ObterCarrinhoProdutos()));

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
@@ -47,6 +48,7 @@ namespace ToolsMarket.Data.Repository
             Db.Entry(entity).State = EntityState.Detached;
             Db.Set<TEntity>().Update(entity);
             await Db.SaveChangesAsync();
+            Db.ChangeTracker.Clear();
 
             //DbSet.Update(entity);
             //await SaveChanges();

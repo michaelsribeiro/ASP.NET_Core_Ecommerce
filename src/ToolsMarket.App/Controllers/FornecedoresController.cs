@@ -22,6 +22,7 @@ namespace ToolsMarket.App.Controllers
               return View(_mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterFornecedores()));
         }
 
+        [Route("fornecedor/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var fornecedorViewModel = await ObterFornecedorProduto(id);
@@ -31,11 +32,13 @@ namespace ToolsMarket.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("inserir-fornecedor")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Route("inserir-fornecedor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(FornecedorViewModel fornecedorViewModel)
@@ -47,6 +50,7 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("editar-fornecedor/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)        {
 
             var fornecedorViewModel = await ObterFornecedorProduto(id);
@@ -56,6 +60,7 @@ namespace ToolsMarket.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("editar-fornecedor/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, FornecedorViewModel fornecedorViewModel)
@@ -69,6 +74,7 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("deletar-fornecedor/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var fornecedorViewModel = await ObterFornecedorProduto(id);
@@ -78,6 +84,7 @@ namespace ToolsMarket.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("deletar-fornecedor/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

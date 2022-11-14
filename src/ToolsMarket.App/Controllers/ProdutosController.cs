@@ -25,11 +25,13 @@ namespace ToolsMarket.App.Controllers
             _mapper = mapper;
         }
 
+        [Route("produtos")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos()));
         }
 
+        [Route("produto/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var produtoViewModel = await ObterProdutoFornecedor(id);
@@ -39,6 +41,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtoViewModel);
         }
 
+        [Route("novo-produto")]
         public async Task<IActionResult> Create()
         {
             var produtoViewModel =  await ObterCategorias(new ProdutoViewModel());
@@ -48,6 +51,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtoViewModel);
         }
 
+        [Route("novo-produto")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm]ProdutoViewModel produtoViewModel)
@@ -89,6 +93,7 @@ namespace ToolsMarket.App.Controllers
             }
         }
 
+        [Route("editar-produto/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var produto= await ObterCategorias(new ProdutoViewModel());
@@ -102,9 +107,10 @@ namespace ToolsMarket.App.Controllers
             return View(produtoViewModel);
         }
 
+        [Route("editar-produto/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, ProdutoViewModel produtoViewModel)
+        public async Task<IActionResult> Edit(Guid id, [FromForm]ProdutoViewModel produtoViewModel)
         {
             if (id != produtoViewModel.Id) return NotFound();
 
@@ -135,6 +141,7 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("deletar-produto/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var produtoViewModel = await ObterProdutoFornecedor(id);
@@ -144,6 +151,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtoViewModel);
         }
 
+        [Route("deletar-produto/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -155,36 +163,42 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("ferramentas-manuais")]
         public async Task<IActionResult> Manuais()
         {
             var produtosManuais = await ObterProdutosManuais();
             return View(produtosManuais);
         }
 
+        [Route("ferramentas-eletricas")]
         public async Task<IActionResult> Eletricos()
         {
             var produtosEletricos = await ObterProdutosEletricos();
             return View(produtosEletricos);
         }
 
+        [Route("pneumaticas")]
         public async Task<IActionResult> Pneumaticos()
         {
             var produtosPneumaticos = await ObterProdutosPneumaticos();
             return View(produtosPneumaticos);
         }
 
+        [Route("automotivas")]
         public async Task<IActionResult> Automotivos()
         {
             var produtosPneumaticos = await ObterProdutosAutomotivos();
             return View(produtosPneumaticos);
         }
 
+        [Route("acessorios")]
         public async Task<IActionResult> Acessorios()
         {
             var acessorios = await ObterProdutosAcessorios();
             return View(acessorios);
         }
 
+        [Route("casa-e-utilidades")]
         public async Task<IActionResult> Utilidades()
         {
             var utilidades = await ObterProdutosUtilidades();
