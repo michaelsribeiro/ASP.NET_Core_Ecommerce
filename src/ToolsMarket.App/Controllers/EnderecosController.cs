@@ -9,12 +9,14 @@ namespace ToolsMarket.App.Controllers
     public class EnderecosController : BaseController
     {
         private readonly IEnderecoRepository _enderecoRepository;
+        private readonly IEnderecoService _enderecoService;
         private readonly IMapper _mapper;
 
-        public EnderecosController(IEnderecoRepository enderecoRepository, IMapper mapper)
+        public EnderecosController(IEnderecoRepository enderecoRepository, IMapper mapper, IEnderecoService enderecoService, INotificador notificador) : base(notificador)
         {
             _enderecoRepository = enderecoRepository;
             _mapper = mapper;
+            _enderecoService = enderecoService;
         }
 
         public async Task<IActionResult> Index()
@@ -42,8 +44,10 @@ namespace ToolsMarket.App.Controllers
         {
             if (!ModelState.IsValid) return View(enderecoViewModel);
 
-            await _enderecoRepository.Adicionar(_mapper.Map<Endereco>(enderecoViewModel));
-            
+            await _enderecoService.Adicionar(_mapper.Map<Endereco>(enderecoViewModel));
+
+            if (!OperacaoValida()) return View(enderecoViewModel);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -64,8 +68,10 @@ namespace ToolsMarket.App.Controllers
 
             if (!ModelState.IsValid) return View(enderecoViewModel);
 
-            await _enderecoRepository.Atualizar(_mapper.Map<Endereco>(enderecoViewModel));
-            
+            await _enderecoService.Atualizar(_mapper.Map<Endereco>(enderecoViewModel));
+
+            if (!OperacaoValida()) return View(enderecoViewModel);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -84,8 +90,10 @@ namespace ToolsMarket.App.Controllers
         {
             var enderecoViewModel = await ObterEnderecoUsuario(id);
 
-            if (enderecoViewModel != null) await _enderecoRepository.Remover(id);
-            
+            if (enderecoViewModel != null) await _enderecoService.Remover(id);
+
+            if (!OperacaoValida()) return View(enderecoViewModel);
+
             return RedirectToAction(nameof(Index));
         }
 

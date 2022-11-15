@@ -7,7 +7,7 @@ using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.Business.Interfaces
 {
-    public interface ICategoriaService
+    public interface ICategoriaService : IDisposable
     {
         Task Adicionar(Categoria categoria);
         Task Atualizar(Categoria categoria);

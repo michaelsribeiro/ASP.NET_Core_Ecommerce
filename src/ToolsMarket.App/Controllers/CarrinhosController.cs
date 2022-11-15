@@ -10,8 +10,7 @@ namespace ToolsMarket.App.Controllers
     {
         private readonly ICarrinhoRepository _carrinhoRepository;
         private readonly IMapper _mapper;
-
-        public CarrinhosController(ICarrinhoRepository carrinhoRepository, IMapper mapper)
+        public CarrinhosController(ICarrinhoRepository carrinhoRepository, IMapper mapper, INotificador notificador) : base(notificador)
         {
             _carrinhoRepository = carrinhoRepository;
             _mapper = mapper;

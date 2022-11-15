@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
@@ -10,12 +9,14 @@ namespace ToolsMarket.App.Controllers
     public class CategoriasController : BaseController
     {
         private readonly ICategoriaRepository _categoriaRepository;
+        private readonly ICategoriaService _categoriaService;
         private readonly IMapper _mapper;
 
-        public CategoriasController(ICategoriaRepository categoriaRepository, IMapper mapper)
+        public CategoriasController(ICategoriaRepository categoriaRepository, IMapper mapper, ICategoriaService categoriaService, INotificador notificador) : base(notificador)
         {
             _categoriaRepository = categoriaRepository;
             _mapper = mapper;
+            _categoriaService = categoriaService;
         }
 
         [Route("todas-as-categorias")]
@@ -47,7 +48,9 @@ namespace ToolsMarket.App.Controllers
         {
             if (!ModelState.IsValid) return View(categoriaViewModel);
 
-            await _categoriaRepository.Adicionar(_mapper.Map<Categoria>(categoriaViewModel));
+            await _categoriaService.Adicionar(_mapper.Map<Categoria>(categoriaViewModel));
+
+            if (!OperacaoValida()) return View(categoriaViewModel);
 
             return RedirectToAction(nameof(Index));           
         }
@@ -71,7 +74,9 @@ namespace ToolsMarket.App.Controllers
 
             if (!ModelState.IsValid) return View(categoriaViewModel);
 
-            await _categoriaRepository.Atualizar(_mapper.Map<Categoria>(categoriaViewModel));
+            await _categoriaService.Atualizar(_mapper.Map<Categoria>(categoriaViewModel));
+
+            if (!OperacaoValida()) return View(categoriaViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -93,7 +98,9 @@ namespace ToolsMarket.App.Controllers
         {
             var categoriaViewModel = await ObterCategoriaProduto(id);
 
-            if (categoriaViewModel != null) await _categoriaRepository.Remover(id);
+            if (categoriaViewModel != null) await _categoriaService.Remover(id);
+
+            if (!OperacaoValida()) return View(categoriaViewModel);
             
             return RedirectToAction(nameof(Index));
         }

@@ -52,9 +52,9 @@
     {
         public const int TamanhoCnpj = 14;
 
-        public static bool Validar(string cpf)
+        public static bool Validar(string cnpj)
         {
-            var cnpjNumeros = Utils.ApenasNumeros(cpf);
+            var cnpjNumeros = Utils.ApenasNumeros(cnpj);
             if (!TamanhoValido(cnpjNumeros)) return false;
             return !TemDigitosRepetidos(cnpjNumeros) && TemDigitosValidos(cnpjNumeros);
         }
@@ -100,8 +100,8 @@
     {
         private string _numero;
         private const int Modulo = 11;
-        private readonly List<int> _multiplicadores = new List<int> { 2, 3, 4, 5, 6, 7, 8, 9 };
-        private readonly Dictionary<int, string> _substituicoes = new Dictionary<int, string>();
+        private readonly List<int> _multiplicadores = new() { 2, 3, 4, 5, 6, 7, 8, 9 };
+        private readonly Dictionary<int, string> _substituicoes = new();
         private bool _complementarDoModulo = true;
 
         public DigitoVerificador(string numero)

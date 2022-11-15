@@ -1,10 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ToolsMarket.App.ViewModels;
-using ToolsMarket.Business.Interfaces;
-using ToolsMarket.Data.Context;
-using ToolsMarket.Data.Repository;
 
 namespace ToolsMarket.App.Controllers
 {

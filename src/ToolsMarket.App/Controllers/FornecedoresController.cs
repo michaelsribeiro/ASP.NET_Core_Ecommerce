@@ -9,14 +9,20 @@ namespace ToolsMarket.App.Controllers
     public class FornecedoresController : BaseController
     {
         private readonly IFornecedorRepository _fornecedorRepository;
+        private readonly IFornecedorService _fornecedorService;
         private readonly IMapper _mapper;
 
-        public FornecedoresController(IFornecedorRepository fornecedorRepository, IMapper mapper)
+        public FornecedoresController(IFornecedorRepository fornecedorRepository,
+                                      IMapper mapper,
+                                      IFornecedorService fornecedorService,
+                                      INotificador notificador) : base(notificador)
         {
             _fornecedorRepository = fornecedorRepository;
             _mapper = mapper;
+            _fornecedorService = fornecedorService; 
         }
 
+        [Route("fornecedores")]
         public async Task<IActionResult> Index()
         {
               return View(_mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterFornecedores()));
@@ -32,20 +38,22 @@ namespace ToolsMarket.App.Controllers
             return View(fornecedorViewModel);
         }
 
-        [Route("inserir-fornecedor")]
+        [Route("cadastrar-fornecedor")]
         public IActionResult Create()
         {
             return View();
         }
 
-        [Route("inserir-fornecedor")]
+        [Route("cadastrar-fornecedor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(FornecedorViewModel fornecedorViewModel)
         {
             if (!ModelState.IsValid) return View(fornecedorViewModel);
 
-            await _fornecedorRepository.Adicionar(_mapper.Map<Fornecedor>(fornecedorViewModel));
+            await _fornecedorService.Adicionar(_mapper.Map<Fornecedor>(fornecedorViewModel));
+
+            if (!OperacaoValida()) return View(fornecedorViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -69,7 +77,9 @@ namespace ToolsMarket.App.Controllers
 
             if (!ModelState.IsValid) return View(fornecedorViewModel);
 
-            await _fornecedorRepository.Atualizar(_mapper.Map<Fornecedor>(fornecedorViewModel));
+            await _fornecedorService.Atualizar(_mapper.Map<Fornecedor>(fornecedorViewModel));
+
+            if (!OperacaoValida()) return View(fornecedorViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -91,7 +101,9 @@ namespace ToolsMarket.App.Controllers
         {
             var fornecedorViewModel = await ObterFornecedorProduto(id);
 
-            if (fornecedorViewModel != null) await _fornecedorRepository.Remover(id);
+            if (fornecedorViewModel != null) await _fornecedorService.Remover(id);
+
+            if (!OperacaoValida()) return View(fornecedorViewModel);
 
             return RedirectToAction(nameof(Index));
         }

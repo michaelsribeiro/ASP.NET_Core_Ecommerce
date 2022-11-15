@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
-using ToolsMarket.Business.Models.Enum;
 
 namespace ToolsMarket.App.Controllers
 {
@@ -14,15 +11,23 @@ namespace ToolsMarket.App.Controllers
         private readonly IProdutoRepository _produtoRepository;
         private readonly ICategoriaRepository _categoriaRepository;
         private readonly IFornecedorRepository _fornecedorRepository;
+        private readonly IProdutoService _produtoService;
         private readonly IMapper _mapper;
+
         public IEnumerable<ProdutoViewModel> produtos { get; set; }
 
-        public ProdutosController(IProdutoRepository produtoRepository, ICategoriaRepository categoriaRepository, IFornecedorRepository fornecedorRepository, IMapper mapper)
+        public ProdutosController(IProdutoRepository produtoRepository,
+                                  ICategoriaRepository categoriaRepository,
+                                  IFornecedorRepository fornecedorRepository,
+                                  IMapper mapper,
+                                  IProdutoService produtoService,
+                                  INotificador notificador) : base(notificador)
         {
             _produtoRepository = produtoRepository;
             _categoriaRepository = categoriaRepository;
             _fornecedorRepository = fornecedorRepository;
             _mapper = mapper;
+            _produtoService = produtoService;
         }
 
         [Route("produtos")]
@@ -82,7 +87,9 @@ namespace ToolsMarket.App.Controllers
                     produtoViewModel.Imagem
                     );
 
-                await _produtoRepository.Adicionar(domain);
+                await _produtoService.Adicionar(domain);
+
+                if (!OperacaoValida()) return View(produtoViewModel);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -136,7 +143,9 @@ namespace ToolsMarket.App.Controllers
             produtoAtualizacao.Descricao = produtoViewModel.Descricao;
             produtoAtualizacao.ValorUnitario = produtoViewModel.ValorUnitario;
 
-            await _produtoRepository.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));
+            await _produtoService.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));
+
+            if (!OperacaoValida()) return View(produtoViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -158,7 +167,9 @@ namespace ToolsMarket.App.Controllers
         {
             var produtoViewModel = await ObterProdutoFornecedor(id);
 
-            if (produtoViewModel != null) await _produtoRepository.Remover(id);
+            if (produtoViewModel != null) await _produtoService.Remover(id);
+
+            if (!OperacaoValida()) return View(produtoViewModel);
 
             return RedirectToAction(nameof(Index));
         }

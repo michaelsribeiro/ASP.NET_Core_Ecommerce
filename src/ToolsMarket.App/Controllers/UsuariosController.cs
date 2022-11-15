@@ -11,7 +11,7 @@ namespace ToolsMarket.App.Controllers
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IMapper _mapper;
 
-        public UsuariosController(IUsuarioRepository usuarioRepository, IMapper mapper)
+        public UsuariosController(IUsuarioRepository usuarioRepository, IMapper mapper, INotificador notificador) : base(notificador)
         {
             _usuarioRepository = usuarioRepository;
             _mapper = mapper;

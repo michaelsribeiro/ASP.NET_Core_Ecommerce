@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using ToolsMarket.App.Data;
 using ToolsMarket.Business.Interfaces;
+using ToolsMarket.Business.Notifications;
+using ToolsMarket.Business.Services;
 using ToolsMarket.Data.Context;
 using ToolsMarket.Data.Repository;
 
@@ -35,6 +37,11 @@ builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<ICarrinhoRepository, CarrinhoRepository>();
 builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+
+builder.Services.AddScoped<INotificador, Notificador>();
+builder.Services.AddScoped<IFornecedorService, FornecedorService>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 
 var app = builder.Build();
 

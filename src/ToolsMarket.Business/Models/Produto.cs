@@ -14,12 +14,10 @@ namespace ToolsMarket.Business.Models
             DefinirQuantidade(quantidade);
             ValorUnitario = valorUnitario;
             Imagem = imagem;
-            Status = StatusProduto.Indisponível;
+            DefinirStatus(quantidade);
         }
 
-        public Produto()
-        {
-        }
+        public Produto() {}
 
         public void DefinirQuantidade(int quantidade)
         {
@@ -27,6 +25,11 @@ namespace ToolsMarket.Business.Models
                 throw new Exception("Nãó é possível adicionar valor menor ou igual a zero");
 
             Quantidade = quantidade;
+        }
+
+        public void DefinirStatus(int quantidade)
+        {
+            Status = (quantidade > 0) ? StatusProduto.Imediata : StatusProduto.Indisponível;
         }
 
         public Guid CategoriaId { get; private set; }

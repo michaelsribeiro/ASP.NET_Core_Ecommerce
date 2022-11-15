@@ -11,7 +11,7 @@ namespace ToolsMarket.App.Controllers
         private readonly IPedidoRepository _pedidoRepository;
         private readonly IMapper _mapper;
 
-        public PedidosController(IPedidoRepository pedidoRepository, IMapper mapper)
+        public PedidosController(IPedidoRepository pedidoRepository, IMapper mapper, INotificador notificador) : base(notificador)
         {
             _pedidoRepository = pedidoRepository;
             _mapper = mapper;
