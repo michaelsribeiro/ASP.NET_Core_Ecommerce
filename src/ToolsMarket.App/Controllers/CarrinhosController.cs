@@ -89,7 +89,8 @@ namespace ToolsMarket.App.Controllers
 
             if (carrinhoViewModel != null) await _carrinhoRepository.Remover(id);
             
-            return RedirectToAction(nameof(Index));        }
+            return RedirectToAction(nameof(Index));        
+        }
 
         private async Task<CarrinhoViewModel> ObterCarrinhoProduto(Guid id)
         {
