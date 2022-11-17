@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.Data.Context
@@ -12,7 +7,7 @@ namespace ToolsMarket.Data.Context
     {
         public CustomDbContext(DbContextOptions options) : base(options)  { }
         
-        public DbSet<Carrinho> Carrinhos { get; set; }
+        public DbSet<ItemPedido> ItensPedido { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }

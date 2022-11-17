@@ -1,4 +1,6 @@
-﻿<div class="container mt-5">
+﻿@using (Html.BeginForm("Adicionar", "Pedidos", FormMethod.Post)) ;
+
+<div class="container mt-5">
     <h3 class="text-center mb-4">Em Destaque</h3>
     <div class="owl-carousel owl-theme">
         @foreach (var item in Model)
@@ -20,8 +22,10 @@
                         </div>
                     </a>
                     <div class="card-action">
-                        <input class="qtd" type="text" value="1" placeholder="1"/>                        
-                            <button type="button" class="btn" asp-page="/carrinho/adicionar" asp-page-handler="Adicionar" asp-route-id="@item.Id">Adicionar ao Carrinho</button>                        
+                        <form method="post">
+                            <input class="qtd" type="text" value="1" placeholder="1" />
+                            <button type="submit" asp-action="Adicionar" asp-controller="Pedidos" name="@item.Id" class="btn">Adicionar ao Carrinho</button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,6 @@ namespace ToolsMarket.Business.Models
         {
             UsuarioId = usuarioId;
             DataVenda = dataVenda;
-            Quantidade = qtd;
             DefinirFrete(valorTotal);
             StatusPedido = StatusPedido.Aberto;
         }
@@ -25,13 +24,12 @@ namespace ToolsMarket.Business.Models
 
         public Guid UsuarioId { get; set; }
         public DateTime DataVenda { get; set; }
-        public decimal? Frete { get; set; }
-        public int Quantidade { get; set; }
-        public decimal ValorTotal { get; set; }
+        public double? Frete { get; set; }
+        public double ValorTotal { get; set; }
         public StatusPedido StatusPedido { get; set; }
 
         // Relations
         public Usuario Usuario { get; set; }
-        public IEnumerable<Carrinho> ItensCarrinho { get; set; }
+        public IEnumerable<ItemPedido> ItensPedido { get; set; }
     }
 }

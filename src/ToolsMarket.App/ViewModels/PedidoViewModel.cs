@@ -18,9 +18,6 @@ namespace ToolsMarket.App.ViewModels
         [DisplayName("Frete")]
         public decimal? Frete { get; set; }
 
-        [DisplayName("Quantidade")]
-        public int Quantidade { get; set; }
-
         [DisplayName("Status do Pedido")]
         public StatusPedido StatusPedido { get; set; }
         public decimal ValorTotal { get; set; }
@@ -28,6 +25,6 @@ namespace ToolsMarket.App.ViewModels
 
         // Relations
         public UsuarioViewModel Usuario { get; set; }
-        public IEnumerable<CarrinhoViewModel> ItensCarrinho { get; set; }
+        public IEnumerable<ItemPedidoViewModel> ItensPedido { get; set; }
     }
 }

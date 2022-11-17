@@ -14,7 +14,7 @@ namespace ToolsMarket.App.AutoMapper
             CreateMap<Fornecedor, FornecedorViewModel>().ReverseMap();
             CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
             CreateMap<Categoria, CategoriaViewModel>().ReverseMap();
-            CreateMap<Carrinho, CarrinhoViewModel>().ReverseMap();
+            CreateMap<ItemPedido, ItemPedidoViewModel>().ReverseMap();
         }
     }
 }

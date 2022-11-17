@@ -1,10 +1,9 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using ToolsMarket.Business.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToolsMarket.App.ViewModels
 {
-    public class CarrinhoViewModel
+    public class ItemPedidoViewModel
     {
         [Key]
         public Guid Id { get; set; }
@@ -12,6 +11,16 @@ namespace ToolsMarket.App.ViewModels
         public Guid PedidoId { get; set; }
         public Guid ProdutoId { get; set; }
         public int Quantidade { get; set; }
+        public double ValorUnitario { get; set; }
+
+        [NotMapped]
+        public double ValorItem
+        {
+            get
+            {
+                return Quantidade * ValorUnitario;
+            }
+        }
 
         // Relations
 

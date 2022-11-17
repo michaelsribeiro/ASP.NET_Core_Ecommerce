@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
-using ToolsMarket.Business.Services;
 
 namespace ToolsMarket.App.Controllers
 {
@@ -12,6 +11,7 @@ namespace ToolsMarket.App.Controllers
     public class PedidosController : BaseController
     {
         private readonly IPedidoRepository _pedidoRepository;
+        private readonly IRepository<Produto> _repository;
         private readonly IMapper _mapper;
 
         public PedidosController(IPedidoRepository pedidoRepository, IMapper mapper, INotificador notificador) : base(notificador)
@@ -22,42 +22,21 @@ namespace ToolsMarket.App.Controllers
 
         [AllowAnonymous]
         [Route("carrinho")]
-        public async Task<IActionResult> Index(Guid id)
+        public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<PedidoViewModel>>(await _pedidoRepository.ObterPedidos()));
         }
 
-        [Route("carrinho/adicionar")]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Adicionar(Guid id, PedidoViewModel pedidoViewModel)
+        public async Task<IActionResult> Adicionar(Guid id, int qtd)
         {
-            try
-            {
-                pedidoViewModel = await ObterPedidoUsuario(id);
+            if (id == null) return NotFound();
 
-                if (pedidoViewModel != null)
-                {
-                    var domain = new Pedido(
-                        pedidoViewModel.UsuarioId,
-                        pedidoViewModel.DataVenda = new DateTime(),
-                        pedidoViewModel.Quantidade = 1,
-                        pedidoViewModel.ValorTotal
-                    );
-                    await _pedidoRepository.Adicionar(domain);
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
 
-                return RedirectToAction("Index");
-            }
-            catch (Exception err)
-            {
-                ModelState.AddModelError("erro", err.Message);
-                return View(pedidoViewModel);
-            }
+            var produto = _repository.ObterPorId(id);
+
+            return View();
         }
        
 

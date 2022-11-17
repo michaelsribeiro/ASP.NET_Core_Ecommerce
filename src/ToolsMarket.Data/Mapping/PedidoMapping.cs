@@ -14,15 +14,11 @@ namespace ToolsMarket.Data.Mapping
                    .IsRequired()
                    .HasColumnType("datetime");
 
-            builder.Property(p => p.Quantidade)
-                   .IsRequired()
-                   .HasColumnType("int");
-
             builder.Property(p => p.ValorTotal)
                    .IsRequired()
-                   .HasColumnType("decimal(18,2)");
+                   .HasColumnType("double");
 
-            builder.HasMany(c => c.ItensCarrinho)
+            builder.HasMany(c => c.ItensPedido)
                    .WithOne(p => p.Pedido);
 
             builder.ToTable("Pedidos");

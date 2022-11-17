@@ -12,9 +12,9 @@ namespace ToolsMarket.Data.Repository
         public async Task<IEnumerable<Pedido>> ObterCarrinhosUsuario()
         {
             return await Db.Pedidos.AsNoTracking()
-                             .Include(u => u.ItensCarrinho)
-                             .ToListAsync();
-        }
+                                   .Include(u => u.ItensPedido)
+                                   .ToListAsync();
+            }
 
         public async Task<IEnumerable<Pedido>> ObterPedidos()
         {
@@ -25,8 +25,9 @@ namespace ToolsMarket.Data.Repository
         public async Task<Pedido> ObterPedidoUsuario(Guid id)
         {
             return await Db.Pedidos.AsNoTracking()
-                                   .Include(u => u.ItensCarrinho)
+                                   .Include(u => u.ItensPedido)
                                    .FirstOrDefaultAsync(p => p.Id == id);
         }
+
     }
 }

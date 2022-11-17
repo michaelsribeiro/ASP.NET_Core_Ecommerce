@@ -5,14 +5,14 @@
 
 @if (Model == null)
 {
-    <div class="container pt-5 pb-5">
+    <div class="container" style="padding: 60px 0 200px;">
         <h3>Página não encontrada</h3>
         <span style="font-size: .8rem;">A página que você tentou acessar não foi encontrada. Por favor verifique o endereço acessado e tente novamente.</span>
     </div>
 }
 else 
 {
-    <div class="container pt-5 pb-5">
+    <div class="container" style="padding: 60px 0 200px;">
         <h3>@Html.Raw(Model.Titulo)</h3>
         <span style="font-size: .8rem;">@Html.Raw(Model.Mensagem)</span>
     </div>

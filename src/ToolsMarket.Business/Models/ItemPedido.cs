@@ -1,17 +1,19 @@
 ﻿namespace ToolsMarket.Business.Models
 {
-    public class Carrinho : Entity
+    public class ItemPedido : Entity
     {
-        public Carrinho(Guid pedidoId, int quantidade, Guid produtoId)
+        public ItemPedido(Guid pedidoId, int quantidade, Guid produtoId, double valorUnitario)
         {
             PedidoId = pedidoId;
-            Quantidade = quantidade;
             ProdutoId = produtoId;
+            Quantidade = quantidade;
+            ValorUnitario = valorUnitario;
         }
 
         public Guid PedidoId { get; set; }
         public Guid ProdutoId { get; set; }
         public int Quantidade { get; set; }
+        public double ValorUnitario { get; set; }
 
         // Relations
         public Pedido Pedido { get; set; }

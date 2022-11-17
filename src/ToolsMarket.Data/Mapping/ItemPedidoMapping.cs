@@ -4,9 +4,9 @@ using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.Data.Mapping
 {
-    public class CarrinhoMapping : IEntityTypeConfiguration<Carrinho>
+    public class ItemPedidoMapping : IEntityTypeConfiguration<ItemPedido>
     {
-        public void Configure(EntityTypeBuilder<Carrinho> builder)
+        public void Configure(EntityTypeBuilder<ItemPedido> builder)
         {
             builder.HasKey(x => x.Id);
 
@@ -14,7 +14,11 @@ namespace ToolsMarket.Data.Mapping
                    .IsRequired()
                    .HasColumnType("int");
 
-            builder.ToTable("Carrinhos");
+            builder.Property(p => p.ValorUnitario)
+                   .IsRequired()
+                   .HasColumnType("decimal(18,2)");
+
+            builder.ToTable("ItensPedido");
         }
     }
 }
