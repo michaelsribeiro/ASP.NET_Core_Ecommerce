@@ -20,8 +20,8 @@
                         </div>
                     </a>
                     <div class="card-action">
-                        <input class="qtd" type="text" value="1" placeholder="1"/>
-                        <button type="buttom" class="btn" value="Adicionar ao Carrinho" asp-action="AdicionarCarrinho">Adicionar ao Carrinho</button>
+                        <input class="qtd" type="text" value="1" placeholder="1"/>                        
+                            <button type="button" class="btn" asp-page="/carrinho/adicionar" asp-page-handler="Adicionar" asp-route-id="@item.Id">Adicionar ao Carrinho</button>                        
                     </div>
                 </div>
             </div>

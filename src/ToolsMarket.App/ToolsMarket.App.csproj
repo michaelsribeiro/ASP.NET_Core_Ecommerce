@@ -25,8 +25,4 @@
     <ProjectReference Include="..\ToolsMarket.Data\ToolsMarket.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Configuration\" />
-  </ItemGroup>
-
 </Project>

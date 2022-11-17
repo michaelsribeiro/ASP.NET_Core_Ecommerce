@@ -1,5 +1,4 @@
 ﻿using ToolsMarket.Business.Models.Enum;
-using ToolsMarket.Business.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
@@ -19,11 +18,16 @@ namespace ToolsMarket.App.ViewModels
         [DisplayName("Frete")]
         public decimal? Frete { get; set; }
 
+        [DisplayName("Quantidade")]
+        public int Quantidade { get; set; }
+
         [DisplayName("Status do Pedido")]
         public StatusPedido StatusPedido { get; set; }
+        public decimal ValorTotal { get; set; }
+        public ProdutoViewModel produto { get; set; }
 
         // Relations
         public UsuarioViewModel Usuario { get; set; }
-        public CarrinhoViewModel Carrinho { get; set; }
+        public IEnumerable<CarrinhoViewModel> ItensCarrinho { get; set; }
     }
 }

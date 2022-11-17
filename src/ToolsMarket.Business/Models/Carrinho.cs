@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToolsMarket.Business.Models
+﻿namespace ToolsMarket.Business.Models
 {
     public class Carrinho : Entity
     {
-        public Carrinho(Guid pedidoId, int quantidade, decimal valorTotal)
+        public Carrinho(Guid pedidoId, int quantidade, Guid produtoId)
         {
             PedidoId = pedidoId;
             Quantidade = quantidade;
-            ValorTotal = valorTotal;
+            ProdutoId = produtoId;
         }
 
         public Guid PedidoId { get; set; }
+        public Guid ProdutoId { get; set; }
         public int Quantidade { get; set; }
-        public decimal ValorTotal { get; set; }
 
         // Relations
         public Pedido Pedido { get; set; }
-        public IEnumerable<Produto> Produtos { get; set; }
+        public Produto Produto { get; set; }
     }
 }

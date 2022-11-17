@@ -10,13 +10,13 @@ namespace ToolsMarket.App.ViewModels
         public Guid Id { get; set; }
 
         public Guid PedidoId { get; set; }
-
+        public Guid ProdutoId { get; set; }
         public int Quantidade { get; set; }
-        public decimal ValorTotal { get; set; }
 
         // Relations
 
         public PedidoViewModel? Pedido { get; set; }
-        public IEnumerable<ProdutoViewModel>? Produtos { get; set; } = new List<ProdutoViewModel>();
+
+        public ProdutoViewModel Produto { get; set; }
     }
 }

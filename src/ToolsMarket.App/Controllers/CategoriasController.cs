@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ToolsMarket.App.Extensions;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.App.Controllers
 {
+    [Authorize]
     public class CategoriasController : BaseController
     {
         private readonly ICategoriaRepository _categoriaRepository;
@@ -19,12 +22,14 @@ namespace ToolsMarket.App.Controllers
             _categoriaService = categoriaService;
         }
 
+        [ClaimsAuthorize("Categoria", "Visualizar")]
         [Route("todas-as-categorias")]
         public async Task<IActionResult> Index()
         {
               return View(_mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterCategorias()));
         }
 
+        [ClaimsAuthorize("Categoria", "Visualizar")]
         [Route("categoria/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -35,12 +40,14 @@ namespace ToolsMarket.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [ClaimsAuthorize("Categoria", "Adicionar")]
         [Route("criar-categoria")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [ClaimsAuthorize("Categoria", "Adicionar")]
         [Route("criar-categoria")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -55,6 +62,8 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));           
         }
 
+
+        [ClaimsAuthorize("Categoria", "Editar")]
         [Route("editar-categoria/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -65,6 +74,7 @@ namespace ToolsMarket.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [ClaimsAuthorize("Categoria", "Editar")]
         [Route("editar-categoria/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -81,6 +91,7 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Categoria", "Excluir")]
         [Route("deletar-categoria/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -91,6 +102,7 @@ namespace ToolsMarket.App.Controllers
             return View(categoriaViewModel);
         }
 
+        [ClaimsAuthorize("Categoria", "Excluir")]
         [Route("deletar-categoria/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

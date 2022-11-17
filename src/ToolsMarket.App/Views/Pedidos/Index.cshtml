@@ -1,53 +1,64 @@
 ﻿@model IEnumerable<ToolsMarket.App.ViewModels.PedidoViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Carrinho - ";
 }
 
-<h1>Index</h1>
+<div class="container" style="margin: 60px auto;">
+    <div class="d-flex flex-row align-items-end mb-4">
+        <h5 class="m-0">Carrinho </h5> <span style="font-size: .8rem; margin-left: 10px; color: #bbb; font-weight: normal">Clique em finalizar compra para efetuar o seu pedido</span>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DataVenda)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Frete)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusPedido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataVenda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Frete)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusPedido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Cpf)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <table class="table table-hover">
+        <thead class="table-light" style="text-transform: uppercase; font-size: .7rem;">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ItensCarrinho)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.produto.ValorUnitario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValorTotal)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="d-flex flex-row">
+                            <div class="productImage">
+                                <img style="width: 90px; height: 90px" src="~/images/produtos/@item.produto.Imagem" alt="@item.produto.Imagem" />
+                            </div>
+                            <div class="descricao d-flex flex-row">
+                                <div>@Html.DisplayFor(modelItem => item.produto.Nome)</div>
+                                <div><span>Estoque: </span> @Html.DisplayFor(modelItem => item.produto.Status)</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.produto.ValorUnitario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorTotal)
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

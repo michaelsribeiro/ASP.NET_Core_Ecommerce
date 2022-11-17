@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ToolsMarket.App.Extensions;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.App.Controllers
 {
+    [Authorize]
     public class ProdutosController : BaseController
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -30,12 +33,14 @@ namespace ToolsMarket.App.Controllers
             _produtoService = produtoService;
         }
 
+        [ClaimsAuthorize("Produto", "Visualizar")]
         [Route("produtos")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos()));
         }
 
+        [AllowAnonymous]
         [Route("produto/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -46,6 +51,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtoViewModel);
         }
 
+        [ClaimsAuthorize("Produto", "Adicionar")]
         [Route("novo-produto")]
         public async Task<IActionResult> Create()
         {
@@ -56,6 +62,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtoViewModel);
         }
 
+        [ClaimsAuthorize("Produto", "Adicionar")]
         [Route("novo-produto")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -91,6 +98,8 @@ namespace ToolsMarket.App.Controllers
 
                 if (!OperacaoValida()) return View(produtoViewModel);
 
+                TempData["Sucesso"] = "Produto inserido com sucesso";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception err)
@@ -100,6 +109,7 @@ namespace ToolsMarket.App.Controllers
             }
         }
 
+        [ClaimsAuthorize("Produto", "Editar")]
         [Route("editar-produto/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -114,6 +124,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtoViewModel);
         }
 
+        [ClaimsAuthorize("Produto", "Editar")]
         [Route("editar-produto/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -147,9 +158,12 @@ namespace ToolsMarket.App.Controllers
 
             if (!OperacaoValida()) return View(produtoViewModel);
 
+            TempData["Sucesso"] = "Produto editado com sucesso";
+
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Produto", "Excluir")]
         [Route("deletar-produto/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -160,6 +174,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtoViewModel);
         }
 
+        [ClaimsAuthorize("Produto", "Excluir")]
         [Route("deletar-produto/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -171,9 +186,12 @@ namespace ToolsMarket.App.Controllers
 
             if (!OperacaoValida()) return View(produtoViewModel);
 
+            TempData["Sucesso"] = "Produto excluído com sucesso";
+
             return RedirectToAction(nameof(Index));
         }
 
+        [AllowAnonymous]
         [Route("ferramentas-manuais")]
         public async Task<IActionResult> Manuais()
         {
@@ -181,6 +199,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtosManuais);
         }
 
+        [AllowAnonymous]
         [Route("ferramentas-eletricas")]
         public async Task<IActionResult> Eletricos()
         {
@@ -188,6 +207,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtosEletricos);
         }
 
+        [AllowAnonymous]
         [Route("pneumaticas")]
         public async Task<IActionResult> Pneumaticos()
         {
@@ -195,6 +215,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtosPneumaticos);
         }
 
+        [AllowAnonymous]
         [Route("automotivas")]
         public async Task<IActionResult> Automotivos()
         {
@@ -202,6 +223,7 @@ namespace ToolsMarket.App.Controllers
             return View(produtosPneumaticos);
         }
 
+        [AllowAnonymous]
         [Route("acessorios")]
         public async Task<IActionResult> Acessorios()
         {
@@ -209,6 +231,7 @@ namespace ToolsMarket.App.Controllers
             return View(acessorios);
         }
 
+        [AllowAnonymous]
         [Route("casa-e-utilidades")]
         public async Task<IActionResult> Utilidades()
         {

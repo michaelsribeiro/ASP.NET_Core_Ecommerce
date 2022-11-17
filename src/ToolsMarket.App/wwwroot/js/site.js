@@ -1,6 +1,7 @@
 ﻿var myCarousel = document.querySelector('#carousel')
 var carousel = new bootstrap.Carousel(myCarousel, {
-    interval: 2000,
+    loop: true,
+    interval: 8000,
     wrap: false
 });
 
@@ -47,3 +48,9 @@ function formatarMoeda() {
     elemento.value = valor;
     if (valor == 'NaN') elemento.value = '';
 }
+
+// Close notification alerts
+
+$(".alert").delay(4000).slideUp(200, function () {
+    $(this).alert('close');
+});

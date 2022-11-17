@@ -1,25 +1,19 @@
 ﻿@model ToolsMarket.App.ViewModels.ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Error - ";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
-@if (Model.ShowRequestId)
+@if (Model == null)
 {
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
+    <div class="container pt-5 pb-5">
+        <h3>Página não encontrada</h3>
+        <span style="font-size: .8rem;">A página que você tentou acessar não foi encontrada. Por favor verifique o endereço acessado e tente novamente.</span>
+    </div>
 }
-
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>
+else 
+{
+    <div class="container pt-5 pb-5">
+        <h3>@Html.Raw(Model.Titulo)</h3>
+        <span style="font-size: .8rem;">@Html.Raw(Model.Mensagem)</span>
+    </div>
+}

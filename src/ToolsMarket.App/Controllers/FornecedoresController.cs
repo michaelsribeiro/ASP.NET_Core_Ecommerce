@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ToolsMarket.App.Extensions;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.App.Controllers
 {
+    [Authorize]
     public class FornecedoresController : BaseController
     {
         private readonly IFornecedorRepository _fornecedorRepository;
@@ -22,12 +25,14 @@ namespace ToolsMarket.App.Controllers
             _fornecedorService = fornecedorService; 
         }
 
+        [ClaimsAuthorize("Fornecedor", "Visualizar")]
         [Route("fornecedores")]
         public async Task<IActionResult> Index()
         {
               return View(_mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterFornecedores()));
         }
 
+        [ClaimsAuthorize("Fornecedor", "Visualizar")]
         [Route("fornecedor/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -38,12 +43,14 @@ namespace ToolsMarket.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Adicionar")]
         [Route("cadastrar-fornecedor")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [ClaimsAuthorize("Fornecedor", "Adicionar")]
         [Route("cadastrar-fornecedor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -58,6 +65,7 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Fornecedor", "Editar")]
         [Route("editar-fornecedor/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)        {
 
@@ -68,6 +76,7 @@ namespace ToolsMarket.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Editar")]
         [Route("editar-fornecedor/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -84,6 +93,7 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Fornecedor", "Excluir")]
         [Route("deletar-fornecedor/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -94,6 +104,7 @@ namespace ToolsMarket.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Excluir")]
         [Route("deletar-fornecedor/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

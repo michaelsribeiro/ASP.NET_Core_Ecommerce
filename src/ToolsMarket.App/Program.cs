@@ -35,7 +35,6 @@ builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-builder.Services.AddScoped<ICarrinhoRepository, CarrinhoRepository>();
 builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 
 builder.Services.AddScoped<INotificador, Notificador>();
@@ -48,6 +47,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseDeveloperExceptionPage();
 app.UseMigrationsEndPoint();
+app.UseStatusCodePagesWithRedirects("/erro/{0}");
+app.UseHsts();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -70,5 +71,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+app.MapControllers();
 
 app.Run();

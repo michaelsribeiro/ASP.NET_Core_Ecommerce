@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
@@ -6,6 +7,7 @@ using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.App.Controllers
 {
+    [Authorize]
     public class EnderecosController : BaseController
     {
         private readonly IEnderecoRepository _enderecoRepository;
