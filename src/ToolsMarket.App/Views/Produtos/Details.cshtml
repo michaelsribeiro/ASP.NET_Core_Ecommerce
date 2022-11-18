@@ -22,8 +22,11 @@
             </div>
             <div class="comprar">
                 <div class="action">
-                    <input class="qtd" type="text" value="1" placeholder="1" />
-                    <button type="buttom" class="btn" value="Comprar" asp-action="Comprar">Comprar</button>
+                    <form method="post">
+                        <input type="hidden" value="@Model.Id" name="id" />
+                        <input class="qtd" type="text" name="qtd" value="1" placeholder="1" />
+                        <button type="submit" asp-action="Adicionar" asp-controller="Pedidos" class="btn">Comprar</button>
+                    </form>
                 </div>
                 <div>
                     <span style="font-size: .7rem">@Html.DisplayNameFor(model => model.Status)</span>

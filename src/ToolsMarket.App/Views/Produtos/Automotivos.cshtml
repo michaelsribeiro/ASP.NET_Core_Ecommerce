@@ -24,9 +24,12 @@
                         <p class="forma-pgt"><strong>à vista com desconto</strong> ou <strong>10x</strong> de <strong>R$</strong> sem Tarifa</p>
                     </div>
                 </a>
-                <div class="card-action">
-                    <input class="qtd" type="text" value="1" placeholder="1" />
-                    <button type="buttom" class="btn" value="Adicionar ao Carrinho" asp-action="AdicionarCarrinho">Adicionar ao Carrinho</button>
+                 <div class="card-action">
+                    <form method="post">
+                        <input type="hidden" value="@item.Id" name="id" />
+                        <input class="qtd" type="text" name="qtd" value="1" placeholder="1" />
+                        <button type="submit" asp-action="Adicionar" asp-controller="Pedidos" class="btn">Adicionar ao Carrinho</button>
+                    </form>
                 </div>
             </div>
         }

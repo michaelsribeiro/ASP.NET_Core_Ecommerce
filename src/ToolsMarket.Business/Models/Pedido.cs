@@ -4,12 +4,12 @@ namespace ToolsMarket.Business.Models
 {
     public class Pedido : Entity
     {
-        public Pedido(Guid usuarioId, DateTime dataVenda, int qtd, decimal valorTotal)
+        public Pedido(Guid usuarioId, DateTime dataVenda, decimal valorTotal, StatusPedido status)
         {
             UsuarioId = usuarioId;
             DataVenda = dataVenda;
             DefinirFrete(valorTotal);
-            StatusPedido = StatusPedido.Aberto;
+            StatusPedido = status;
         }
 
         public Pedido() { }
@@ -24,12 +24,12 @@ namespace ToolsMarket.Business.Models
 
         public Guid UsuarioId { get; set; }
         public DateTime DataVenda { get; set; }
-        public double? Frete { get; set; }
-        public double ValorTotal { get; set; }
+        public decimal? Frete { get; set; }
+        public decimal ValorTotal { get; set; }
         public StatusPedido StatusPedido { get; set; }
 
         // Relations
         public Usuario Usuario { get; set; }
-        public IEnumerable<ItemPedido> ItensPedido { get; set; }
+        public virtual ICollection<ItemPedido> ItensPedido { get; set; } = new List<ItemPedido>();
     }
 }

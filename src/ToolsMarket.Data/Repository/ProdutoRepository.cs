@@ -9,6 +9,12 @@ namespace ToolsMarket.Data.Repository
     {
         public ProdutoRepository(CustomDbContext db) : base(db) {}
 
+        public async Task<Produto> ObterProdutoPorId(Guid id)
+        {
+            return await Db.Produtos.AsNoTracking()
+                                    .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
         public async Task<Produto> ObterProdutoFornecedor(Guid id)
         {
             return await Db.Produtos.AsNoTracking()

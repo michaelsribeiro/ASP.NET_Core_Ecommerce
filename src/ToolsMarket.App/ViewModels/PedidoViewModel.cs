@@ -25,6 +25,6 @@ namespace ToolsMarket.App.ViewModels
 
         // Relations
         public UsuarioViewModel Usuario { get; set; }
-        public IEnumerable<ItemPedidoViewModel> ItensPedido { get; set; }
+        public virtual ICollection<ItemPedidoViewModel> ItensPedido { get; set; }
     }
 }

@@ -4,7 +4,7 @@
 
 namespace ToolsMarket.App.Data.Migrations
 {
-    public partial class AzureDB : Migration
+    public partial class AjusteItemPedido : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

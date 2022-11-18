@@ -23,8 +23,9 @@
                     </a>
                     <div class="card-action">
                         <form method="post">
-                            <input class="qtd" type="text" value="1" placeholder="1" />
-                            <button type="submit" asp-action="Adicionar" asp-controller="Pedidos" name="@item.Id" class="btn">Adicionar ao Carrinho</button>
+                            <input type="hidden" value="@item.Id" name="id" />
+                            <input class="qtd" type="text" name="qtd" value="1" placeholder="1" />
+                            <button type="submit" asp-action="Adicionar" asp-controller="Pedidos" class="btn">Adicionar ao Carrinho</button>
                         </form>
                     </div>
                 </div>

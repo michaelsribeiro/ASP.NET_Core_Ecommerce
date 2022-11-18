@@ -58,6 +58,7 @@ namespace ToolsMarket.Data.Migrations
                     UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DataVenda = table.Column<DateTime>(type: "datetime", nullable: false),
                     Frete = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StatusPedido = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -67,25 +68,6 @@ namespace ToolsMarket.Data.Migrations
                         name: "FK_Pedidos_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuarios",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Carrinhos",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PedidoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
-                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Carrinhos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Carrinhos_Pedidos_PedidoId",
-                        column: x => x.PedidoId,
-                        principalTable: "Pedidos",
                         principalColumn: "Id");
                 });
 
@@ -125,22 +107,16 @@ namespace ToolsMarket.Data.Migrations
                     CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FornecedorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(1000)", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(3000)", nullable: false),
                     Marca = table.Column<string>(type: "varchar(100)", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
                     ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Imagem = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    CarrinhoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produtos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Produtos_Carrinhos_CarrinhoId",
-                        column: x => x.CarrinhoId,
-                        principalTable: "Carrinhos",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Produtos_Categorias_CategoriaId",
                         column: x => x.CategoriaId,
@@ -153,11 +129,30 @@ namespace ToolsMarket.Data.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Carrinhos_PedidoId",
-                table: "Carrinhos",
-                column: "PedidoId",
-                unique: true);
+            migrationBuilder.CreateTable(
+                name: "ItensPedido",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PedidoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItensPedido", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ItensPedido_Pedidos_PedidoId",
+                        column: x => x.PedidoId,
+                        principalTable: "Pedidos",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ItensPedido_Produtos_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produtos",
+                        principalColumn: "Id");
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categorias_ProdutoId",
@@ -176,14 +171,19 @@ namespace ToolsMarket.Data.Migrations
                 column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ItensPedido_PedidoId",
+                table: "ItensPedido",
+                column: "PedidoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItensPedido_ProdutoId",
+                table: "ItensPedido",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_UsuarioId",
                 table: "Pedidos",
                 column: "UsuarioId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Produtos_CarrinhoId",
-                table: "Produtos",
-                column: "CarrinhoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Produtos_CategoriaId",
@@ -213,10 +213,6 @@ namespace ToolsMarket.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Carrinhos_Pedidos_PedidoId",
-                table: "Carrinhos");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_Categorias_Produtos_ProdutoId",
                 table: "Categorias");
 
@@ -228,6 +224,9 @@ namespace ToolsMarket.Data.Migrations
                 name: "Enderecos");
 
             migrationBuilder.DropTable(
+                name: "ItensPedido");
+
+            migrationBuilder.DropTable(
                 name: "Pedidos");
 
             migrationBuilder.DropTable(
@@ -235,9 +234,6 @@ namespace ToolsMarket.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Produtos");
-
-            migrationBuilder.DropTable(
-                name: "Carrinhos");
 
             migrationBuilder.DropTable(
                 name: "Categorias");

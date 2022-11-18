@@ -12,8 +12,8 @@ using ToolsMarket.App.Data;
 namespace ToolsMarket.App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221109132951_Initial")]
-    partial class Initial
+    [Migration("20221117184845_AjusteItemPedido")]
+    partial class AjusteItemPedido
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

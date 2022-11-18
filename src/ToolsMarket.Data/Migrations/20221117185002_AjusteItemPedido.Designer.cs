@@ -12,8 +12,8 @@ using ToolsMarket.Data.Context;
 namespace ToolsMarket.Data.Migrations
 {
     [DbContext(typeof(CustomDbContext))]
-    [Migration("20221109132656_Initial")]
-    partial class Initial
+    [Migration("20221117185002_AjusteItemPedido")]
+    partial class AjusteItemPedido
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,29 +23,6 @@ namespace ToolsMarket.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("ToolsMarket.Business.Models.Carrinho", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PedidoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("ValorTotal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PedidoId")
-                        .IsUnique();
-
-                    b.ToTable("Carrinhos", (string)null);
-                });
 
             modelBuilder.Entity("ToolsMarket.Business.Models.Categoria", b =>
                 {
@@ -132,6 +109,31 @@ namespace ToolsMarket.Data.Migrations
                     b.ToTable("Fornecedores", (string)null);
                 });
 
+            modelBuilder.Entity("ToolsMarket.Business.Models.ItemPedido", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PedidoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ValorUnitario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PedidoId");
+
+                    b.ToTable("ItensPedido", (string)null);
+                });
+
             modelBuilder.Entity("ToolsMarket.Business.Models.Pedido", b =>
                 {
                     b.Property<Guid>("Id")
@@ -150,6 +152,9 @@ namespace ToolsMarket.Data.Migrations
                     b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<decimal>("ValorTotal")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UsuarioId");
@@ -163,15 +168,12 @@ namespace ToolsMarket.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CarrinhoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("CategoriaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("varchar(1000)");
+                        .HasColumnType("varchar(3000)");
 
                     b.Property<Guid>("FornecedorId")
                         .HasColumnType("uniqueidentifier");
@@ -179,6 +181,9 @@ namespace ToolsMarket.Data.Migrations
                     b.Property<string>("Imagem")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
+
+                    b.Property<Guid?>("ItemPedidoId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Marca")
                         .IsRequired()
@@ -199,11 +204,11 @@ namespace ToolsMarket.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarrinhoId");
-
                     b.HasIndex("CategoriaId");
 
                     b.HasIndex("FornecedorId");
+
+                    b.HasIndex("ItemPedidoId");
 
                     b.ToTable("Produtos", (string)null);
                 });
@@ -249,16 +254,6 @@ namespace ToolsMarket.Data.Migrations
                     b.ToTable("Usuarios", (string)null);
                 });
 
-            modelBuilder.Entity("ToolsMarket.Business.Models.Carrinho", b =>
-                {
-                    b.HasOne("ToolsMarket.Business.Models.Pedido", "Pedido")
-                        .WithOne("Carrinho")
-                        .HasForeignKey("ToolsMarket.Business.Models.Carrinho", "PedidoId")
-                        .IsRequired();
-
-                    b.Navigation("Pedido");
-                });
-
             modelBuilder.Entity("ToolsMarket.Business.Models.Categoria", b =>
                 {
                     b.HasOne("ToolsMarket.Business.Models.Produto", null)
@@ -283,6 +278,16 @@ namespace ToolsMarket.Data.Migrations
                         .HasForeignKey("ProdutoId");
                 });
 
+            modelBuilder.Entity("ToolsMarket.Business.Models.ItemPedido", b =>
+                {
+                    b.HasOne("ToolsMarket.Business.Models.Pedido", "Pedido")
+                        .WithMany("ItensPedido")
+                        .HasForeignKey("PedidoId")
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
+                });
+
             modelBuilder.Entity("ToolsMarket.Business.Models.Pedido", b =>
                 {
                     b.HasOne("ToolsMarket.Business.Models.Usuario", "Usuario")
@@ -295,10 +300,6 @@ namespace ToolsMarket.Data.Migrations
 
             modelBuilder.Entity("ToolsMarket.Business.Models.Produto", b =>
                 {
-                    b.HasOne("ToolsMarket.Business.Models.Carrinho", null)
-                        .WithMany("Produtos")
-                        .HasForeignKey("CarrinhoId");
-
                     b.HasOne("ToolsMarket.Business.Models.Categoria", "Categoria")
                         .WithMany("Produtos")
                         .HasForeignKey("CategoriaId")
@@ -309,14 +310,13 @@ namespace ToolsMarket.Data.Migrations
                         .HasForeignKey("FornecedorId")
                         .IsRequired();
 
+                    b.HasOne("ToolsMarket.Business.Models.ItemPedido", null)
+                        .WithMany("Produtos")
+                        .HasForeignKey("ItemPedidoId");
+
                     b.Navigation("Categoria");
 
                     b.Navigation("Fornecedor");
-                });
-
-            modelBuilder.Entity("ToolsMarket.Business.Models.Carrinho", b =>
-                {
-                    b.Navigation("Produtos");
                 });
 
             modelBuilder.Entity("ToolsMarket.Business.Models.Categoria", b =>
@@ -329,10 +329,14 @@ namespace ToolsMarket.Data.Migrations
                     b.Navigation("Produtos");
                 });
 
+            modelBuilder.Entity("ToolsMarket.Business.Models.ItemPedido", b =>
+                {
+                    b.Navigation("Produtos");
+                });
+
             modelBuilder.Entity("ToolsMarket.Business.Models.Pedido", b =>
                 {
-                    b.Navigation("Carrinho")
-                        .IsRequired();
+                    b.Navigation("ItensPedido");
                 });
 
             modelBuilder.Entity("ToolsMarket.Business.Models.Produto", b =>

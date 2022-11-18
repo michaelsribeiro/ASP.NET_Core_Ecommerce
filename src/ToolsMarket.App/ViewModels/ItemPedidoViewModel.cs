@@ -11,16 +11,7 @@ namespace ToolsMarket.App.ViewModels
         public Guid PedidoId { get; set; }
         public Guid ProdutoId { get; set; }
         public int Quantidade { get; set; }
-        public double ValorUnitario { get; set; }
-
-        [NotMapped]
-        public double ValorItem
-        {
-            get
-            {
-                return Quantidade * ValorUnitario;
-            }
-        }
+        public decimal ValorUnitario { get; set; }
 
         // Relations
 

@@ -16,7 +16,7 @@ namespace ToolsMarket.Data.Mapping
 
             builder.Property(p => p.ValorTotal)
                    .IsRequired()
-                   .HasColumnType("double");
+                   .HasColumnType("decimal(18,2)");
 
             builder.HasMany(c => c.ItensPedido)
                    .WithOne(p => p.Pedido);
