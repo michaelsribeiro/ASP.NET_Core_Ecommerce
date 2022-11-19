@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ToolsMarket.App.Data;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Models;
 
@@ -8,7 +9,7 @@ namespace ToolsMarket.App.AutoMapper
     {
         public AutoMapperConfig()
         {
-            //CreateMap<Usuario, UsuarioViewModel>().ReverseMap();
+            CreateMap<ApplicationUser, ApplicationUser>().ReverseMap();
             CreateMap<Produto, ProdutoViewModel>().ReverseMap();
             CreateMap<Pedido, PedidoViewModel>().ReverseMap();
             CreateMap<Fornecedor, FornecedorViewModel>().ReverseMap();

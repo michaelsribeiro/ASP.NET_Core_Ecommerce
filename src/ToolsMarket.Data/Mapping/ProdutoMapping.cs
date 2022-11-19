@@ -29,7 +29,7 @@ namespace ToolsMarket.Data.Mapping
             builder.HasOne(f => f.Fornecedor)
                    .WithMany(p => p.Produtos)
                    .HasForeignKey(f => f.FornecedorId);
-
+           
             builder.HasOne(f => f.Categoria)
                     .WithMany(p => p.Produtos)
                     .HasForeignKey(f => f.CategoriaId);

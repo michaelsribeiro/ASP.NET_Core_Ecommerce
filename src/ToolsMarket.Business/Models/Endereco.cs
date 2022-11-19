@@ -1,4 +1,5 @@
 ﻿using System;
+using ToolsMarket.App.Data;
 
 namespace ToolsMarket.Business.Models
 {
@@ -22,6 +23,6 @@ namespace ToolsMarket.Business.Models
         public string Uf { get; set; }
 
         // Relations
-        public Usuario Usuario { get; set; }
+        public IEnumerable<ApplicationUser> Usuarios { get; set; }
     }
 }

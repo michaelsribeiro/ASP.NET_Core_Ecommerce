@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using ToolsMarket.App.Data;
 
 namespace ToolsMarket.App.ViewModels
 {
@@ -37,5 +38,6 @@ namespace ToolsMarket.App.ViewModels
 
         [HiddenInput]
         public Guid? UsuarioId { get; set; }
+        public IEnumerable<ApplicationUser> Usuarios { get; set; }
     }
 }

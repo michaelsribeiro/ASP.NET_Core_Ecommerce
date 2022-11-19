@@ -3,22 +3,23 @@
 
 <div class="container" style="margin: 60px auto;">
     <div class="row">
-        <div class="col-md-6">
-            <div class="d-flex flex-row align-items-end mb-4">
-                <h5 class="m-0">Identificação </h5> <span style="font-size: .8rem; margin-left: 10px; color: #bbb; font-weight: normal">Crie uma conta caso ainda não possua cadastro</span>
-            </div>
-            <hr style="background-color: #bbb"/>
+        <div class="d-flex flex-row align-items-end mb-4">
+            <h5 class="m-0">Identificação </h5> <span style="font-size: .8rem; margin-left: 10px; color: #bbb; font-weight: normal">Crie uma conta caso ainda não possua cadastro</span>
+        </div>
+        <h5 class="mb-2">Dados para acesso </h5> 
+        <hr style="background-color: #bbb" />
+        <div class="col-md-6">            
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 
-                <div class="input d-flex flex-row align-items-center mb-2">
-                    <label for="email" class="me-3">E-mail:</label>
-                    <input asp-for="Input.Email" id="email" class="form-control" style="width: 380px; height: 60px; box-shadow: none;" autocomplete="username" aria-required="true" />
+                <div class="input mb-2">
+                    <label for="email" class="mb-2" style="font-size: .8rem; font-weight: bold;">E-mail:</label>
+                    <input asp-for="Input.Email" id="email" class="form-control" style="font-size: .8rem; font-weight: bold; max-width: 500px; height: 50px; box-shadow: none;" autocomplete="username" aria-required="true" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
-                <div class="input d-flex flex-row align-items-center mb-2">
-                    <label for="email" class="me-3">Senha:</label>
-                    <input asp-for="Input.Password" class="form-control" style="width: 200px; height: 60px; margin-right:10px; box-shadow: none;" autocomplete="current-password" aria-required="true" />
+                <div class="input mb-2">
+                    <label for="senha" class="mb-2" style="font-size: .8rem; font-weight: bold;">Crie uma Senha:</label>
+                    <input asp-for="Input.Password" class="form-control" style="font-size: .8rem; font-weight: bold; max-width: 500px; height: 50px; box-shadow: none;" autocomplete="current-password" aria-required="true" />
                     <button id="registerSubmit" type="submit" class="btn" style="width: 120px; height: 60px; background-color: #e6e6e6; color: #868686; font-size: .8rem; font-weight:bold; box-shadow: none;">PROSSEGUIR</button>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>

@@ -28,7 +28,7 @@ namespace ToolsMarket.App.ViewComponents
         private async Task<IEnumerable<ProdutoViewModel>> ObterFerramentasEletricas()
         {
             return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _context.Produtos
-                                                                            .Include(c => c.Categorias)
+                                                                            .Include(c => c.Categoria)
                                                                             .Where(c => c.Categoria.NomeCategoria.Equals("Ferramentas Elétricas"))
                                                                             .OrderByDescending(p => p.Id)
                                                                             .ToListAsync());

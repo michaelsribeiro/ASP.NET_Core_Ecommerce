@@ -1,4 +1,5 @@
-﻿using ToolsMarket.Business.Models.Enum;
+﻿using ToolsMarket.App.Data;
+using ToolsMarket.Business.Models.Enum;
 
 namespace ToolsMarket.Business.Models
 {
@@ -29,7 +30,7 @@ namespace ToolsMarket.Business.Models
         public StatusPedido StatusPedido { get; set; }
 
         // Relations
-        public Usuario Usuario { get; set; }
+        public ApplicationUser Usuario { get; set; }
         public virtual ICollection<ItemPedido> ItensPedido { get; set; } = new List<ItemPedido>();
     }
 }

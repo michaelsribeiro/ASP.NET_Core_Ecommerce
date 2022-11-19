@@ -1,14 +1,16 @@
 ﻿using ToolsMarket.Business.Models.Enum;
-using ToolsMarket.Business.Models;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using ToolsMarket.App.ViewModels;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ToolsMarket.App.ViewModels
+namespace ToolsMarket.App.Data
 {
-    public class UsuarioViewModel
+    public class ApplicationUser : IdentityUser
     {
         [Key]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public Guid PedidoId { get; set; }
 
@@ -34,8 +36,9 @@ namespace ToolsMarket.App.ViewModels
 
         public string? Imagem { get; set; }
 
-        //[DisplayName("Imagem")]
-        //public IFormFile ImageUsuario { get; set; }
+        [NotMapped]
+        [DisplayName("Imagem")]
+        public IFormFile ImageUsuario { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
 
         // Relations

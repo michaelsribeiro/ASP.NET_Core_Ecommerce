@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToolsMarket.App.Data;
 using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.Data.Context
@@ -12,8 +13,7 @@ namespace ToolsMarket.Data.Context
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Produto> Produtos { get; set; } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

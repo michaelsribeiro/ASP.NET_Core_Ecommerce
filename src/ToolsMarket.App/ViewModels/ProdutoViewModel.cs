@@ -3,6 +3,7 @@ using ToolsMarket.Business.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToolsMarket.App.ViewModels
 {
@@ -45,19 +46,33 @@ namespace ToolsMarket.App.ViewModels
         public decimal ValorUnitario { get; set; }
         public string? Imagem { get; set; }
 
-        [DisplayName("Imagem")]        
+        
+        [DisplayName("Imagem")]
+        [NotMapped]
         public IFormFile? ImageProduto { get; set; }
 
         [DisplayName("Disponibilidade:")]
         public StatusProduto? Status { get; set; }
 
+        public decimal? PrecoVenda { get; set; }
+        public int QuantidadeParcelas { get; set; } = 6;
+
+        public decimal ValorParcela
+        {
+            get
+            {
+                return ValorUnitario / QuantidadeParcelas;
+            }
+        }
+
         // Relations
 
-
+        [NotMapped]
         [DisplayName("Categoria")]
         public CategoriaViewModel? Categoria { get; set; }
         public IEnumerable<CategoriaViewModel> Categorias { get; set; } = new List<CategoriaViewModel>();
 
+        [NotMapped]
         [DisplayName("Fornecedor")]
         public FornecedorViewModel? Fornecedor { get; set; }
         public IEnumerable<FornecedorViewModel>? Fornecedores { get; set; } = new List<FornecedorViewModel>();

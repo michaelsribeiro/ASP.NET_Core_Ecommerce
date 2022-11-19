@@ -98,7 +98,7 @@ main .container .item {
     color: #545454;
 }
 
-.container .item .card-action {
+.container .item .card-action form {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -205,7 +205,7 @@ main .container .item {
                 color: #545454;
             }
 
-            .manuais .card-group .card .card-action {
+            .manuais .card-group .card .card-action form {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -301,7 +301,7 @@ footer .copyright .container {
             text-align: end;
         }
 
-            .details .row .comprar .action {
+            .details .row .comprar .action form {
                 margin-bottom: 15px;
                 display: flex;
                 flex-direction: row;

@@ -1,8 +1,9 @@
 ﻿using ToolsMarket.Business.Models.Enum;
+using ToolsMarket.Business.Models;
 
-namespace ToolsMarket.Business.Models
+namespace ToolsMarket.App.Data
 {
-    public class Usuario : Entity
+    public class ApplicationUser : Entity
     {
         public Guid PedidoId { get; set; }
         public string Nome { get; set; }
@@ -15,6 +16,6 @@ namespace ToolsMarket.Business.Models
 
         // Relations
         public Endereco Endereco { get; set; }
-        public IEnumerable<Pedido>? Pedido { get; set; } = new List<Pedido>();
+        public IEnumerable<Pedido>? Pedido { get; set; }
     }
 }

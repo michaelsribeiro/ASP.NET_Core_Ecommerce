@@ -16,7 +16,7 @@
                             <p class="produto-preco">@item.ValorUnitario.ToString("C")</p>
                         </div>
                         <div class="card-forma-pgt">
-                            <p class="forma-pgt"><strong>à vista com desconto</strong> ou <strong>10x</strong> de <strong>R$</strong> sem Tarifa</p>
+                            <p class="forma-pgt">ou <strong>@item.QuantidadeParcelas x</strong> de <strong>@item.ValorParcela.ToString("C")</strong> sem Juros</p>
                         </div>
                     </a>
                     <div class="card-action">

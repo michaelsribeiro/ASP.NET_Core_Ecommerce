@@ -1,4 +1,5 @@
-﻿using ToolsMarket.Business.Models.Enum;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using ToolsMarket.Business.Models.Enum;
 
 namespace ToolsMarket.Business.Models
 {
@@ -44,10 +45,14 @@ namespace ToolsMarket.Business.Models
 
         // Relations
 
+        [NotMapped]
         public Categoria Categoria { get; private set; }
+        [NotMapped]
         public IEnumerable<Categoria> Categorias { get; private set; }
 
+        [NotMapped]
         public Fornecedor Fornecedor { get; private set; }
+        [NotMapped]
         public IEnumerable<Fornecedor> Fornecedores { get; private set; }
     }
 }

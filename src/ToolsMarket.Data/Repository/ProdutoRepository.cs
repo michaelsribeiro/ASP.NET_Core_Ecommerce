@@ -44,7 +44,7 @@ namespace ToolsMarket.Data.Repository
         public async Task<IEnumerable<Produto>> ObterProdutosManuais()
         {
             return await Db.Produtos.AsNoTracking()
-                                    .Include(c => c.Categorias)
+                                    .Include(c => c.Categoria)
                                     .Where(c => c.Categoria.NomeCategoria.Equals("Ferramentas Manuais"))
                                     .OrderBy(p => p.Id)
                                     .Take(9)
@@ -54,7 +54,7 @@ namespace ToolsMarket.Data.Repository
         public async Task<IEnumerable<Produto>> ObterProdutosEletricos()
         {
             return await Db.Produtos.AsNoTracking()
-                                    .Include(c => c.Categorias)
+                                    .Include(c => c.Categoria)
                                     .Where(c => c.Categoria.NomeCategoria.Equals("Ferramentas Elétricas"))
                                     .OrderBy(p => p.Id)
                                     .Take(9)
@@ -64,7 +64,7 @@ namespace ToolsMarket.Data.Repository
         public async Task<IEnumerable<Produto>> ObterProdutosPneumaticos()
         {
             return await Db.Produtos.AsNoTracking()
-                                    .Include(c => c.Categorias)
+                                    .Include(c => c.Categoria)
                                     .Where(c => c.Categoria.NomeCategoria.Equals("Ferramentas Pneumárticas"))
                                     .OrderBy(p => p.Id)
                                     .Take(9)
@@ -74,7 +74,7 @@ namespace ToolsMarket.Data.Repository
         public async Task<IEnumerable<Produto>> ObterProdutosAutomotivos()
         {
             return await Db.Produtos.AsNoTracking()
-                                    .Include(c => c.Categorias)
+                                    .Include(c => c.Categoria)
                                     .Where(c => c.Categoria.NomeCategoria.Equals("Automotivas"))
                                     .OrderBy(p => p.Id)
                                     .Take(9)
@@ -84,7 +84,7 @@ namespace ToolsMarket.Data.Repository
         public async Task<IEnumerable<Produto>> ObterProdutosAcessorios()
         {
             return await Db.Produtos.AsNoTracking()
-                                    .Include(c => c.Categorias)
+                                    .Include(c => c.Categoria)
                                     .Where(c => c.Categoria.NomeCategoria.Equals("Acessórios"))
                                     .OrderBy(p => p.Id)
                                     .Take(9)
@@ -94,7 +94,7 @@ namespace ToolsMarket.Data.Repository
         public async Task<IEnumerable<Produto>> ObterProdutosUtilidades()
         {
             return await Db.Produtos.AsNoTracking()
-                                    .Include(c => c.Categorias)
+                                    .Include(c => c.Categoria)
                                     .Where(c => c.Categoria.NomeCategoria.Equals("Casa e Utilidades"))
                                     .OrderBy(p => p.Id)
                                     .Take(9)

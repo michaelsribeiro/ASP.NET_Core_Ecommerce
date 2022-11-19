@@ -1,6 +1,7 @@
 ﻿using ToolsMarket.Business.Models.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using ToolsMarket.App.Data;
 
 namespace ToolsMarket.App.ViewModels
 {
@@ -10,7 +11,7 @@ namespace ToolsMarket.App.ViewModels
         public Guid Id { get; set; }
         
         [DisplayName("Cliente")] 
-        public Guid UsuarioId { get; set; }
+        public string UsuarioId { get; set; }
 
         [DisplayName("Data da Compra")]
         public DateTime DataVenda { get; set; }
@@ -24,7 +25,7 @@ namespace ToolsMarket.App.ViewModels
         public ProdutoViewModel produto { get; set; }
 
         // Relations
-        public UsuarioViewModel Usuario { get; set; }
+        public ApplicationUser Usuario { get; set; }
         public virtual ICollection<ItemPedidoViewModel> ItensPedido { get; set; }
     }
 }

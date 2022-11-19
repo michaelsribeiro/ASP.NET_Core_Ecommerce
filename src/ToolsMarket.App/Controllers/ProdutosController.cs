@@ -17,7 +17,7 @@ namespace ToolsMarket.App.Controllers
         private readonly IProdutoService _produtoService;
         private readonly IMapper _mapper;
 
-        public IEnumerable<ProdutoViewModel> produtos { get; set; }
+        public IEnumerable<ProdutoViewModel> Produtos { get; set; }
 
         public ProdutosController(IProdutoRepository produtoRepository,
                                   ICategoriaRepository categoriaRepository,
