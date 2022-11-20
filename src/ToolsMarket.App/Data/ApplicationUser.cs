@@ -24,9 +24,10 @@ namespace ToolsMarket.App.Data
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [DisplayName("Gênero")]
-        public string Genero { get; set; }
+        public Genero Genero { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+        [StringLength(11, ErrorMessage = "A {0} precisa ter {1} caracteres.", MinimumLength = 2)]
         [DisplayName("Telefone")]
         public string Telefone { get; set; }
 
@@ -34,11 +35,6 @@ namespace ToolsMarket.App.Data
         [DisplayName("E-mail")]
         public string Email { get; set; }
 
-        public string? Imagem { get; set; }
-
-        [NotMapped]
-        [DisplayName("Imagem")]
-        public IFormFile ImageUsuario { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
 
         // Relations

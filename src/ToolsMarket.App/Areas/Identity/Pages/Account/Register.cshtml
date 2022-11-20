@@ -1,36 +1,128 @@
 ﻿@page
 @model RegisterModel
 
-<div class="container" style="margin: 60px auto;">
+<div class="container account">
     <div class="row">
-        <div class="d-flex flex-row align-items-end mb-4">
-            <h5 class="m-0">Identificação </h5> <span style="font-size: .8rem; margin-left: 10px; color: #bbb; font-weight: normal">Crie uma conta caso ainda não possua cadastro</span>
+        <div class="title">
+            <h5 class="m-0">Identificação </h5> <span>Crie uma conta caso ainda não possua cadastro</span>
         </div>
-        <h5 class="mb-2">Dados para acesso </h5> 
-        <hr style="background-color: #bbb" />
-        <div class="col-md-6">            
+        <div class="col-md-12 insideForm">
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                
-                <div class="input mb-2">
-                    <label for="email" class="mb-2" style="font-size: .8rem; font-weight: bold;">E-mail:</label>
-                    <input asp-for="Input.Email" id="email" class="form-control" style="font-size: .8rem; font-weight: bold; max-width: 500px; height: 50px; box-shadow: none;" autocomplete="username" aria-required="true" />
+                <h5>Dados para acesso </h5>
+                <hr />
+                <div class="campo">
+                    <label for="email">E-mail:</label>
+                    <input asp-for="Input.Email" id="email" class="form-control" autocomplete="username" aria-required="true" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
-                <div class="input mb-2">
-                    <label for="senha" class="mb-2" style="font-size: .8rem; font-weight: bold;">Crie uma Senha:</label>
-                    <input asp-for="Input.Password" class="form-control" style="font-size: .8rem; font-weight: bold; max-width: 500px; height: 50px; box-shadow: none;" autocomplete="current-password" aria-required="true" />
-                    <button id="registerSubmit" type="submit" class="btn" style="width: 120px; height: 60px; background-color: #e6e6e6; color: #868686; font-size: .8rem; font-weight:bold; box-shadow: none;">PROSSEGUIR</button>
+                <div class="campo">
+                    <label for="senha">Crie uma Senha:</label>
+                    <input asp-for="Input.Password" id="senha" class="form-control" autocomplete="current-password" aria-required="true" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <div class="form-floating">
-                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                    <label asp-for="Input.ConfirmPassword"></label>
+                <div class="campo">
+                    <label for="confirma">Confirmar Senha:</label>
+                    <input asp-for="Input.ConfirmPassword" id="confirma" class="form-control" autocomplete="new-password" aria-required="true" />
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
-                
+
+                <div class="dados_cliente">
+                    <div class="col-md-6 dados_pessoais">
+                        <h5 class="m-0">Dados Pessoais</h5>
+                        <hr />
+                        <div class="campo">
+                            <label for="nome">Nome Completo</label>
+                            <input asp-for="Input.Nome" id="nome" class="form-control" autocomplete="nome" aria-required="true" />
+                            <span asp-validation-for="Input.Nome" class="text-danger"></span>
+                        </div>
+                        <div class="campo">
+                            <label for="cpf">CPF</label>
+                            <input asp-for="Input.Cpf" id="cpf" class="form-control" autocomplete="cpf" aria-required="true" />
+                            <span asp-validation-for="Input.Cpf" class="text-danger"></span>
+                        </div>
+                        <div class="campo">
+                            <label for="telefone">Celular</label>
+                            <input asp-for="Input.Telefone" id="telefone" class="form-control" autocomplete="telefone" aria-required="true" />
+                            <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+                        </div>
+                        <div class="campo">
+                            <label for="genero">Sexo</label>
+                            <select asp-for="Input.Genero" id="genero" class="form-control select" autocomplete="genero">
+                                <option>- Selecione -</option>
+                                <option value="1">Masculino</option>
+                                <option value="2">Feminino</option>
+                            </select>
+                            <span asp-validation-for="Input.Genero" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 endereco">
+                        <h5 class="m-0">Endereço</h5>
+                        <hr />
+                        <div class="campo">
+                            <label for="cep">CEP</label>
+                            <input asp-for="Input.Endereco.Cep" id="cep" class="form-control" autocomplete="cep" aria-required="true" />
+                            <span asp-validation-for="Input.Endereco.Cep" class="text-danger"></span>
+                        </div>
+                        <div class="campo">
+                            <label for="logradouro">Endereço</label>
+                            <input asp-for="Input.Endereco.Logradouro" id="logradouro" class="form-control" autocomplete="logradouro" aria-required="true" />
+                            <span asp-validation-for="Input.Endereco.Logradouro" class="text-danger"></span>
+                        </div>
+                        <div class="campo">
+                            <label for="numero">Número</label>
+                            <input asp-for="Input.Endereco.Numero" id="numero" class="form-control" autocomplete="numero" aria-required="true" />
+                            <span asp-validation-for="Input.Endereco.Numero" class="text-danger"></span>
+                        </div>
+                        <div class="campo">
+                            <label for="bairro">Bairro</label>
+                            <input asp-for="Input.Endereco.Bairro" id="bairro" class="form-control" autocomplete="bairro" aria-required="true" />
+                            <span asp-validation-for="Input.Endereco.Bairro" class="text-danger"></span>
+                        </div>
+                        <div class="campo">
+                            <label for="cidade">Cidade</label>
+                            <input asp-for="Input.Endereco.Cidade" id="cidade" class="form-control" autocomplete="cidade" aria-required="true" />
+                            <span asp-validation-for="Input.Endereco.Cidade" class="text-danger"></span>
+                        </div>
+                        <div class="campo">
+                            <label for="uf">Estado</label>
+                            <select asp-for="Input.Endereco.Uf" id="uf" class="form-control select" autocomplete="uf">
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                                <option value="EX">Estrangeiro</option>
+                            </select>
+                            <span asp-validation-for="Input.Endereco.Uf" class="text-danger"></span>
+                        </div>
+                        <button id="registerSubmit" type="submit" class="btn">Criar Conta</button>
+                    </div>                    
+                </div>                
             </form>
-        </div>       
+        </div>
     </div>
 </div>
 

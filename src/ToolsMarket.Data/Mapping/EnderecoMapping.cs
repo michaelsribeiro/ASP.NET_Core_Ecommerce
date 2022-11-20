@@ -22,6 +22,10 @@ namespace ToolsMarket.Data.Mapping
                    .IsRequired()
                    .HasColumnType("varchar(100)");
 
+            builder.Property(c => c.Numero)
+                   .IsRequired()
+                   .HasColumnType("varchar(50)");
+
             builder.Property(c => c.Cidade)
                    .IsRequired()
                    .HasColumnType("varchar(100)");

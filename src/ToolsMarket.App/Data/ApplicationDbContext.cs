@@ -40,10 +40,6 @@ namespace ToolsMarket.App.Data
                    .IsRequired()
                    .HasColumnType("varchar(100)");
 
-            builder.Property(u => u.Imagem)
-                   .IsRequired()
-                   .HasColumnType("varchar(100)");
-
             // Relação 1:1 Usuário => Endereço
             builder.HasOne(e => e.Endereco)
                    .WithMany(u => u.Usuarios);

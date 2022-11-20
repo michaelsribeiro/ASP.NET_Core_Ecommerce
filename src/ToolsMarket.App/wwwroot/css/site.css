@@ -113,16 +113,16 @@ main .container .item {
         border: 1px solid #dbdee1;
     }
 
-    .container .item .card-action .btn {
-        padding: 10px 20px;
-        text-align: center;
-        font-size: 0.9rem;
-        outline: none;
-        border-radius: 5px;
-        background: #fdb827;
-        color: #fff;
-        font-weight: 500;
-    }
+.container .item .card-action .btn {
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    outline: none;
+    border-radius: 5px;
+    background: #fdb827;
+    color: #fff;
+    font-weight: 500;
+}
 
 /* PAGINAS CATEGORIAS */
 
@@ -213,27 +213,27 @@ main .container .item {
                 margin: 0 10px 20px;
             }
 
-                .manuais .card-group .card .card-action input {
-                    width: 40px;
-                    height: 40px;
-                    margin-right: 20px;
-                    text-align: center;
-                    outline: none;
-                    border-radius: 5px;
-                    border: none;
-                    background: #eee;
-                }
+            .manuais .card-group .card .card-action input {
+                width: 40px;
+                height: 40px;
+                margin-right: 20px;
+                text-align: center;
+                outline: none;
+                border-radius: 5px;
+                border: none;
+                background: #eee;
+            }
 
-                .manuais .card-group .card .card-action .btn {
-                    padding: 10px 20px;
-                    text-align: center;
-                    font-size: 0.9rem;
-                    outline: none;
-                    border-radius: 5px;
-                    background: #fdb827;
-                    color: #fff;
-                    font-weight: 500;
-                }
+            .manuais .card-group .card .card-action .btn {
+                padding: 10px 20px;
+                text-align: center;
+                font-size: 0.9rem;
+                outline: none;
+                border-radius: 5px;
+                background: #fdb827;
+                color: #fff;
+                font-weight: 500;
+            }
 
 /* FOOTER */
 
@@ -309,31 +309,31 @@ footer .copyright .container {
                 justify-content: space-between;
             }
 
-                .details .row .comprar .action .qtd {
-                    width: 90px;
-                    height: 55px;
-                    background-color: #eee;
-                    border: none;
-                    border-radius: 5px;
-                    text-align: center;
-                    outline: none;
-                }
+            .details .row .comprar .action .qtd {
+                width: 90px;
+                height: 55px;
+                background-color: #eee;
+                border: none;
+                border-radius: 5px;
+                text-align: center;
+                outline: none;
+            }
 
-                .details .row .comprar .action .btn {
-                    max-width: 250px;
-                    width: 100%;
-                    height: 55px;
-                    background-color: #fdb827;
-                    border: 1px solid #efa200;
-                    border-radius: 5px;
-                    color: #fff;
-                    text-align: center;
-                    text-transform: uppercase;
-                    font-weight: 500;
-                    font-size: 1.2rem;
-                    letter-spacing: 1.2px;
-                    box-shadow: none;
-                }
+            .details .row .comprar .action .btn {
+                max-width: 250px;
+                width: 100%;
+                height: 55px;
+                background-color: #fdb827;
+                border: 1px solid #efa200;
+                border-radius: 5px;
+                color: #fff;
+                text-align: center;
+                text-transform: uppercase;
+                font-weight: 500;
+                font-size: 1.2rem;
+                letter-spacing: 1.2px;
+                box-shadow: none;
+            }
 
         .details .row .frete {
             width 100%;
@@ -376,6 +376,98 @@ footer .copyright .container {
         margin-top: 50px;
     }
 
+/* REGISTER AND LOGIN PAGES */
+
+.account {
+    margin: 60px auto;
+}
+
+    .account .row * {
+        padding: 0;
+    }
+
+    .account .row .title {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        margin-bottom: 30px;
+    }
+
+        .account .row .title h5 {
+            margin: 0;
+        }
+
+        .account .row .title span {
+            font-size: .8rem;
+            margin-left: 10px;
+            color: #bbb;
+            font-weight: normal;
+        }
+
+    .account .row h5 {
+        margin-bottom: 20px;
+    }
+
+    .account .row hr {
+        background-color: #838383;
+    }
+
+    .account .row .insideForm {
+        padding: 0;
+    }
+
+        .account .row .insideForm .campo {
+            margin-bottom: 30px;
+        }
+
+        .account .row .insideForm input {
+            padding: 10px;
+        }
+
+        .account .row .insideForm select {
+            width: 250px;
+            padding: 0 20px;
+        }
+
+        .account .row .insideForm label {
+            margin-bottom: 10px;
+            font-size: .8rem;
+            font-weight: bold;
+        }
+
+        .account .row .insideForm .form-control {
+            font-size: .8rem;
+            font-weight: bold;
+            max-width: 500px;
+            height: 50px;
+            box-shadow: none;
+        }
+
+        .account .row .insideForm .dados_cliente {
+            display: flex;
+            flex-direction: row;
+        }
+
+            .account .row .insideForm .dados_cliente .endereco {
+                display: flex;
+                flex-direction: column;
+            }
+
+        .account .row .insideForm .dados_cliente .dados_pessoais {
+            padding-right: 40px;
+        }
+
+            .account .row .insideForm .dados_cliente .endereco .btn {
+                width: 120px;
+                height: 60px;
+                background-color: #e6e6e6;
+                color: #868686;
+                font-size: .8rem;
+                font-weight: bold;
+                box-shadow: none;
+                justify-self: end;
+            }
+
 /* MEDIA QUERYS */
 
 @media screen and (max-width: 1000px) {
@@ -406,7 +498,7 @@ footer .copyright .container {
         grid-gap: 20px;
     }
 
-        /*.mid-banners img {
+    /*.mid-banners img {
             margin-bottom: 10px;
         }*/
 

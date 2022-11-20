@@ -21,6 +21,10 @@ namespace ToolsMarket.App.ViewModels
         public string Logradouro { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+        [DisplayName("Número")]
+        public string Numero { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [StringLength(100, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres.", MinimumLength = 3)]
         [DisplayName("Bairro")]
         public string Bairro { get; set; }
@@ -36,8 +40,7 @@ namespace ToolsMarket.App.ViewModels
 
         // Relations
 
-        [HiddenInput]
         public Guid? UsuarioId { get; set; }
-        public IEnumerable<ApplicationUser> Usuarios { get; set; }
+        public ICollection<ApplicationUser> Usuarios { get; set; }
     }
 }

@@ -66,15 +66,14 @@ namespace ToolsMarket.App.ViewModels
         }
 
         // Relations
-
         [NotMapped]
         [DisplayName("Categoria")]
-        public CategoriaViewModel? Categoria { get; set; }
-        public IEnumerable<CategoriaViewModel> Categorias { get; set; } = new List<CategoriaViewModel>();
+        public CategoriaViewModel Categoria { get; set; }
+        public virtual IEnumerable<CategoriaViewModel>? Categorias { get; set; } = new List<CategoriaViewModel>();
 
-        [NotMapped]
         [DisplayName("Fornecedor")]
-        public FornecedorViewModel? Fornecedor { get; set; }
-        public IEnumerable<FornecedorViewModel>? Fornecedores { get; set; } = new List<FornecedorViewModel>();
+        [NotMapped]
+        public FornecedorViewModel Fornecedor { get; set; }
+        public virtual IEnumerable<FornecedorViewModel>? Fornecedores { get; set; } = new List<FornecedorViewModel>();
     }
 }
