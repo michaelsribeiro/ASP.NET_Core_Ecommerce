@@ -18,14 +18,14 @@
                 <th>
                     @Html.DisplayNameFor(model => model.produto.ValorUnitario)
                 </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.ItensPedido.)
-                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.produto.Quantidade)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.ValorTotal)
                 </th>
                 <th>
-
+                    EXCLUIR
                 </th>
             </tr>
         </thead>
@@ -36,7 +36,7 @@
                     <td>
                         <div class="d-flex flex-row">
                             <div class="productImage">
-                                <img style="width: 90px; height: 90px" src="~/images/produtos/@item.produto.Imagem" alt="@item.produto.Imagem" />
+                                @*<img style="width: 90px; height: 90px" src="~/images/produtos/@item.produto.Imagem" alt="@item.produto.Imagem" />*@
                             </div>
                             <div class="descricao d-flex flex-row">
                                 <div>@Html.DisplayFor(modelItem => item.produto.Nome)</div>
@@ -48,8 +48,6 @@
                         @Html.DisplayFor(modelItem => item.produto.ValorUnitario)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ValorTotal)
-                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ValorTotal)
                     </td>

@@ -34,7 +34,7 @@ namespace ToolsMarket.App.Controllers
         [Route("carrinho")]
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<Pedido>>(await _pedidoRepository.ObterPedidos()));
+            return View(_mapper.Map<IEnumerable<PedidoViewModel>>(await _pedidoRepository.ObterPedidos()));
         }
 
         [Route("carrinho/adicionar")]
@@ -59,11 +59,14 @@ namespace ToolsMarket.App.Controllers
                     itemPedido.Produto = produto;
                     itemPedido.Quantidade = qtd;
                     itemPedido.ProdutoId = produto.Id;
+                    itemPedido.ValorUnitario = produto.ValorUnitario;
 
                     carrinho.UsuarioId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
                     carrinho.DataVenda = DateTime.Now;
+                    carrinho.DefinirFrete(carrinho.ValorTotal);
                     carrinho.StatusPedido = StatusPedido.Aberto;
                     carrinho.ItensPedido.Add(itemPedido);
+                    carrinho.produto = produto;
                 }
 
                 carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.Produto.ValorUnitario * i.Quantidade).Sum();

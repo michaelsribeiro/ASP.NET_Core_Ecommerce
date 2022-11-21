@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using ToolsMarket.App.Data;
+using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.App.ViewModels
 {
@@ -22,7 +23,7 @@ namespace ToolsMarket.App.ViewModels
         [DisplayName("Status do Pedido")]
         public StatusPedido StatusPedido { get; set; }
         public decimal ValorTotal { get; set; }
-        public ProdutoViewModel produto { get; set; }
+        public Produto produto { get; set; }
 
         // Relations
         public ApplicationUser Usuario { get; set; }

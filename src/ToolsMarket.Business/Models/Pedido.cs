@@ -1,4 +1,5 @@
-﻿using ToolsMarket.App.Data;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using ToolsMarket.App.Data;
 using ToolsMarket.Business.Models.Enum;
 
 namespace ToolsMarket.Business.Models
@@ -15,7 +16,7 @@ namespace ToolsMarket.Business.Models
 
         public Pedido() { }
 
-        private void DefinirFrete(decimal ValorTotal)
+        public void DefinirFrete(decimal ValorTotal)
         {
             if(ValorTotal >= 200)
             {
@@ -28,6 +29,9 @@ namespace ToolsMarket.Business.Models
         public decimal? Frete { get; set; }
         public decimal ValorTotal { get; set; }
         public StatusPedido StatusPedido { get; set; }
+
+        [NotMapped]
+        public Produto produto { get; set; }
 
         // Relations
         public ApplicationUser Usuario { get; set; }
