@@ -6,9 +6,9 @@ namespace ToolsMarket.Business.Models
 {
     public class Pedido : Entity
     {
-        public Pedido(Guid usuarioId, DateTime dataVenda, decimal valorTotal, StatusPedido status)
+        public Pedido(Guid clienteId, DateTime dataVenda, decimal valorTotal, StatusPedido status)
         {
-            UsuarioId = usuarioId;
+            ClienteId = clienteId;
             DataVenda = dataVenda;
             DefinirFrete(valorTotal);
             StatusPedido = status;
@@ -24,7 +24,6 @@ namespace ToolsMarket.Business.Models
             }
         }
 
-        public Guid UsuarioId { get; set; }
         public DateTime DataVenda { get; set; }
         public decimal? Frete { get; set; }
         public decimal ValorTotal { get; set; }
@@ -34,7 +33,9 @@ namespace ToolsMarket.Business.Models
         public Produto produto { get; set; }
 
         // Relations
-        public ApplicationUser Usuario { get; set; }
-        public virtual ICollection<ItemPedido> ItensPedido { get; set; } = new List<ItemPedido>();
+        public Cliente Cliente { get; set; }
+        public Guid ClienteId { get; set; }
+
+        public virtual ICollection<ItemPedido>? ItensPedido { get; set; } = new List<ItemPedido>();
     }
 }

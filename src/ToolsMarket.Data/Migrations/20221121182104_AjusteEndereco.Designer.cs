@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToolsMarket.Data.Context;
 
@@ -11,9 +12,10 @@ using ToolsMarket.Data.Context;
 namespace ToolsMarket.Data.Migrations
 {
     [DbContext(typeof(CustomDbContext))]
-    partial class CustomDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221121182104_AjusteEndereco")]
+    partial class AjusteEndereco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +74,12 @@ namespace ToolsMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<Guid?>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
 
                     b.ToTable("Categorias", (string)null);
                 });
@@ -132,11 +139,16 @@ namespace ToolsMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<Guid?>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
 
                     b.ToTable("Fornecedores", (string)null);
                 });
@@ -242,6 +254,13 @@ namespace ToolsMarket.Data.Migrations
                     b.ToTable("Produtos", (string)null);
                 });
 
+            modelBuilder.Entity("ToolsMarket.Business.Models.Categoria", b =>
+                {
+                    b.HasOne("ToolsMarket.Business.Models.Produto", null)
+                        .WithMany("Categorias")
+                        .HasForeignKey("ProdutoId");
+                });
+
             modelBuilder.Entity("ToolsMarket.Business.Models.Endereco", b =>
                 {
                     b.HasOne("ToolsMarket.App.Data.ApplicationUser", "Usuario")
@@ -250,6 +269,13 @@ namespace ToolsMarket.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("ToolsMarket.Business.Models.Fornecedor", b =>
+                {
+                    b.HasOne("ToolsMarket.Business.Models.Produto", null)
+                        .WithMany("Fornecedores")
+                        .HasForeignKey("ProdutoId");
                 });
 
             modelBuilder.Entity("ToolsMarket.Business.Models.ItemPedido", b =>
@@ -317,6 +343,13 @@ namespace ToolsMarket.Data.Migrations
             modelBuilder.Entity("ToolsMarket.Business.Models.Pedido", b =>
                 {
                     b.Navigation("ItensPedido");
+                });
+
+            modelBuilder.Entity("ToolsMarket.Business.Models.Produto", b =>
+                {
+                    b.Navigation("Categorias");
+
+                    b.Navigation("Fornecedores");
                 });
 #pragma warning restore 612, 618
         }

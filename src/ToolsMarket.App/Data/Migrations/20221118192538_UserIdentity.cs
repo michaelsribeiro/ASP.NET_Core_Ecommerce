@@ -22,7 +22,72 @@ namespace ToolsMarket.App.Migrations
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
-            
+
+            migrationBuilder.CreateTable(
+                name: "CategoriaViewModel",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NomeCategoria = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoriaViewModel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EnderecoViewModel",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Cep = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    Logradouro = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Bairro = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Cidade = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Uf = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EnderecoViewModel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FornecedorViewModel",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Telefone = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Cnpj = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FornecedorViewModel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProdutoViewModel",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FornecedorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
+                    Marca = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Imagem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: true),
+                    PrecoVenda = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    QuantidadeParcelas = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProdutoViewModel", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
@@ -80,7 +145,51 @@ namespace ToolsMarket.App.Migrations
                         column: x => x.EnderecoId,
                         principalTable: "EnderecoViewModel",
                         principalColumn: "Id");
-                });            
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoriaViewModelProdutoViewModel",
+                columns: table => new
+                {
+                    CategoriasId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProdutosId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoriaViewModelProdutoViewModel", x => new { x.CategoriasId, x.ProdutosId });
+                    table.ForeignKey(
+                        name: "FK_CategoriaViewModelProdutoViewModel_CategoriaViewModel_CategoriasId",
+                        column: x => x.CategoriasId,
+                        principalTable: "CategoriaViewModel",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CategoriaViewModelProdutoViewModel_ProdutoViewModel_ProdutosId",
+                        column: x => x.ProdutosId,
+                        principalTable: "ProdutoViewModel",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FornecedorViewModelProdutoViewModel",
+                columns: table => new
+                {
+                    FornecedoresId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProdutosId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FornecedorViewModelProdutoViewModel", x => new { x.FornecedoresId, x.ProdutosId });
+                    table.ForeignKey(
+                        name: "FK_FornecedorViewModelProdutoViewModel_FornecedorViewModel_FornecedoresId",
+                        column: x => x.FornecedoresId,
+                        principalTable: "FornecedorViewModel",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_FornecedorViewModelProdutoViewModel_ProdutoViewModel_ProdutosId",
+                        column: x => x.ProdutosId,
+                        principalTable: "ProdutoViewModel",
+                        principalColumn: "Id");
+                });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
@@ -166,7 +275,58 @@ namespace ToolsMarket.App.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-            
+
+            migrationBuilder.CreateTable(
+                name: "PedidoViewModel",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DataVenda = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Frete = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    StatusPedido = table.Column<int>(type: "int", nullable: false),
+                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    produtoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PedidoViewModel", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PedidoViewModel_AspNetUsers_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_PedidoViewModel_ProdutoViewModel_produtoId",
+                        column: x => x.produtoId,
+                        principalTable: "ProdutoViewModel",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItemPedidoViewModel",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PedidoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemPedidoViewModel", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ItemPedidoViewModel_PedidoViewModel_PedidoId",
+                        column: x => x.PedidoId,
+                        principalTable: "PedidoViewModel",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ItemPedidoViewModel_ProdutoViewModel_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "ProdutoViewModel",
+                        principalColumn: "Id");
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -211,7 +371,36 @@ namespace ToolsMarket.App.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-            
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoriaViewModelProdutoViewModel_ProdutosId",
+                table: "CategoriaViewModelProdutoViewModel",
+                column: "ProdutosId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FornecedorViewModelProdutoViewModel_ProdutosId",
+                table: "FornecedorViewModelProdutoViewModel",
+                column: "ProdutosId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemPedidoViewModel_PedidoId",
+                table: "ItemPedidoViewModel",
+                column: "PedidoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemPedidoViewModel_ProdutoId",
+                table: "ItemPedidoViewModel",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PedidoViewModel_produtoId",
+                table: "PedidoViewModel",
+                column: "produtoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PedidoViewModel_UsuarioId",
+                table: "PedidoViewModel",
+                column: "UsuarioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -229,13 +418,37 @@ namespace ToolsMarket.App.Migrations
                 name: "AspNetUserRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserTokens");           
+                name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");           
+                name: "CategoriaViewModelProdutoViewModel");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");            
+                name: "FornecedorViewModelProdutoViewModel");
+
+            migrationBuilder.DropTable(
+                name: "ItemPedidoViewModel");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "CategoriaViewModel");
+
+            migrationBuilder.DropTable(
+                name: "FornecedorViewModel");
+
+            migrationBuilder.DropTable(
+                name: "PedidoViewModel");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "ProdutoViewModel");
+
+            migrationBuilder.DropTable(
+                name: "EnderecoViewModel");
         }
     }
 }

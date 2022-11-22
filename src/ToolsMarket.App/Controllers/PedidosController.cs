@@ -61,7 +61,7 @@ namespace ToolsMarket.App.Controllers
                     itemPedido.ProdutoId = produto.Id;
                     itemPedido.ValorUnitario = produto.ValorUnitario;
 
-                    carrinho.UsuarioId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                    carrinho.ClienteId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
                     carrinho.DataVenda = DateTime.Now;
                     carrinho.DefinirFrete(carrinho.ValorTotal);
                     carrinho.StatusPedido = StatusPedido.Aberto;

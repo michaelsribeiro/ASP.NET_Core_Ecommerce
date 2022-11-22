@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ToolsMarket.App.ViewModels.PedidoViewModel>
+﻿@*@model IEnumerable<ToolsMarket.App.ViewModels.PedidoViewModel>
 
 @{
     ViewData["Title"] = "Carrinho - ";
@@ -16,7 +16,7 @@
                     @Html.DisplayNameFor(model => model.ItensPedido)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.produto.ValorUnitario)
+                    @Html.DisplayNameFor(model => model.ItensPedido.)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.produto.Quantidade)
@@ -36,7 +36,7 @@
                     <td>
                         <div class="d-flex flex-row">
                             <div class="productImage">
-                                @*<img style="width: 90px; height: 90px" src="~/images/produtos/@item.produto.Imagem" alt="@item.produto.Imagem" />*@
+                                <img style="width: 90px; height: 90px" src="~/images/produtos/@item.produto.Imagem" alt="@item.produto.Imagem" />
                             </div>
                             <div class="descricao d-flex flex-row">
                                 <div>@Html.DisplayFor(modelItem => item.produto.Nome)</div>
@@ -59,4 +59,4 @@
         </tbody>
     </table>
 
-</div>
+</div>*@

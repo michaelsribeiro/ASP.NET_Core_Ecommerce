@@ -26,6 +26,7 @@ namespace ToolsMarket.Data.Repository
         {
             return await Db.Pedidos.AsNoTracking()
                                    .Include(u => u.ItensPedido)
+                                        .ThenInclude(c=>c.Produto)                                            
                                    .FirstOrDefaultAsync(p => p.Id == id);
         }
 

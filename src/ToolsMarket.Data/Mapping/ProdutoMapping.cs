@@ -34,6 +34,9 @@ namespace ToolsMarket.Data.Mapping
                     .WithMany(p => p.Produtos)
                     .HasForeignKey(f => f.CategoriaId);
 
+            builder.Ignore(c => c.Categorias);
+            builder.Ignore(c => c.Fornecedores);
+
             builder.ToTable("Produtos");
         }
     }

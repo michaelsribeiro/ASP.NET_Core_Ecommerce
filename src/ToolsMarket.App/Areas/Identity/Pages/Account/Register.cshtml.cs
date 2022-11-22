@@ -28,17 +28,17 @@ namespace ToolsMarket.App.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IUserStore<ApplicationUser> _userStore;
-        private readonly IUserEmailStore<ApplicationUser> _emailStore;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IUserStore<IdentityUser> _userStore;
+        private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<ApplicationUser> userManager,
-            IUserStore<ApplicationUser> userStore,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            IUserStore<IdentityUser> userStore,
+            SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -76,29 +76,6 @@ namespace ToolsMarket.App.Areas.Identity.Pages.Account
             [Display(Name = "Confirmar Senha")]
             [Compare("Password", ErrorMessage = "As senhas não coincidem.")]
             public string ConfirmPassword { get; set; }
-
-            [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-            [StringLength(100, ErrorMessage = "A {0} precisa ter entre {2} e {1} caracteres.", MinimumLength = 2)]
-            [DisplayName("Nome Completo")]
-            public string Nome { get; set; }
-
-            [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-            [StringLength(11, ErrorMessage = "A {0} precisa ter {1} caracteres.")]
-            [DisplayName("CPF")]
-            public string Cpf { get; set; }
-
-            [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-            [DisplayName("Gênero")]
-            public Genero Genero { get; set; }
-
-            [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-            [StringLength(11, ErrorMessage = "A {0} precisa ter {1} caracteres.", MinimumLength = 2)]
-            [DisplayName("Telefone")]
-            public string Telefone { get; set; }
-
-            [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-            [DisplayName("Endereço")]
-            public EnderecoViewModel Endereco { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -111,33 +88,10 @@ namespace ToolsMarket.App.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            ApplicationUser user = new()
-            {
-                Nome        = Input.Nome,
-                Cpf         = Input.Cpf,
-                Genero      = Input.Genero,
-                Telefone    = Input.Telefone
-            };
-
-            EnderecoViewModel endereco = new()
-            {
-                UsuarioId = new Guid(user.Id),
-                Cep = Input.Endereco.Cep,
-                Logradouro = Input.Endereco.Logradouro,
-                Numero = Input.Endereco.Numero,
-                Bairro = Input.Endereco.Bairro,
-                Cidade = Input.Endereco.Cidade,
-                Uf = Input.Endereco.Uf
-            };
-
-            user.Endereco.Usuarios.Add(user);
-
+                       
             if (ModelState.IsValid)
             {
-                 user = CreateUser();
-
-                
+                 var user = CreateUser();                
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -178,27 +132,27 @@ namespace ToolsMarket.App.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private ApplicationUser CreateUser()
+        private IdentityUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<ApplicationUser>();
+                return Activator.CreateInstance<IdentityUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
-                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
+                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<ApplicationUser> GetEmailStore()
+        private IUserEmailStore<IdentityUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<ApplicationUser>)_userStore;
+            return (IUserEmailStore<IdentityUser>)_userStore;
         }
     }
 }

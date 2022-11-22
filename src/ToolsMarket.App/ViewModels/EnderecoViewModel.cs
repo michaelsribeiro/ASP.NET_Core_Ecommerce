@@ -40,7 +40,7 @@ namespace ToolsMarket.App.ViewModels
 
         // Relations
 
-        public Guid? UsuarioId { get; set; }
-        public ICollection<ApplicationUser> Usuarios { get; set; }
+        public ClienteViewModel Cliente { get; set; }
+        public Guid ClienteId { get; set; }
     }
 }

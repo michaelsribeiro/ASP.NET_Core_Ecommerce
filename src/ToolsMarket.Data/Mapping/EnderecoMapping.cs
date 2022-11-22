@@ -34,6 +34,12 @@ namespace ToolsMarket.Data.Mapping
                    .IsRequired()
                    .HasColumnType("varchar(30)");
 
+            builder.Property(c => c.ClienteId)
+                   .IsRequired();
+
+            builder.HasOne(c => c.Cliente)
+                   .WithOne(c => c.Endereco);
+
             builder.ToTable("Enderecos");
         }
     }

@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ToolsMarket.App.Data;
 using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.Data.Context
 {
     public class CustomDbContext : DbContext
     {
-        public CustomDbContext(DbContextOptions options) : base(options)  { }
+        public CustomDbContext(DbContextOptions<CustomDbContext> options) : base(options)  { }
         
         public DbSet<ItemPedido> ItensPedido { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
