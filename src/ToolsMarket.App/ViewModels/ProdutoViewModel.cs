@@ -48,7 +48,6 @@ namespace ToolsMarket.App.ViewModels
 
         
         [DisplayName("Imagem")]
-        [NotMapped]
         public IFormFile? ImageProduto { get; set; }
 
         [DisplayName("Disponibilidade:")]
@@ -66,13 +65,11 @@ namespace ToolsMarket.App.ViewModels
         }
 
         // Relations
-        [NotMapped]
         [DisplayName("Categoria")]
         public CategoriaViewModel Categoria { get; set; }
         public virtual IEnumerable<CategoriaViewModel>? Categorias { get; set; } = new List<CategoriaViewModel>();
 
         [DisplayName("Fornecedor")]
-        [NotMapped]
         public FornecedorViewModel Fornecedor { get; set; }
         public virtual IEnumerable<FornecedorViewModel>? Fornecedores { get; set; } = new List<FornecedorViewModel>();
     }

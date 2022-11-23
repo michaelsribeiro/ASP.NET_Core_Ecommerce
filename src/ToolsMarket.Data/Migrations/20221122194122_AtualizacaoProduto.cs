@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace ToolsMarket.App.Migrations
+namespace ToolsMarket.Data.Migrations
 {
-    public partial class AjustesFK : Migration
+    public partial class AtualizacaoProduto : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

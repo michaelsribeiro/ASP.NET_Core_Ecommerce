@@ -20,7 +20,7 @@ namespace ToolsMarket.App.ViewModels
         public decimal ValorTotal { get; set; }
 
         // Relations
-        public ClienteViewModel Cliente { get; set; }
+        public ApplicationUserModel Cliente { get; set; }
         [DisplayName("Cliente")]
         public string ClienteId { get; set; }
 

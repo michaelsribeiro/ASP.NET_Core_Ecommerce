@@ -5,7 +5,7 @@ namespace ToolsMarket.Business.Models
 {
     public class Endereco : Entity
     {
-        public Endereco(Guid clienteId, string cep, string logradouro, string numero, string bairro, string cidade, string uf)
+        public Endereco(Guid clienteId, string cep, string logradouro, string numero, string bairro, string cidade, string uf, ApplicationUser cliente)
         {
             ClienteId = clienteId;
             Cep = cep;
@@ -14,6 +14,7 @@ namespace ToolsMarket.Business.Models
             Bairro = bairro;
             Cidade = cidade;
             Uf = uf;
+            Cliente = cliente;
         }
 
         public Endereco() { }
@@ -27,7 +28,7 @@ namespace ToolsMarket.Business.Models
 
         // Relations
 
-        public Cliente Cliente { get; set; }
+        public ApplicationUser? Cliente { get; set; }
         public Guid ClienteId { get; set; }
     }
 }

@@ -45,10 +45,9 @@ namespace ToolsMarket.Business.Models
 
         // Relations
 
-        [NotMapped]
         public Categoria Categoria { get; private set; }
         public IEnumerable<Categoria> Categorias { get; private set; }
-        [NotMapped]
+
         public Fornecedor Fornecedor { get; private set; }
         public IEnumerable<Fornecedor> Fornecedores { get; private set; }
     }

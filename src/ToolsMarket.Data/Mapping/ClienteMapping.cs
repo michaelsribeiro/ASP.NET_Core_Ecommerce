@@ -5,10 +5,12 @@ using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.Data.Mapping
 {
-    public class ClienteMapping : IEntityTypeConfiguration<Cliente>
+    public class ClienteMapping : IEntityTypeConfiguration<ApplicationUser>
     {
-        public void Configure(EntityTypeBuilder<Cliente> builder)
+        public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
+            builder.HasKey(x => x.Id);
+
             builder.Property(u => u.Nome)
                    .IsRequired()
                    .HasColumnType("varchar(100)");

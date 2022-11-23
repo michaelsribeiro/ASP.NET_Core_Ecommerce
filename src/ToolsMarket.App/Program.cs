@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Exchange.WebServices.Data;
 using System.Globalization;
 using ToolsMarket.App.Data;
+using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Notifications;
 using ToolsMarket.Business.Services;
@@ -23,8 +24,7 @@ builder.Services.AddDbContext<CustomDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>()
-                .AddRoles<IdentityUser>()
+builder.Services.AddDefaultIdentity<ApplicationUserModel>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();

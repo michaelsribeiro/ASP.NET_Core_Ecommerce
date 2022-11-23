@@ -1,7 +1,7 @@
 ﻿@using ToolsMarket.App.Data;
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUserModel> SignInManager
+@inject UserManager<ApplicationUserModel> UserManager
 
 
 @if (SignInManager.IsSignedIn(User))

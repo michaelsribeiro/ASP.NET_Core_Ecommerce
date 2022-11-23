@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToolsMarket.App.Data;
 using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.Data.Context
@@ -17,6 +18,8 @@ namespace ToolsMarket.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CustomDbContext).Assembly);
+
+            modelBuilder.Ignore<ApplicationUser>();
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
                      relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;

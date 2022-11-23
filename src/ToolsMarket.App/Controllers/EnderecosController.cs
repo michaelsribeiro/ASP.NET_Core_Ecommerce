@@ -37,7 +37,7 @@ namespace ToolsMarket.App.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]

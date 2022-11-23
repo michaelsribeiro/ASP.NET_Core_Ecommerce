@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using ToolsMarket.App.Data;
 
 namespace ToolsMarket.App.ViewModels
 {
@@ -40,7 +38,7 @@ namespace ToolsMarket.App.ViewModels
 
         // Relations
 
-        public ClienteViewModel Cliente { get; set; }
+        public ApplicationUserModel? Cliente { get; set; }
         public Guid ClienteId { get; set; }
     }
 }
