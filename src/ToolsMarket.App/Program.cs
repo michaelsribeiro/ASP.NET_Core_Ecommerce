@@ -38,6 +38,7 @@ builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+builder.Services.AddScoped<IItemPedidoRepository, ItemPedidoRepository>();
 
 builder.Services.AddScoped<INotificador, Notificador>();
 builder.Services.AddScoped<IFornecedorService, FornecedorService>();

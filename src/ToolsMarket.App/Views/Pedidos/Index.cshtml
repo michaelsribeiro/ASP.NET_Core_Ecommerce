@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<ToolsMarket.App.ViewModels.PedidoViewModel>
+﻿@model ToolsMarket.App.ViewModels.PedidoViewModel
 
 @{
     ViewData["Title"] = "Carrinho - ";
@@ -13,16 +13,16 @@
         <thead class="table-light" style="text-transform: uppercase; font-size: .7rem;">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.ItensPedido)
+                    PRODUTO
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ItensPedido.)
+                    PREÇO UNITÁRIO
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.produto.Quantidade)
+                    QUANTIDADE
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ValorTotal)
+                    SUBTOTAL
                 </th>
                 <th>
                     EXCLUIR
@@ -30,26 +30,26 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.ItensPedido)
             {
                 <tr>
                     <td>
                         <div class="d-flex flex-row">
                             <div class="productImage">
-                                <img style="width: 90px; height: 90px" src="~/images/produtos/@item.produto.Imagem" alt="@item.produto.Imagem" />
+                                <img style="width: 90px; height: 90px" src="~/images/produtos/@item.Produto.Imagem" alt="@item.Produto.Imagem" />
                             </div>
                             <div class="descricao d-flex flex-row">
-                                <div>@Html.DisplayFor(modelItem => item.produto.Nome)</div>
-                                <div><span>Estoque: </span> @Html.DisplayFor(modelItem => item.produto.Status)</div>
+                                <div>@Html.DisplayFor(modelItem => item.Produto.Nome)</div>
+                                <div><span>Estoque: </span> @Html.DisplayFor(modelItem => item.Produto.Status)</div>
                             </div>
                         </div>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.produto.ValorUnitario)
+                        @Html.DisplayFor(modelItem => item.Produto.ValorUnitario)
                     </td>
                     <td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ValorTotal)
+                            @Html.DisplayFor(modelItem => item.Pedido.ValorTotal)
                     </td>
                     <td>
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
@@ -59,4 +59,4 @@
         </tbody>
     </table>
 
-</div>*@
+</div>

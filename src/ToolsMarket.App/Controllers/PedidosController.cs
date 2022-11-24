@@ -16,57 +16,63 @@ namespace ToolsMarket.App.Controllers
         private readonly IPedidoRepository _pedidoRepository;
         private readonly IProdutoRepository _produtoRepository;
         private readonly CustomDbContext _context;
+        private readonly IItemPedidoRepository _itemPedidoRepository;
         private readonly IMapper _mapper;
 
-        public PedidosController(IPedidoRepository pedidoRepository, 
-                                 IMapper mapper, 
-                                 INotificador notificador, 
-                                 IProdutoRepository produtoRepository, 
+        public PedidosController(IPedidoRepository pedidoRepository,
+                                 IProdutoRepository produtoRepository,
+                                 IItemPedidoRepository itemPedidoRepository,
+                                 IMapper mapper,
+                                 INotificador notificador,
                                  CustomDbContext context) : base(notificador)
         {
             _pedidoRepository = pedidoRepository;
             _produtoRepository = produtoRepository;
             _mapper = mapper;
             _context = context;
+            _itemPedidoRepository = itemPedidoRepository;
         }
 
         [AllowAnonymous]
         [Route("carrinho")]
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<PedidoViewModel>>(await _pedidoRepository.ObterPedidos()));
+            return View(await _pedidoRepository.ObterCarrinhosUsuario());
         }
 
         [Route("carrinho/adicionar")]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Adicionar([FromForm]Guid id, int qtd)
+        public async Task<IActionResult> Adicionar([FromForm] Guid id, int qtd)
         {
             Pedido carrinho = new();
 
             var produto = await _context.Produtos.FindAsync(id);
 
             if (produto != null)
-            {                
+            {
 
-                if(carrinho.ItensPedido.FirstOrDefault(c => c.Id == produto.Id) != null)
+                if (carrinho.ItensPedido.FirstOrDefault(c => c.Id == produto.Id) != null)
                 {
                     carrinho.ItensPedido.FirstOrDefault(c => c.Id == produto.Id).Quantidade += qtd;
                 }
                 else
                 {
-                    var itemPedido = new ItemPedido();
-                    itemPedido.Produto = produto;
-                    itemPedido.Quantidade = qtd;
-                    itemPedido.ProdutoId = produto.Id;
-                    itemPedido.ValorUnitario = produto.ValorUnitario;
+                    var itemPedido = new ItemPedido()
+                    {
+                        Produto = produto,
+                        Quantidade = qtd,
+                        ProdutoId = produto.Id,
+                        ValorUnitario = produto.ValorUnitario
+                    };
+
 
                     carrinho.ClienteId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
                     carrinho.DataVenda = DateTime.Now;
                     carrinho.DefinirFrete(carrinho.ValorTotal);
                     carrinho.StatusPedido = StatusPedido.Aberto;
                     carrinho.ItensPedido.Add(itemPedido);
-                    carrinho.produto = produto;
+                    carrinho.Produtos = carrinho.ItensPedido.Select(c => c.Produto);
                 }
 
                 carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.Produto.ValorUnitario * i.Quantidade).Sum();
@@ -77,14 +83,10 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task<ProdutoViewModel> ObterProdutoPorId(Guid id)
-        {
-            return _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoPorId(id));
-        }
 
-        private async Task<IEnumerable<PedidoViewModel>> ObterPedidos()
+        private async Task<IEnumerable<PedidoViewModel>> ObterCarrinhosUsuario()
         {
-            return _mapper.Map<IEnumerable<PedidoViewModel>>(await _pedidoRepository.ObterPedidos());
+            return _mapper.Map<IEnumerable<PedidoViewModel>>(await _pedidoRepository.ObterCarrinhosUsuario());
         }
     }
 }

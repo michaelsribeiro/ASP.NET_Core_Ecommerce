@@ -13,22 +13,18 @@ namespace ToolsMarket.Data.Repository
         {
             return await Db.Pedidos.AsNoTracking()
                                    .Include(u => u.ItensPedido)
-                                   .ToListAsync();
-            }
-
-        public async Task<IEnumerable<Pedido>> ObterPedidos()
-        {
-            return await Db.Pedidos.AsNoTracking()
+                                   .ThenInclude(c => c.Produto)
                                    .ToListAsync();
         }
 
-        public async Task<Pedido> ObterPedidoUsuario(Guid id)
+        public Task<IEnumerable<Pedido>> ObterPedidos()
         {
-            return await Db.Pedidos.AsNoTracking()
-                                   .Include(u => u.ItensPedido)
-                                        .ThenInclude(c=>c.Produto)                                            
-                                   .FirstOrDefaultAsync(p => p.Id == id);
+            throw new NotImplementedException();
         }
 
+        public Task<Pedido> ObterPedidoUsuario(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

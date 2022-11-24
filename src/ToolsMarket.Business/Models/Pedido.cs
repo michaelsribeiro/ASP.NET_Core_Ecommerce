@@ -30,12 +30,12 @@ namespace ToolsMarket.Business.Models
         public StatusPedido StatusPedido { get; set; }
 
         [NotMapped]
-        public Produto produto { get; set; }
 
         // Relations
         public ApplicationUser Cliente { get; set; }
         public Guid ClienteId { get; set; }
 
+        public IEnumerable<Produto> Produtos { get; set; }
         public virtual ICollection<ItemPedido>? ItensPedido { get; set; } = new List<ItemPedido>();
     }
 }

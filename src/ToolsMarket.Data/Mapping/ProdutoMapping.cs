@@ -26,6 +26,12 @@ namespace ToolsMarket.Data.Mapping
                    .IsRequired()
                    .HasColumnType("varchar(100)");
 
+            builder.HasOne(c => c.Categoria)
+                   .WithMany(p => p.Produtos);
+
+            builder.HasOne(c => c.Fornecedor)
+                   .WithMany(p => p.Produtos);
+
             builder.Ignore(c => c.Categorias);
             builder.Ignore(c => c.Fornecedores);
 

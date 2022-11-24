@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ToolsMarket.App.ViewModels.ItemPedidoViewModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <div class="d-flex flex-row">
+                <div class="productImage">
+                    <img style="width: 90px; height: 90px" src="~/images/produtos/@item.Produto.Imagem" alt="@item.Produto.Imagem" />
+                </div>
+                <div class="descricao d-flex flex-row">
+                    <div>@Html.DisplayFor(modelItem => item.Produto.Nome)</div>
+                    <div><span>Estoque: </span> @Html.DisplayFor(modelItem => item.Produto.Status)</div>
+                </div>
+            </div>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Produto.ValorUnitario)
+        </td>
+        <td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pedido.ValorTotal)
+        </td>
+        <td>
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </td>
+    </tr>
+}

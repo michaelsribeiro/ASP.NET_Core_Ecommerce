@@ -1,9 +1,7 @@
 ﻿using ToolsMarket.Business.Models.Enum;
-using ToolsMarket.Business.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Web.Mvc;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToolsMarket.App.ViewModels
 {
@@ -65,12 +63,13 @@ namespace ToolsMarket.App.ViewModels
         }
 
         // Relations
+
         [DisplayName("Categoria")]
-        public CategoriaViewModel Categoria { get; set; }
+        public CategoriaViewModel? Categoria { get; set; }
         public virtual IEnumerable<CategoriaViewModel>? Categorias { get; set; } = new List<CategoriaViewModel>();
 
         [DisplayName("Fornecedor")]
-        public FornecedorViewModel Fornecedor { get; set; }
+        public FornecedorViewModel? Fornecedor { get; set; }
         public virtual IEnumerable<FornecedorViewModel>? Fornecedores { get; set; } = new List<FornecedorViewModel>();
     }
 }
