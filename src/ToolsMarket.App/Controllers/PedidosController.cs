@@ -33,11 +33,14 @@ namespace ToolsMarket.App.Controllers
             _itemPedidoRepository = itemPedidoRepository;
         }
 
-        [AllowAnonymous]
+
         [Route("carrinho")]
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(Guid id)
         {
-            return View(await _pedidoRepository.ObterCarrinhosUsuario());
+            var pedidoViewModel = _mapper.Map<PedidoViewModel>(await _pedidoRepository.ObterPedidoPorId(id));
+
+            return View(pedidoViewModel);
         }
 
         [Route("carrinho/adicionar")]
@@ -45,48 +48,39 @@ namespace ToolsMarket.App.Controllers
         [HttpPost]
         public async Task<IActionResult> Adicionar([FromForm] Guid id, int qtd)
         {
-            Pedido carrinho = new();
-
             var produto = await _context.Produtos.FindAsync(id);
 
-            if (produto != null)
+            var carrinho = await _pedidoRepository.ObterItemPedido();
+
+            if (carrinho == null)
             {
+                carrinho = new Pedido();
+                carrinho.ClienteId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                carrinho.DataVenda = DateTime.Now;
+                carrinho.DefinirFrete(carrinho.ValorTotal);
+                carrinho.StatusPedido = StatusPedido.Aberto;
 
-                if (carrinho.ItensPedido.FirstOrDefault(c => c.Id == produto.Id) != null)
+                var itemPedido = new ItemPedido()
                 {
-                    carrinho.ItensPedido.FirstOrDefault(c => c.Id == produto.Id).Quantidade += qtd;
-                }
-                else
-                {
-                    var itemPedido = new ItemPedido()
-                    {
-                        Produto = produto,
-                        Quantidade = qtd,
-                        ProdutoId = produto.Id,
-                        ValorUnitario = produto.ValorUnitario
-                    };
+                    PedidoId = carrinho.Id,
+                    Produto = produto,
+                    Quantidade = qtd,
+                    ProdutoId = produto.Id,
+                    ValorUnitario = produto.ValorUnitario
+                };                
+                carrinho.ItensPedido.Add(itemPedido);
+                TempData["carrinho"] = carrinho;
 
-
-                    carrinho.ClienteId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                    carrinho.DataVenda = DateTime.Now;
-                    carrinho.DefinirFrete(carrinho.ValorTotal);
-                    carrinho.StatusPedido = StatusPedido.Aberto;
-                    carrinho.ItensPedido.Add(itemPedido);
-                    carrinho.Produtos = carrinho.ItensPedido.Select(c => c.Produto);
-                }
-
-                carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.Produto.ValorUnitario * i.Quantidade).Sum();
+                await _pedidoRepository.Adicionar(carrinho);
             }
+            else
+            {
+                carrinho.ItensPedido.FirstOrDefault(c => c. == Id).Quantidade += qtd;                
+            }
+            carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.Produto.ValorUnitario * i.Quantidade).Sum();
 
-            await _pedidoRepository.Adicionar(carrinho);
-
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Pedidos", new { id = carrinho.Id });
         }
 
-
-        private async Task<IEnumerable<PedidoViewModel>> ObterCarrinhosUsuario()
-        {
-            return _mapper.Map<IEnumerable<PedidoViewModel>>(await _pedidoRepository.ObterCarrinhosUsuario());
-        }
     }
 }

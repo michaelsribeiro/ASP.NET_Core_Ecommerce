@@ -9,12 +9,11 @@ namespace ToolsMarket.Data.Repository
     {
         public PedidoRepository(CustomDbContext db) : base(db) {}
 
-        public async Task<IEnumerable<Pedido>> ObterCarrinhosUsuario()
+        public async Task<Pedido> ObterItemPedido()
         {
             return await Db.Pedidos.AsNoTracking()
                                    .Include(u => u.ItensPedido)
-                                   .ThenInclude(c => c.Produto)
-                                   .ToListAsync();
+                                   .FirstOrDefaultAsync();
         }
 
         public Task<IEnumerable<Pedido>> ObterPedidos()
@@ -22,9 +21,12 @@ namespace ToolsMarket.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Pedido> ObterPedidoUsuario(Guid id)
+        public async Task<Pedido> ObterPedidoPorId(Guid id)
         {
-            throw new NotImplementedException();
+            return await Db.Pedidos.AsNoTracking()
+                                   .Include(c => c.ItensPedido)
+                                   .Where(c => c.Id == id)
+                                   .FirstOrDefaultAsync();
         }
     }
 }

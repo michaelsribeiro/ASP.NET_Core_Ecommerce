@@ -12,6 +12,8 @@ namespace ToolsMarket.Business.Models
             DataVenda = dataVenda;
             DefinirFrete(valorTotal);
             StatusPedido = status;
+
+            ItensPedido = new List<ItemPedido>();
         }
 
         public Pedido() { }
@@ -29,13 +31,11 @@ namespace ToolsMarket.Business.Models
         public decimal ValorTotal { get; set; }
         public StatusPedido StatusPedido { get; set; }
 
-        [NotMapped]
-
         // Relations
         public ApplicationUser Cliente { get; set; }
         public Guid ClienteId { get; set; }
 
-        public IEnumerable<Produto> Produtos { get; set; }
-        public virtual ICollection<ItemPedido>? ItensPedido { get; set; } = new List<ItemPedido>();
+        public ICollection<Produto> Produtos { get; set; }
+        public virtual ICollection<ItemPedido> ItensPedido { get; set; } =  new List<ItemPedido>();
     }
 }

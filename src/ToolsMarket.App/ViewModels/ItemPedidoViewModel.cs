@@ -7,7 +7,6 @@ namespace ToolsMarket.App.ViewModels
     {
         [Key]
         public Guid Id { get; set; }
-
         public Guid PedidoId { get; set; }
         public Guid ProdutoId { get; set; }
         public int Quantidade { get; set; }

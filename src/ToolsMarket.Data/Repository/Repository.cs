@@ -28,7 +28,7 @@ namespace ToolsMarket.Data.Repository
             return await DbSet.FindAsync(id);
         }
 
-        public virtual async Task<List<TEntity>> ObterTodos()
+        public virtual async Task<IEnumerable<TEntity>> ObterTodos()
         {
             return await DbSet.ToListAsync();
         }

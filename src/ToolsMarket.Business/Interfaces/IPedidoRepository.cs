@@ -4,8 +4,8 @@ namespace ToolsMarket.Business.Interfaces
 {
     public interface IPedidoRepository : IRepository<Pedido>
     {
-        Task<IEnumerable<Pedido>> ObterCarrinhosUsuario();
+        Task<Pedido> ObterItemPedido();
         Task<IEnumerable<Pedido>> ObterPedidos();
-        Task<Pedido> ObterPedidoUsuario(Guid id);
+        Task<Pedido> ObterPedidoPorId(Guid id);
     }
 }
