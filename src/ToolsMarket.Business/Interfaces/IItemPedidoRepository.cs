@@ -7,8 +7,8 @@ using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.Business.Interfaces
 {
-    public interface IItemPedidoRepository : IDisposable
+    public interface IItemPedidoRepository : IRepository<ItemPedido>
     {
-        Task<IEnumerable<ItemPedido>> ObterItemPedidoProduto();
+        Task<ItemPedido> ObterItemPedidoProduto(Guid id);
     }
 }

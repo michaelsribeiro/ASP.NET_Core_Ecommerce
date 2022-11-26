@@ -45,13 +45,13 @@ namespace ToolsMarket.Data.Repository
 
         public virtual async Task Atualizar(TEntity entity)
         {
-            Db.Entry(entity).State = EntityState.Detached;
-            Db.Set<TEntity>().Update(entity);
-            await Db.SaveChangesAsync();
-            Db.ChangeTracker.Clear();
+            //Db.Entry(entity).State = EntityState.Detached;
+            //Db.Set<TEntity>().Update(entity);
+            //await Db.SaveChangesAsync();
+            //Db.ChangeTracker.Clear();
 
-            //DbSet.Update(entity);
-            //await SaveChanges();
+            DbSet.Update(entity);
+            await SaveChanges();
         }
 
         public virtual async Task Remover(Guid id)

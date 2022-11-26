@@ -9,10 +9,12 @@ namespace ToolsMarket.Data.Repository
     {
         public PedidoRepository(CustomDbContext db) : base(db) {}
 
-        public async Task<Pedido> ObterItemPedido()
+        public async Task<Pedido> ObterItemPedido(Guid id)
         {
             return await Db.Pedidos.AsNoTracking()
                                    .Include(u => u.ItensPedido)
+                                        .ThenInclude(u => u.Produto)
+                                   .Where(c => c.ClienteId == id)
                                    .FirstOrDefaultAsync();
         }
 
@@ -25,6 +27,7 @@ namespace ToolsMarket.Data.Repository
         {
             return await Db.Pedidos.AsNoTracking()
                                    .Include(c => c.ItensPedido)
+                                        .ThenInclude(u => u.Produto)
                                    .Where(c => c.Id == id)
                                    .FirstOrDefaultAsync();
         }

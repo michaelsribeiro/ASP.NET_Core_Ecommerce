@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
 using ToolsMarket.Data.Context;
@@ -15,11 +10,12 @@ namespace ToolsMarket.Data.Repository
 
         public ItemPedidoRepository(CustomDbContext db) : base(db) { }
 
-        public async Task<IEnumerable<ItemPedido>> ObterItemPedidoProduto()
+        public async Task<ItemPedido> ObterItemPedidoProduto(Guid id)
         {
             return await Db.ItensPedido.AsNoTracking()
                                        .Include(p => p.Produto)
-                                       .ToListAsync();
+                                       .Where(p => p.Id == id)
+                                       .FirstOrDefaultAsync();
         }
 
         public void Dispose()

@@ -12,7 +12,7 @@ using ToolsMarket.Data.Context;
 namespace ToolsMarket.Data.Migrations
 {
     [DbContext(typeof(CustomDbContext))]
-    [Migration("20221123184833_AtualizacaoProduto")]
+    [Migration("20221125162801_AtualizacaoProduto")]
     partial class AtualizacaoProduto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

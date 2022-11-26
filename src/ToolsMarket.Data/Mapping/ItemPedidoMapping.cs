@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using ToolsMarket.Business.Models;
 
 namespace ToolsMarket.Data.Mapping
@@ -17,6 +18,16 @@ namespace ToolsMarket.Data.Mapping
             builder.Property(p => p.ValorUnitario)
                    .IsRequired()
                    .HasColumnType("decimal(18,2)");
+
+            builder.Property(c => c.ProdutoId)
+                    .IsRequired();
+
+            builder.Property(c => c.PedidoId)
+                    .IsRequired();
+
+            builder.HasOne(p => p.Produto)
+                   .WithMany()
+                   .HasForeignKey(p => p.ProdutoId);                   
 
             builder.ToTable("ItensPedido");
         }

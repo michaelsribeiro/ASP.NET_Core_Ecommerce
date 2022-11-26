@@ -6,13 +6,14 @@
 
 <div class="container" style="margin: 60px auto;">
     <div class="d-flex flex-row align-items-end mb-4">
-        <h5 class="m-0">Carrinho </h5> <span style="font-size: .8rem; margin-left: 10px; color: #bbb; font-weight: normal">Clique em finalizar compra para efetuar o seu pedido</span>
+        <h5 class="m-0">Carrinho </h5> 
+        <span style="font-size: .8rem; margin-left: 10px; color: #bbb; font-weight: normal">Clique em finalizar compra para efetuar o seu pedido</span>
     </div>
 
-    <table class="table table-hover">
+    <table class="table table-hover" style="padding: 10px;">
         <thead class="table-light" style="text-transform: uppercase; font-size: .7rem;">
             <tr>
-                <th>
+                <th style=" border-bottom: none">
                     PRODUTO
                 </th>
                 <th>
@@ -34,22 +35,25 @@
             {
                 <tr>
                     <td>
+                        
                         <div class="d-flex flex-row">
-                            @*<div class="productImage">
-                                <img style="width: 90px; height: 90px" src="~/images/produtos/@item.Produto.Imagem" alt="@item.Produto.Imagem" />
-                            </div>*@
-                            <div class="descricao d-flex flex-row">
-                                <div>@Html.DisplayFor(modelItem => item.Produto.Nome)</div>
-                                <div><span>Estoque: </span> @Html.DisplayFor(modelItem => item.Produto.Status)</div>
+                            <div class="productImage">
+                                <img style="width: 70px; height: 70px" src="~/images/produtos/@item.Produto.Imagem" alt="@item.Produto.Imagem" />
+                            </div>
+                            <div class="descricao d-flex flex-column justify-content-center align-content-center p-2">
+                                <div class="text-capitalize" style="font-size: .75rem;"><strong>@item.Produto.Nome</strong></div>
+                                <div style ="font-size: .8rem;"><span>Estoque: </span> @item.Produto.Status</div>
                             </div>
                         </div>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Produto.ValorUnitario)
+                        @item.Produto.ValorUnitario
                     </td>
                     <td>
+                        @item.Quantidade
+                    </td>
                     <td>
-                            @Html.DisplayFor(modelItem => item.Pedido.ValorTotal)
+                        @item.Pedido.ValorTotal
                     </td>
                     <td>
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
