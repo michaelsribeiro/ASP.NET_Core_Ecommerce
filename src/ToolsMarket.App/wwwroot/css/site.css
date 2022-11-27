@@ -453,9 +453,9 @@ footer .copyright .container {
                 flex-direction: column;
             }
 
-        .account .row .insideForm .dados_cliente .dados_pessoais {
-            padding-right: 40px;
-        }
+            .account .row .insideForm .dados_cliente .dados_pessoais {
+                padding-right: 40px;
+            }
 
             .account .row .insideForm .dados_cliente .endereco .btn {
                 width: 120px;
@@ -572,10 +572,10 @@ footer .copyright .container {
                         font-size: .62rem;
                     }
 
-            .carrinho .table tbody tr td a{
-                text-decoration: none;
-                color: #888;
-            }
+                .carrinho .table tbody tr td a {
+                    text-decoration: none;
+                    color: #888;
+                }
 
                 .carrinho .table tbody tr td .qtdCarrinho {
                     display: flex;
@@ -584,12 +584,12 @@ footer .copyright .container {
                     justify-content: center;
                 }
 
-                .carrinho .table tbody tr td .qtdCarrinho .btn {
-                    font-size: 1.4rem;
-                    font-weight: bold;
-                    box-shadow: none;
-                    box-shadow: none;
-                }
+                    .carrinho .table tbody tr td .qtdCarrinho .btn {
+                        font-size: 1.4rem;
+                        font-weight: bold;
+                        box-shadow: none;
+                        box-shadow: none;
+                    }
 
                     .carrinho .table tbody tr td .qtdCarrinho .qtd {
                         width: 50px;
@@ -601,11 +601,11 @@ footer .copyright .container {
                         outline: none;
                     }
 
-                    .carrinho .table tbody tr td .remover-produto .delete-btn {
-                        background-color: transparent;
-                        outline: none;
-                        box-shadow: none;
-                    }
+                .carrinho .table tbody tr td .remover-produto .delete-btn {
+                    background-color: transparent;
+                    outline: none;
+                    box-shadow: none;
+                }
 
 
 

@@ -14,7 +14,7 @@ namespace ToolsMarket.Data.Repository
         {
             return await Db.ItensPedido.AsNoTracking()
                                        .Include(p => p.Produto)
-                                       .Where(p => p.Id == id)
+                                       .Where(p => p.ProdutoId == id)
                                        .FirstOrDefaultAsync();
         }
 
