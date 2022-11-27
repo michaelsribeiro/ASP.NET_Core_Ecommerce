@@ -471,6 +471,145 @@ footer .copyright .container {
 /* CARRINHO */
 
 .carrinho {
+    margin: 80px auto;
+}
+
+    .carrinho .titulo {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 24px;
+        align-items: flex-end;
+    }
+
+        .carrinho .titulo h5 {
+            margin: 0;
+        }
+
+        .carrinho .titulo span {
+            margin-left: 10px;
+            font-size: .8rem;
+            color: #666;
+            font-weight: normal;
+        }
+
+    .carrinho .table {
+        border: 1px solid #eee;
+    }
+
+        .carrinho .table thead tr {
+            background-color: #eee;
+            text-transform: uppercase;
+            font-size: .65rem;
+            font-weight: normal;
+            border-bottom: none;
+            color: #888;
+        }
+
+            .carrinho .table thead tr th {
+                width: 15%;
+                text-align: center;
+                border: none;
+                padding: 15px 15px 15px 10px;
+            }
+
+                .carrinho .table thead tr th:first-child {
+                    text-align: initial;
+                    width: 45%;
+                }
+
+        .carrinho .table tbody tr {
+            border: none;
+        }
+
+            .carrinho .table tbody tr td {
+                border: none;
+                vertical-align: middle;
+                text-align: center;
+                padding: 10px;
+                color: #888;
+            }
+
+                .carrinho .table tbody tr td:first-child {
+                    text-align: initial;
+                    width: 300px;
+                    color: #000;
+                }
+
+                .carrinho .table tbody tr td .produto-info {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                }
+
+                    .carrinho .table tbody tr td .produto-info .imagemProduto {
+                        width: 100px;
+                        height: 100px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                        .carrinho .table tbody tr td .produto-info .imagemProduto img {
+                            width: 70px;
+                            height: 70px;
+                        }
+
+                .carrinho .table tbody tr td .descricao {
+                    width: 300px;
+                    display: flex;
+                    flex-direction: column;
+                    align-content: center;
+                    justify-content: center;
+                }
+
+                    .carrinho .table tbody tr td .descricao .tituloProduto {
+                        font-size: .70rem;
+                        text-transform: uppercase;
+                        margin-bottom: 5px;
+                    }
+
+                    .carrinho .table tbody tr td .descricao .statusProduto {
+                        font-size: .62rem;
+                    }
+
+            .carrinho .table tbody tr td a{
+                text-decoration: none;
+                color: #888;
+            }
+
+                .carrinho .table tbody tr td .qtdCarrinho {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .carrinho .table tbody tr td .qtdCarrinho .btn {
+                    font-size: 1.4rem;
+                    font-weight: bold;
+                    box-shadow: none;
+                    box-shadow: none;
+                }
+
+                    .carrinho .table tbody tr td .qtdCarrinho .qtd {
+                        width: 50px;
+                        height: 50px;
+                        background-color: #eee;
+                        border: none;
+                        border-radius: 5px;
+                        text-align: center;
+                        outline: none;
+                    }
+
+                    .carrinho .table tbody tr td .remover-produto .delete-btn {
+                        background-color: transparent;
+                        outline: none;
+                        box-shadow: none;
+                    }
+
+
+
+
 /* MEDIA QUERYS */
 
 @media screen and (max-width: 1000px) {
