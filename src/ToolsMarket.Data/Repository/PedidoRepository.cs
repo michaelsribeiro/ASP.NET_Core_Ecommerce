@@ -18,9 +18,13 @@ namespace ToolsMarket.Data.Repository
                                    .FirstOrDefaultAsync();
         }
 
-        public Task<IEnumerable<Pedido>> ObterPedidos()
+        public async Task<Pedido> ObterItemPedidoProduto(Guid id)
         {
-            throw new NotImplementedException();
+            return await Db.Pedidos.AsNoTracking()
+                                   .Include(c => c.ItensPedido)
+                                        .ThenInclude(u => u.Produto)
+                                   .Where(u => u.Id == id)
+                                   .FirstOrDefaultAsync();
         }
 
         public async Task<Pedido> ObterPedidoPorId(Guid id)

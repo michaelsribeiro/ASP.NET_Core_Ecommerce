@@ -4,16 +4,16 @@
     ViewData["Title"] = "Carrinho - ";
 }
 
-<div class="container" style="margin: 60px auto;">
-    <div class="d-flex flex-row align-items-end mb-4">
-        <h5 class="m-0">Carrinho </h5> 
-        <span style="font-size: .8rem; margin-left: 10px; color: #bbb; font-weight: normal">Clique em finalizar compra para efetuar o seu pedido</span>
+<div class="container carrinho">
+    <div class="titulo">
+        <h5>Carrinho </h5>
+        <span>Clique em finalizar compra para efetuar o seu pedido</span>
     </div>
 
-    <table class="table table-hover" style="padding: 10px;">
-        <thead class="table-light" style="text-transform: uppercase; font-size: .7rem;">
+    <table class="table">
+        <thead>
             <tr>
-                <th style=" border-bottom: none">
+                <th>
                     PRODUTO
                 </th>
                 <th>
@@ -35,28 +35,35 @@
             {
                 <tr>
                     <td>
-                        
-                        <div class="d-flex flex-row">
-                            <div class="productImage">
-                                <img style="width: 70px; height: 70px" src="~/images/produtos/@item.Produto.Imagem" alt="@item.Produto.Imagem" />
+                        <div class="produto-info">
+                            <div class="imagemProduto">
+                                <img src="~/images/produtos/@item.Produto.Imagem" alt="@item.Produto.Imagem" />
                             </div>
-                            <div class="descricao d-flex flex-column justify-content-center align-content-center p-2">
-                                <div class="text-capitalize" style="font-size: .75rem;"><strong>@item.Produto.Nome</strong></div>
-                                <div style ="font-size: .8rem;"><span>Estoque: </span> @item.Produto.Status</div>
+                            <div class="descricao">
+                                <div class="tituloProduto"><strong>@item.Produto.Nome</strong></div>
+                                <div class="statusProduto"><span>Disponibilidade: </span><strong>@item.Produto.Status</strong></div>
                             </div>
                         </div>
                     </td>
                     <td>
-                        @item.Produto.ValorUnitario
+                        <strong>@item.Produto.ValorUnitario.ToString("C")</strong>
                     </td>
                     <td>
-                        @item.Quantidade
+                        <form method="post" class="qtdCarrinho">
+                            <input type="hidden" value="@item.Produto.Id" name="id" />
+                            <button type="submit" asp-action="RemoverQtd" asp-controller="Pedidos" class="btn">-</button>
+                            <input class="qtd" type="text" name="qtd" value="@item.Quantidade" placeholder="@item.Quantidade" />
+                            <button type="submit" asp-action="Adicionar" asp-controller="Pedidos" class="btn">+</button>
+                        </form>
                     </td>
                     <td>
-                        @item.Pedido.ValorTotal
+                        <strong>@item.Pedido.ValorTotal.ToString("C")</strong>
                     </td>
                     <td>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <form method="post" class="remover-produto">
+                            <input type="hidden" value="@item.Produto.Id" name="id" />
+                            <button class="delete-btn" type="submit" asp-action="RemoverProduto" asp-controller="Pedidos" class="btn"><i class="fa fa-trash"></i></button>
+                        </form>
                     </td>
                 </tr>
             }
