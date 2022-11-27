@@ -605,6 +605,8 @@ footer .copyright .container {
                     background-color: transparent;
                     outline: none;
                     box-shadow: none;
+                    border: none;
+                    color: #888;
                 }
 
 

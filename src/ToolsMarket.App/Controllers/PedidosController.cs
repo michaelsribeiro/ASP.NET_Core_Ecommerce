@@ -139,9 +139,10 @@ namespace ToolsMarket.App.Controllers
 
             var itemPedido = carrinho.ItensPedido.FirstOrDefault(c => c.ProdutoId == id);
 
-            if (carrinho.ItensPedido.Count() > 0)
+            if (carrinho.ItensPedido.Count() > 1)
             {
                 carrinho.ItensPedido.Remove(itemPedido);
+                carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.Produto.ValorUnitario * i.Quantidade).Sum();
                 await _pedidoRepository.Atualizar(carrinho);
             }
             else
