@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Security.Claims;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
@@ -35,8 +34,7 @@ namespace ToolsMarket.App.Controllers
         [Route("carrinho")]
         public async Task<IActionResult> Index(Guid id)
         {
-            var pedidoViewModel = _mapper.Map<PedidoViewModel>(await _pedidoRepository.ObterPedidoPorId(id));
-
+            var pedidoViewModel = _mapper.Map<PedidoViewModel>(await _pedidoRepository.ObterPedidoPorId(id)); ;
 
             if (pedidoViewModel == null)
             {
@@ -143,11 +141,11 @@ namespace ToolsMarket.App.Controllers
             {
                 carrinho.ItensPedido.Remove(itemPedido);
                 await _pedidoRepository.Atualizar(carrinho);
-            }
+    }
             else
             {
                 await _pedidoRepository.Remover(carrinho.Id);
-            }
+}
 
             return RedirectToAction("Index", "Pedidos", new { id = carrinho.Id });
         }
