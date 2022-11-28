@@ -12,7 +12,7 @@ using ToolsMarket.Data.Context;
 namespace ToolsMarket.Data.Migrations
 {
     [DbContext(typeof(CustomDbContext))]
-    [Migration("20221125162801_AtualizacaoProduto")]
+    [Migration("20221127205626_AtualizacaoProduto")]
     partial class AtualizacaoProduto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,6 +115,9 @@ namespace ToolsMarket.Data.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal>("ValorUnitario")
                         .HasColumnType("decimal(18,2)");
 
@@ -181,9 +184,6 @@ namespace ToolsMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.Property<Guid?>("PedidoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
@@ -198,8 +198,6 @@ namespace ToolsMarket.Data.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.HasIndex("FornecedorId");
-
-                    b.HasIndex("PedidoId");
 
                     b.ToTable("Produtos", (string)null);
                 });
@@ -233,10 +231,6 @@ namespace ToolsMarket.Data.Migrations
                         .HasForeignKey("FornecedorId")
                         .IsRequired();
 
-                    b.HasOne("ToolsMarket.Business.Models.Pedido", null)
-                        .WithMany("Produtos")
-                        .HasForeignKey("PedidoId");
-
                     b.Navigation("Categoria");
 
                     b.Navigation("Fornecedor");
@@ -255,8 +249,6 @@ namespace ToolsMarket.Data.Migrations
             modelBuilder.Entity("ToolsMarket.Business.Models.Pedido", b =>
                 {
                     b.Navigation("ItensPedido");
-
-                    b.Navigation("Produtos");
                 });
 #pragma warning restore 612, 618
         }

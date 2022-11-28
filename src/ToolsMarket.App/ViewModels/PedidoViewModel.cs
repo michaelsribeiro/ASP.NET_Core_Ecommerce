@@ -30,19 +30,7 @@ namespace ToolsMarket.App.ViewModels
         [DisplayName("Cliente")]
         public string ClienteId { get; set; }
 
-        public virtual ICollection<ItemPedidoViewModel> ItensPedido { get; set; }/* = new List<ItemPedidoViewModel>();*/
-
-        //public static PedidoViewModel GetCarrinho(HttpContext context)
-        //{
-        //    var carrinho = new PedidoViewModel();
-        //    carrinho.Id = carrinho.GetCarrinhoId(context);
-        //    return carrinho;
-        //}
-
-        //public static PedidoViewModel GetCarrinho(Controller controller)
-        //{
-        //    return GetCarrinho(controller.HttpContext);
-        //}
-
+        public virtual ICollection<ItemPedidoViewModel> ItensPedido { get; set; }
+       
     }
 }

@@ -19,6 +19,10 @@ namespace ToolsMarket.Data.Mapping
                    .IsRequired()
                    .HasColumnType("decimal(18,2)");
 
+            builder.Property(p => p.SubTotal)
+                   .IsRequired()
+                   .HasColumnType("decimal(18,2)");
+
             builder.Property(c => c.ProdutoId)
                     .IsRequired();
 

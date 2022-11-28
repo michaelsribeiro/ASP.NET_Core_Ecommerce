@@ -25,6 +25,7 @@ namespace ToolsMarket.Data.Context
                      relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
             base.OnModelCreating(modelBuilder);
+
         }
 
     }

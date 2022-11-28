@@ -35,7 +35,6 @@ namespace ToolsMarket.Business.Models
         public ApplicationUser Cliente { get; set; }
         public Guid ClienteId { get; set; }
 
-        public ICollection<Produto> Produtos { get; set; }
         public virtual ICollection<ItemPedido> ItensPedido { get; set; } =  new List<ItemPedido>();
     }
 }

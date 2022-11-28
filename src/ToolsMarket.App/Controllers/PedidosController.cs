@@ -81,6 +81,7 @@ namespace ToolsMarket.App.Controllers
                 itemPedido.Quantidade = qtd;
                 itemPedido.ProdutoId = produto.Id;
                 itemPedido.ValorUnitario = produto.ValorUnitario;
+                itemPedido.SubTotal = itemPedido.ValorUnitario * itemPedido.Quantidade;
 
                 carrinho.ItensPedido.Add(itemPedido);
             }
@@ -89,20 +90,21 @@ namespace ToolsMarket.App.Controllers
                 itemPedido.Quantidade += qtd;
             }
 
-            carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.Produto.ValorUnitario * i.Quantidade).Sum();
+            carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.SubTotal).Sum();
 
             if (isInsert)
                 await _pedidoRepository.Adicionar(carrinho);
             else
-                await _pedidoRepository.Atualizar(carrinho);
+                await _itemPedidoRepository.Adicionar(itemPedido);
+            await _pedidoRepository.Atualizar(carrinho);
 
             return RedirectToAction("Index", "Pedidos", new { id = carrinho.Id });
         }
 
-        [Route("carrinho/removerQtd")]
+        [Route("carrinho/adicionarQtd")]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> RemoverQtd([FromForm] Guid id)
+        public async Task<IActionResult> AdicionarQtd([FromForm] Guid id)
         {
             var idCliente = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
@@ -112,16 +114,12 @@ namespace ToolsMarket.App.Controllers
 
             if (carrinho.ItensPedido != null)
             {
-                if (itemPedido.Quantidade > 1)
+                if (itemPedido.Quantidade >= 1)
                 {
-                    itemPedido.Quantidade -= 1;
-                    carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.Produto.ValorUnitario * i.Quantidade).Sum();
+                    itemPedido.Quantidade += 1;
+                    itemPedido.SubTotal = itemPedido.ValorUnitario * itemPedido.Quantidade;
+                    carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.SubTotal).Sum();
                     await _pedidoRepository.Atualizar(carrinho);
-                }
-                else
-                {
-                    carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.Produto.ValorUnitario * i.Quantidade).Sum();
-                    await _pedidoRepository.Remover(carrinho.Id);
                 }
             }
 
@@ -139,18 +137,47 @@ namespace ToolsMarket.App.Controllers
 
             var itemPedido = carrinho.ItensPedido.FirstOrDefault(c => c.ProdutoId == id);
 
-            if (carrinho.ItensPedido.Count() > 1)
+            if (carrinho != null)
             {
-                carrinho.ItensPedido.Remove(itemPedido);
-                carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.Produto.ValorUnitario * i.Quantidade).Sum();
-                await _pedidoRepository.Atualizar(carrinho);
+                if (carrinho.ItensPedido.Count() > 1)
+                {
+                    await _itemPedidoRepository.Remover(itemPedido.Id);
+                    await _pedidoRepository.Atualizar(carrinho);
+                }
+                else
+                {
+                    await _itemPedidoRepository.Remover(itemPedido.Id);
+                    await _pedidoRepository.Remover(carrinho.Id);
+                }
             }
-            else
+
+            carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.SubTotal).Sum();
+
+            return RedirectToAction("Index", "Pedidos", new { id = carrinho.Id });
+        }
+
+        [Route("carrinho/removerQtd")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> RemoverQtd([FromForm] Guid id)
+        {
+            var idCliente = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var carrinho = await _pedidoRepository.ObterItemPedido(idCliente);
+
+            var itemPedido = carrinho.ItensPedido.FirstOrDefault(c => c.ProdutoId == id);
+
+            if (itemPedido.Quantidade > 1)
             {
-                await _pedidoRepository.Remover(carrinho.Id);
+                itemPedido.Quantidade -= 1;
+                itemPedido.SubTotal = itemPedido.ValorUnitario * itemPedido.Quantidade;
+                carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.SubTotal).Sum();
+                await _pedidoRepository.Atualizar(carrinho);
             }
 
             return RedirectToAction("Index", "Pedidos", new { id = carrinho.Id });
         }
+
+
     }
 }
