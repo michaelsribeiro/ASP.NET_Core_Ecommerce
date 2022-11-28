@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolsMarket.App.ViewModels;
-using ToolsMarket.Business.Models;
 using ToolsMarket.Data.Context;
 
 namespace ToolsMarket.App.ViewComponents

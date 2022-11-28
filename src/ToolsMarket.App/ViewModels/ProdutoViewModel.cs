@@ -43,7 +43,6 @@ namespace ToolsMarket.App.ViewModels
         [DisplayName("Valor Unitário")]
         public decimal ValorUnitario { get; set; }
         public string? Imagem { get; set; }
-
         
         [DisplayName("Imagem")]
         public IFormFile? ImageProduto { get; set; }
@@ -52,6 +51,15 @@ namespace ToolsMarket.App.ViewModels
         public StatusProduto? Status { get; set; }
 
         public decimal? PrecoVenda { get; set; }
+
+        [DisplayName("Categoria")]
+        public CategoriaViewModel? Categoria { get; set; }
+        public virtual IEnumerable<CategoriaViewModel>? Categorias { get; set; } = new List<CategoriaViewModel>();
+
+        [DisplayName("Fornecedor")]
+        public FornecedorViewModel? Fornecedor { get; set; }
+        public virtual IEnumerable<FornecedorViewModel>? Fornecedores { get; set; } = new List<FornecedorViewModel>();
+
         public int QuantidadeParcelas { get; set; } = 6;
 
         public decimal ValorParcela
@@ -62,14 +70,5 @@ namespace ToolsMarket.App.ViewModels
             }
         }
 
-        // Relations
-
-        [DisplayName("Categoria")]
-        public CategoriaViewModel? Categoria { get; set; }
-        public virtual IEnumerable<CategoriaViewModel>? Categorias { get; set; } = new List<CategoriaViewModel>();
-
-        [DisplayName("Fornecedor")]
-        public FornecedorViewModel? Fornecedor { get; set; }
-        public virtual IEnumerable<FornecedorViewModel>? Fornecedores { get; set; } = new List<FornecedorViewModel>();
     }
 }

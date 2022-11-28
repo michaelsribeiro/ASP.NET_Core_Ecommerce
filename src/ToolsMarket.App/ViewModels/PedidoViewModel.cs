@@ -9,8 +9,6 @@ namespace ToolsMarket.App.ViewModels
 {
     public class PedidoViewModel
     {
-        private readonly CustomDbContext _context;
-
         [Key]
         public Guid Id { get; set; }
 
@@ -23,14 +21,19 @@ namespace ToolsMarket.App.ViewModels
         [DisplayName("Status do Pedido")]
         public StatusPedido StatusPedido { get; set; }
         public decimal ValorTotal { get; set; }
-        
-
-        // Relations
         public ApplicationUserModel Cliente { get; set; }
         [DisplayName("Cliente")]
         public string ClienteId { get; set; }
-
         public virtual ICollection<ItemPedidoViewModel> ItensPedido { get; set; }
-       
+        public int QuantidadeParcelas { get; set; } = 6;
+
+        public decimal ValorParcela
+        {
+            get
+            {
+                return ValorTotal / QuantidadeParcelas;
+            }
+        }
+
     }
 }

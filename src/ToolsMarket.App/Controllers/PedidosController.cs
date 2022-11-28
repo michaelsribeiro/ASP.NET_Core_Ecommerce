@@ -38,11 +38,27 @@ namespace ToolsMarket.App.Controllers
             var pedidoViewModel = _mapper.Map<PedidoViewModel>(await _pedidoRepository.ObterPedidoPorId(id));
 
 
-            if (pedidoViewModel == null)
+            if (pedidoViewModel != null)
+            {
+                ViewBag.QtdParcelas = pedidoViewModel.QuantidadeParcelas;
+                ViewBag.ValorParcela = pedidoViewModel.ValorParcela;
+            }
+            else
             {
                 var idCliente = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
                 pedidoViewModel = _mapper.Map<PedidoViewModel>(await _pedidoRepository.ObterItemPedido(idCliente));
+
+                if(pedidoViewModel != null)
+                {
+                    ViewBag.QtdParcelas = pedidoViewModel.QuantidadeParcelas;
+                    ViewBag.ValorParcela = pedidoViewModel.ValorParcela;
+                }
+                else
+                {
+                    ViewBag.QtdParcelas = "";
+                    ViewBag.ValorParcela = "";
+                }
             }
 
             return View(pedidoViewModel);
@@ -96,7 +112,7 @@ namespace ToolsMarket.App.Controllers
                 await _pedidoRepository.Adicionar(carrinho);
             else
                 await _itemPedidoRepository.Adicionar(itemPedido);
-            await _pedidoRepository.Atualizar(carrinho);
+                await _pedidoRepository.Atualizar(carrinho);
 
             return RedirectToAction("Index", "Pedidos", new { id = carrinho.Id });
         }
@@ -142,6 +158,8 @@ namespace ToolsMarket.App.Controllers
                 if (carrinho.ItensPedido.Count() > 1)
                 {
                     await _itemPedidoRepository.Remover(itemPedido.Id);
+                    carrinho = await _pedidoRepository.ObterItemPedido(idCliente);
+                    carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.SubTotal).Sum();
                     await _pedidoRepository.Atualizar(carrinho);
                 }
                 else
@@ -178,6 +196,20 @@ namespace ToolsMarket.App.Controllers
             return RedirectToAction("Index", "Pedidos", new { id = carrinho.Id });
         }
 
+        [Route("carrinho/carrinhoGet")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> PegarQuantidade([FromForm] Guid id)
+        {
+            var idCliente = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+            var carrinho = await _pedidoRepository.ObterItemPedido(idCliente);
+
+            var itensPedido = carrinho.
+
+            
+
+            return RedirectToAction("Index", "Pedidos", new { id = carrinho.Id });
+        }
     }
 }

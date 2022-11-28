@@ -1,0 +1,7 @@
+﻿<div class="carrinho">
+    @foreach (var item in Model)
+    {
+        <span class="quantidade-carrinho">@item.</span>
+        <a class="btn" asp-area="" asp-controller="Pedidos" asp-action="Index"><i class="fa fa-cart-shopping"></i></a>
+    }
+</div>

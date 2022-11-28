@@ -77,7 +77,45 @@
                         <strong>@Model.ValorTotal.ToString("C")</strong>
                     </td>
                 </tr>
-
+                <tr class="frete">
+                    <td colspan="2">
+                        <div class="frete-campos">
+                            <div class="frete-title">
+                                <span><i class="fa fa-truck"></i></span>
+                                <strong>CALCULE O PRAZO E O FRETE</strong>
+                            </div>
+                            <div class="frete-input">
+                                <input name="cep" type="tel" placeholder="Digite seu CEP" maxlength="9" />
+                                <button type="submit" class="btn">calcular</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr class="total">
+                    <td colspan="2"></td>
+                    <td colspan="3">
+                        <span>Total:</span>
+                        <strong>@Model.ValorTotal.ToString("C")</strong>
+                        <div class="forma-pagamento">
+                            <p class="forma-pgt" style="font-size: .7rem!important;">ou <strong>@ViewBag.QtdParcelas x</strong> de <strong>@ViewBag.ValorParcela.ToString("C")</strong> sem juros</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="finalizar-compra">
+                    <td colspan="1" class="imagem">
+                        <img src="~/images/ssl-certificate.png">
+                    </td>
+                    <td colspan="4">
+                        <div class="buttons">
+                            <a class="btn" asp-area="" asp-controller="Home" asp-action="Index">Continuar comprando</a>
+                            <form method="post" class="finalizar-compra">
+                                <input type="hidden" value="@Model.Id" name="id" />
+                                <button class="btn-finalizar" type="submit" asp-action="" asp-controller="Pedidos" class="btn"><i class="fa fa-check"></i>&nbsp;&nbsp;Finalizar compra</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     }
