@@ -641,9 +641,9 @@ footer .copyright .container {
                 align-items: center;
             }
 
-            .carrinho .table tbody .frete .frete-campos .frete-title span {
-                margin-right: 5px;
-            }
+                .carrinho .table tbody .frete .frete-campos .frete-title span {
+                    margin-right: 5px;
+                }
 
             .carrinho .table tbody .frete .frete-campos .frete-input {
                 font-size: .8rem;
@@ -742,6 +742,34 @@ footer .copyright .container {
             box-shadow: none;
         }
 
+/* CARRINHO TOPO */
+
+.botao-carrinho {
+    position: relative;
+}
+
+    .botao-carrinho .quantidade-carrinho {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #fdb827;
+        color: #fff;
+        font-size: .75rem;
+        font-weight: bold;
+        position: absolute;
+        right: 0;
+        z-index: 10;
+    }
+
+    .botao-carrinho .btn {
+        color: #545454;
+        box-shadow: none;
+    }
+
+
 /* MEDIA QUERYS */
 
 @media screen and (max-width: 1000px) {
@@ -756,6 +784,77 @@ footer .copyright .container {
     footer .container-fluid .container {
         grid-template-areas: "link-group link-group";
     }
+
+    .carrinho {
+        margin: 40px auto;
+    }
+
+        .carrinho .titulo {
+            flex-direction: column;
+            margin-bottom: 24px;
+            align-items: flex-start;
+        }
+
+        .carrinho .titulo span{
+            margin: 0;
+            font-size: .7rem;
+        }
+
+        .carrinho .table tr .vazio {
+            display: none;
+        }
+
+    .carrinho .table thead {
+        display: none;
+    }
+
+     .carrinho .table tbody tr td{
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .carrinho .table tbody tr td:first-child {
+        width: 100%
+    }
+
+        .carrinho .table tbody tr td .produto-info {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%
+        }
+
+        .carrinho .table tbody .subtotal {
+            display: none;
+        }
+
+        .carrinho .table tbody .frete .frete-campos {
+            margin-top: 20px;
+            flex-direction: column;
+        }
+
+        .carrinho .table tbody .frete .frete-input {
+            margin-bottom: 20px;
+        }
+
+        .carrinho .table tbody .finalizar-compra .imagem {
+            display: none;
+        }
+
+        .carrinho .table tbody .finalizar-compra td .buttons {
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+            .carrinho .table tbody .finalizar-compra td .buttons .btn {
+                font-size: 1rem;
+                margin: 0 0 10px;
+            }
+
+            .carrinho .table tbody .finalizar-compra td .buttons .btn-finalizar {
+                font-size: 1.15rem;
+            }
 }
 
 @media screen and (max-width: 880px) {
@@ -771,10 +870,6 @@ footer .copyright .container {
         padding: 0 20px;
         grid-gap: 20px;
     }
-
-    /*.mid-banners img {
-            margin-bottom: 10px;
-        }*/
 
     .manuais .card-group {
         grid-template-areas: "card";
@@ -827,11 +922,16 @@ footer .copyright .container {
             .link-group
             .navbar-nav
             .nav-item
-            .nav-link {
+            .nav-link
+            a{
                 color: #fff;
             }
 
     footer .container-fluid .container {
         grid-template-areas: "link-group";
     }
+
+    /* CARRINHO */
+
+
 }

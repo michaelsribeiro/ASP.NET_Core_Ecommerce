@@ -31,7 +31,7 @@
             </div>
             <div class="searchbox" style="width: 50%">
                 <div class="input-group d-flex justify-content-center align-items-center">
-                    <div class="form-outline" style="max-width: 90%; width: 100%">
+                    <div class="form-outline" style="max-width: 400px; width: 80%">
                         <input type="search" id="form" class="form-control" style="font-size: .8rem; line-height: 1.8"
                                placeholder="Pesquise em toda a loja" />
                     </div>
@@ -54,7 +54,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex w-80">
-                        <ul class="navbar-nav w-100 d-flex justify-content-evenly align-content-center">
+                        <ul class="navbar-nav w-100 d-flex justify-content-between align-content-center">
                             <li class="nav-item">
                                 <a class="nav-link text-black fw-bold text-uppercase" asp-area="" asp-controller="Produtos" asp-action="Manuais">Ferramentas Manuais</a>
                             </li>
@@ -185,10 +185,14 @@
                             <button class="btn btn-outline-light" type="button">Enviar</button>
                         </div>
                     </div>
-                    <div class="navbar-nav mt-3  ">
+                    <div class="navbar-nav mt-3 ">
                         <h6>Siga as nossas Redes Sociais:</h6>
-                        @*<button type="button" class="btn btn-dark" style="font-size: .8rem; line-height: 1.6; opacity:
-                        60%;"><span class="fa fa-instagram-square"></span></button>*@
+                        <div class="icons w100">
+                            <a href="#" style="font-size: 1.5rem; color: #545454; text-decoration: none;"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" style="font-size: 1.5rem; color: #545454; text-decoration: none; margin: 0 20px;"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="#" style="font-size: 1.5rem; color: #545454; text-decoration: none;"><i class="fa-brands fa-twitter"></i></a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

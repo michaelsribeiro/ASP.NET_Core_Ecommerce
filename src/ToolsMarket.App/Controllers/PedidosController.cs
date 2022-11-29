@@ -205,7 +205,7 @@ namespace ToolsMarket.App.Controllers
 
             var carrinho = await _pedidoRepository.ObterItemPedido(idCliente);
 
-            var itensPedido = carrinho.
+            //var itensPedido = carrinho.ItensPedido.FirstOrDefault(c => c.);
 
             
 

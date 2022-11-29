@@ -1,44 +1,41 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Runtime.ConstrainedExecution;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
-using ToolsMarket.Data.Context;
+using Microsoft.AspNetCore.Identity;
 
 namespace ToolsMarket.App.ViewComponents
 {
     [ViewComponent]
     public class CarrinhoComprasViewComponent : ViewComponent
     {
-        private readonly CustomDbContext _context;
+        private readonly UserManager<ApplicationUserModel> _userManager;
+        private readonly SignInManager<ApplicationUserModel> _signInManager;
         private readonly IPedidoRepository _pedidoRepository;
-        private readonly IMapper _mapper;
 
-        public CarrinhoComprasViewComponent(CustomDbContext context, IPedidoRepository pedidoRepository, IMapper mapper)
+        public CarrinhoComprasViewComponent(IPedidoRepository pedidoRepository, UserManager<ApplicationUserModel> userManager, SignInManager<ApplicationUserModel> signInManager)
         {
-            _context = context;
-            _pedidoRepository= pedidoRepository;
-            _mapper = mapper;
+            _pedidoRepository = pedidoRepository;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var itensPedido = await ObterCarrinho();
+            var itensPedido = 0;
+
+            if (_signInManager.IsSignedIn((ClaimsPrincipal)User)) {
+                var idCliente = new Guid(_userManager.GetUserId(Request.HttpContext.User));
+
+                var carrinho = await _pedidoRepository.ObterItemPedido(idCliente);
+
+                if (carrinho != null)
+                {
+                    itensPedido = carrinho.ItensPedido.Count();
+                }
+            }
+
             return View(itensPedido);
-        }
-
-        private async Task<IEnumerable<PedidoViewModel>> ObterCarrinho()
-        {
-            var idCliente = new Guid(User. Claims.Where(c => c.Type == "sub").FirstOrDefault().Value);
-
-            var carrinho = await _pedidoRepository.ObterItemPedido(idCliente);
-
-            return _mapper.Map<IEnumerable<PedidoViewModel>>(await _context.Pedidos
-                                                                           .Include(i => i.ItensPedido)
-                                                                           .
-                                                                           .ToListAsync());
-        }
+        }        
     }
 }

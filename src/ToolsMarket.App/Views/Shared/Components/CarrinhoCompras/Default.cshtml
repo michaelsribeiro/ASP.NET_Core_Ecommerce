@@ -1,0 +1,13 @@
+﻿<div class="botao-carrinho">
+    
+    @if(Model != null)
+    {
+        <span class="quantidade-carrinho">@Model</span>
+        <a class="btn" asp-area="" asp-controller="Pedidos" asp-action="Index"><i class="fa fa-cart-shopping"></i></a>
+    }
+    else
+    {
+        <span class="quantidade-carrinho">@Model</span>
+        <a class="btn" asp-area="" asp-controller="Pedidos" asp-action="Index"><i class="fa fa-cart-shopping"></i></a>
+    }
+</div>

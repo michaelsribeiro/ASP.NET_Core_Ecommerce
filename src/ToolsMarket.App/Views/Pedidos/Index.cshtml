@@ -90,15 +90,17 @@
                             </div>
                         </div>
                     </td>
-                    <td colspan="3"></td>
+                    <td colspan="3" class="vazio"></td>
                 </tr>
                 <tr class="total">
-                    <td colspan="2"></td>
+                    <td colspan="2" class="vazio"></td>
                     <td colspan="3">
-                        <span>Total:</span>
-                        <strong>@Model.ValorTotal.ToString("C")</strong>
+                        <div class="valor">
+                            <span>Total:</span>
+                            <strong>@Model.ValorTotal.ToString("C")</strong>
+                        </div>
                         <div class="forma-pagamento">
-                            <p class="forma-pgt" style="font-size: .7rem!important;">ou <strong>@ViewBag.QtdParcelas x</strong> de <strong>@ViewBag.ValorParcela.ToString("C")</strong> sem juros</p>
+                            <p class="forma-pgt" style="font-size: .7rem!important;">ou em até <strong>@ViewBag.QtdParcelas x</strong> de <strong>@ViewBag.ValorParcela.ToString("C")</strong> sem juros</p>
                         </div>
                     </td>
                 </tr>
