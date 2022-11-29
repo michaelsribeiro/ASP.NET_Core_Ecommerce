@@ -1,0 +1,7 @@
+INSERT INTO [dbo].[Fornecedores] ([Id], [Nome], [Telefone], [Cnpj], [ProdutoId]) VALUES (N'4e33e32e-8205-4795-4654-08dac2a56ae4', N'Charbs', N'61999990000', N'00000000000000', NULL)
+INSERT INTO [dbo].[Fornecedores] ([Id], [Nome], [Telefone], [Cnpj], [ProdutoId]) VALUES (N'fd8a2e87-660e-4b1d-4655-08dac2a56ae4', N'Razi', N'61999990000', N'00000000000000', NULL)
+INSERT INTO [dbo].[Fornecedores] ([Id], [Nome], [Telefone], [Cnpj], [ProdutoId]) VALUES (N'ffa6a72e-2d7c-4f8d-4656-08dac2a56ae4', N'SA Tools', N'61999990000', N'00000000000000', NULL)
+INSERT INTO [dbo].[Fornecedores] ([Id], [Nome], [Telefone], [Cnpj], [ProdutoId]) VALUES (N'871bef7a-5c13-4f56-4657-08dac2a56ae4', N'Songue Tools', N'61999990000', N'00000000000000', NULL)
+INSERT INTO [dbo].[Fornecedores] ([Id], [Nome], [Telefone], [Cnpj], [ProdutoId]) VALUES (N'ac7fbd0a-e206-425c-4658-08dac2a56ae4', N'Black Jack', N'61999990000', N'00000000000000', NULL)
+INSERT INTO [dbo].[Fornecedores] ([Id], [Nome], [Telefone], [Cnpj], [ProdutoId]) VALUES (N'1def13b1-7b37-4e42-4659-08dac2a56ae4', N'Versa', N'00000000000', N'00000000000000', NULL)
+INSERT INTO [dbo].[Fornecedores] ([Id], [Nome], [Telefone], [Cnpj], [ProdutoId]) VALUES (N'0c67b3b1-da18-43c4-c8ae-08dac37ce202', N'Nakasaki', N'00000000000', N'00000000000000', NULL)

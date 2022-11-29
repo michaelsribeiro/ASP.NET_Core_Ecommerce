@@ -1,0 +1,6 @@
+INSERT INTO [dbo].[Categorias] ([Id], [NomeCategoria], [ProdutoId]) VALUES (N'0522b15d-ec46-4a74-1550-08dac2a5bf37', N'Ferramentas Manuais', NULL)
+INSERT INTO [dbo].[Categorias] ([Id], [NomeCategoria], [ProdutoId]) VALUES (N'1fcd9bfe-71e6-4205-1551-08dac2a5bf37', N'Ferramentas Pneumárticas', NULL)
+INSERT INTO [dbo].[Categorias] ([Id], [NomeCategoria], [ProdutoId]) VALUES (N'b04fe993-68e8-4294-1552-08dac2a5bf37', N'Automotivas', NULL)
+INSERT INTO [dbo].[Categorias] ([Id], [NomeCategoria], [ProdutoId]) VALUES (N'2d5d4cc6-7d08-440e-1553-08dac2a5bf37', N'Acessórios', NULL)
+INSERT INTO [dbo].[Categorias] ([Id], [NomeCategoria], [ProdutoId]) VALUES (N'7927cb82-c877-4c8d-1554-08dac2a5bf37', N'Casa e Utilidades', NULL)
+INSERT INTO [dbo].[Categorias] ([Id], [NomeCategoria], [ProdutoId]) VALUES (N'2c074101-dbee-4c84-a41a-08dac37cf6bb', N'Ferramentas Elétricas', NULL)
