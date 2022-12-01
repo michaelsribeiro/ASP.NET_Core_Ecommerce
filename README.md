@@ -45,13 +45,50 @@
 - Product Search
 - Send Email (SendGrid)
 
-## 🤔 How to use
+## 🤔 How to use?
 
-- Clone this repo: `git clone https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce.git`
+### Prerequisites
 
-- You will need the latest Visual Studio Community 2022 and the latest .NET Core 6.
+- You will need the latest Visual Studio Community 2022
+- Latest version of .NET Core 6
+- Entity Framework Core 6
 
-- To configure SQL Server database, use `update-database -verbose -context CustomDbContext` and `update-database -verbose -context ApplicationDbContext` to create database and tables.
+### Installing
+Follow these steps to get your development environment set up:
+
+1. Clone this repository: `git clone https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce.git`
+
+2. If you have Visual Studio after cloning Open solution with your IDE, AspnetRun.Web should be the start-up project. Directly run this project on Visual Studio with `F5 or Ctrl+F5`. You will see index page of project, you can navigate product and category pages and you can perform crud operations on your browser.
+
+3. Ensure your connection strings in appsettings.json point to a local SQL Server instance.
+
+4. To run SQL, use `update-database -verbose -context CustomDbContext` and `update-database -verbose -context ApplicationDbContext` to create database and tables.
+
+## ⚙️ Structure of Project
+
+The project include layers divided by 3 projects
+
+* Application    
+    * Properties  
+    * wwwroot
+    * Areas
+    * AutoMapper
+    * Controllers
+    * Data
+    * Extensions
+    * ViewComponents
+    * ViewModels
+    * Views
+* Business  
+    * Interfaces
+    * Models
+    * Notifications
+    * Services
+* Data
+    * Context
+    * Mapping
+    * Migrations
+    * Repository
 
 ## 📝 Licence 
 
