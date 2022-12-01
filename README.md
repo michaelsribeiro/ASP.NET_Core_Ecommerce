@@ -66,7 +66,7 @@ Follow these steps to get your development environment set up:
 
 ## ⚙️ Structure of Project
 
-The project include layers divided by 3 projects
+**The project include layers divided by 3 projects**
 
 * Application    
     * Properties  
