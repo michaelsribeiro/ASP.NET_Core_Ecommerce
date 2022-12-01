@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="wwwroot/images/logo.png" alt="Ecommerce ASP.NET Core MVC"/>
+   <img src="src/ToolsMarket.App/wwwroot/images/logo.png" alt="Ecommerce ASP.NET Core MVC"/>
 </p> 
 
 <div align=center>
