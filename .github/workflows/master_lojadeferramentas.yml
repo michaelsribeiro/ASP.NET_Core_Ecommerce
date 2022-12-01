@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'lojadeferramentas'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_35018E79CCA74F71A8244E5DB15B00D1 }}
+          publish-profile: ${{ secrets.lojadeferramentas_60D3 }}
           package: .
