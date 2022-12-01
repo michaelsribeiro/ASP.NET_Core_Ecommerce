@@ -36,11 +36,9 @@
 
 - Clone this repo: `git clone https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce.git`
 
-- You will need the latest Visual Studio 2022 and the latest .NET Core 6.
+- You will need the latest Visual Studio Community 2022 and the latest .NET Core 6.
 
-- Also you can run this Project in Visual Studio Community 2022 or VS Code (Windows, Linux or MacOS). 
-
-- To know more about how to setup your enviroment visit the Microsoft .NET Download Guide Build a complete e-commerce application ASP.NET Core MVC .NET 6
+- To configure SQL Server database, use `update-database -verbose -context CustomDbContext` and `update-database -verbose -context ApplicationDbContext` to create database and tables.
 
 ## 📝 Licence 
 
