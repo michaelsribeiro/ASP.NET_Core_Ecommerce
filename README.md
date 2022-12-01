@@ -62,7 +62,7 @@ Follow these steps to get your development environment set up:
 
 3. Ensure your connection strings in appsettings.json point to a local SQL Server instance.
 
-4. To run SQL, use `update-database -verbose -context CustomDbContext` and `update-database -verbose -context ApplicationDbContext` to create database and tables.
+4. To run SQL Server, use `update-database -verbose -context CustomDbContext` and `update-database -verbose -context ApplicationDbContext` to create database and tables.
 
 ## ⚙️ Structure of Project
 
