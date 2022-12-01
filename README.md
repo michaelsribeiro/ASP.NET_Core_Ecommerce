@@ -1,7 +1,7 @@
 <p align="center">
 <br>
 <br>
-   <img src="src/ToolsMarket.App/wwwroot/images/logo.png" width="40%" alt="Ecommerce ASP.NET Core MVC"/>
+   <img src="src/ToolsMarket.App/wwwroot/images/logo.png" width="55%" alt="Ecommerce ASP.NET Core MVC"/>
 <br>
 <br>
 </p> 
