@@ -31,6 +31,7 @@
 - Register new account<br/>
 - Login<br/>
 - Edit Profile (Change password, username)<br/>
+- Product Details<br/>
 - Cart system (Add products and Remove, shipping rates), registration required<br/>
 
 ## ✨ Administator Features
