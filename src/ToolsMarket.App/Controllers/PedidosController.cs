@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Security.Claims;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
 using ToolsMarket.Business.Models.Enum;
-using ToolsMarket.Data.Context;
 
 namespace ToolsMarket.App.Controllers
 {

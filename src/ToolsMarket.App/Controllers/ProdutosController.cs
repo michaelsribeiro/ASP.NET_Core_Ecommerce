@@ -264,6 +264,7 @@ namespace ToolsMarket.App.Controllers
                 ModelState.AddModelError(string.Empty, "Já existe um arquivo com este nome!");
                 return false;
             }
+
             using (var stream = new FileStream(path, FileMode.Create))
             {
                 await arquivo.CopyToAsync(stream);
