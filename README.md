@@ -26,11 +26,23 @@
 - [SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-2019)
 - [Azure Cloud Services](https://azure.microsoft.com/en-us/)
 
+## ✨ User Features
+
+- Register new account<br/>
+- Login<br/>
+- Edit Profile (Change password, username)<br/>
+- Cart system (Add products and Remove, shipping rates), registration required<br/>
+
+## ✨ Administator Features
+
+- CRUD operations on products, categories, and suppliers<br/>
 
 ## 👨🏽‍💻 Features in development
 
-- Administrator Panel<br/>
-- Payment API for checkout
+- Complete Administrator panel<br/>
+- Payment API integration
+- Product Search
+- Send Email (SendGrid)
 
 ## 🤔 How to use
 
