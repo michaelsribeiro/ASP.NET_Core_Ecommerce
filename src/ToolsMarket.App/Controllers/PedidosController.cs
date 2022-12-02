@@ -92,7 +92,7 @@ namespace ToolsMarket.App.Controllers
                 itemPedido = new ItemPedido();
                 itemPedido.PedidoId = carrinho.Id;
                 itemPedido.Produto = produto;
-                itemPedido.Quantidade = qtd;
+                itemPedido.Quantidade = itemPedido.Produto.Quantidade >= qtd ? qtd : itemPedido.Produto.Quantidade ;
                 itemPedido.ProdutoId = produto.Id;
                 itemPedido.ValorUnitario = produto.ValorUnitario;
                 itemPedido.SubTotal = itemPedido.ValorUnitario * itemPedido.Quantidade;
@@ -128,7 +128,7 @@ namespace ToolsMarket.App.Controllers
 
             if (carrinho.ItensPedido != null)
             {
-                if (itemPedido.Quantidade >= 1)
+                if (itemPedido.Quantidade >= 1 && itemPedido.Produto.Quantidade > itemPedido.Quantidade)
                 {
                     itemPedido.Quantidade += 1;
                     itemPedido.SubTotal = itemPedido.ValorUnitario * itemPedido.Quantidade;
@@ -190,22 +190,6 @@ namespace ToolsMarket.App.Controllers
                 carrinho.ValorTotal = carrinho.ItensPedido.Select(i => i.SubTotal).Sum();
                 await _pedidoRepository.Atualizar(carrinho);
             }
-
-            return RedirectToAction("Index", "Pedidos", new { id = carrinho.Id });
-        }
-
-        [Route("carrinho/carrinhoGet")]
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public async Task<IActionResult> PegarQuantidade([FromForm] Guid id)
-        {
-            var idCliente = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            var carrinho = await _pedidoRepository.ObterItemPedido(idCliente);
-
-            //var itensPedido = carrinho.ItensPedido.FirstOrDefault(c => c.);
-
-            
 
             return RedirectToAction("Index", "Pedidos", new { id = carrinho.Id });
         }

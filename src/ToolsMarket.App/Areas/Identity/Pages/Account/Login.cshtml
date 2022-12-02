@@ -1,32 +1,33 @@
 ﻿@page
 @model LoginModel
 
-<div class="container" style="margin: 60px auto 100px;">
+<div class="container login">
     <div class="row">
         <div class="col-md-6">
             <section>
-                <div class="d-flex flex-row align-items-end mb-4">
-                    <h5 class="m-0">Identificação </h5> <span style="font-size: .7rem; margin-left: 10px; color: #bbb; font-weight: normal">Faça login ou crie uma conta caso ainda não possua cadastro</span>
+                <div class="title">
+                    <h5 class="m-0">Identificação </h5> <span>Faça login ou crie uma conta caso ainda não possua cadastro</span>
                 </div>
-                <hr style="background-color: #bbb" />
+                <hr/>
                 <form id="account" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="input d-flex flex-row align-items-center mb-2">
-                        <label for="email" class="me-3">E-mail:</label>
-                        <input asp-for="Input.Email" id="email" class="form-control" style="width: 380px; height: 60px; box-shadow: none;" autocomplete="username" aria-required="true" />
+                    <div class="input">
+                        <label for="email" id="email">Email:</label>
+                        <input asp-for="Input.Email" id="email" class="form-control" autocomplete="username" aria-required="true" />
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
-                    <div class="input d-flex flex-row align-items-center mb-2">
-                        <label for="email" class="me-3">Senha:</label>
-                        <input asp-for="Input.Password" class="form-control" style="width: 200px; height: 60px; margin-right:10px; box-shadow: none;" autocomplete="current-password" aria-required="true" />
-                        <button id="registerSubmit" type="submit" class="btn" style="width: 120px; height: 60px; background-color: #e6e6e6; color: #868686; font-size: .8rem; font-weight:bold; box-shadow: none;">PROSSEGUIR</button>
+                    <div class="input">
+                        <label for="senha">Senha:</label>
+                        <input asp-for="Input.Password" id="senha" class="form-control" autocomplete="current-password" aria-required="true" />
+                        <button id="registerSubmit" type="submit" class="btn">PROSSEGUIR</button>
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
 
-                    <div>
+                    <div class="forgot">
                         <p>
-                            <a id="forgot-password" style="font-size: .7rem; font-weight: bold; color: #999; margin-left: 65px; text-decoration: none;" asp-page="./ForgotPassword">Esqueceu a senha?</a>
+                            <a id="forgot-password" asp-page="./ForgotPassword">Esqueceu a senha?</a>
                         </p>
+                    </div>
                 </form>
             </section>
         </div>

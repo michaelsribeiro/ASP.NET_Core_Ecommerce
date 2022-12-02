@@ -468,8 +468,78 @@ footer .copyright .container {
                 justify-self: end;
             }
 
-/* CARRINHO */
+/* LOGIN */
 
+.login {
+    margin: 60px auto 100px;
+}
+
+    .login .row section .title {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        margin-bottom: 24px;
+    }
+
+        .login .row section .title span {
+            font-size: .7rem;
+            margin-left: 10px;
+            color: #bbb;
+            font-weight: normal;
+        }
+
+    .login .row section hr {
+        background-color: #bbb;
+    }
+
+    .login .row section form .input {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+        .login .row section form .input label {
+            margin-right: 15px;
+        }
+
+        .login .row section form .input label#email {
+            margin-right: 18px;
+            height:18px;
+        }
+
+        .login .row section form .input #email {
+            max-width: 380px;
+            height: 60px;
+            box-shadow: none;
+        }
+
+        .login .row section form .input #senha {
+            max-width: 250px;
+            height: 60px;
+            margin-right: 10px;
+            box-shadow: none;
+        }
+
+        .login .row section form .input .btn {
+            width: 120px;
+            height: 60px;
+            background-color: #e6e6e6;
+            color: #868686;
+            font-size: .8rem;
+            font-weight: bold;
+            box-shadow: none;
+        }
+
+    .login .row section form .forgot #forgot-password {
+        font-size: .7rem;
+        font-weight: bold;
+        color: #999;
+        margin-left: 65px;
+        text-decoration: none;
+    }
+
+/* CARRINHO */
 .carrinho {
     margin: 80px auto;
 }
@@ -795,35 +865,35 @@ footer .copyright .container {
             align-items: flex-start;
         }
 
-        .carrinho .titulo span{
-            margin: 0;
-            font-size: .7rem;
-        }
+            .carrinho .titulo span {
+                margin: 0;
+                font-size: .7rem;
+            }
 
         .carrinho .table tr .vazio {
             display: none;
         }
 
-    .carrinho .table thead {
-        display: none;
-    }
-
-     .carrinho .table tbody tr td{
-        display: flex;
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    .carrinho .table tbody tr td:first-child {
-        width: 100%
-    }
-
-        .carrinho .table tbody tr td .produto-info {
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%
+        .carrinho .table thead {
+            display: none;
         }
+
+        .carrinho .table tbody tr td {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+            .carrinho .table tbody tr td:first-child {
+                width: 100%
+            }
+
+            .carrinho .table tbody tr td .produto-info {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%
+            }
 
         .carrinho .table tbody .subtotal {
             display: none;
@@ -855,7 +925,48 @@ footer .copyright .container {
             .carrinho .table tbody .finalizar-compra td .buttons .btn-finalizar {
                 font-size: 1.15rem;
             }
+
+    /* REGISTER */
+
+    .account .row .title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        padding: 0 20px;
+    }
+
+        .account .row .title span {
+            margin-left: 0;
+        }
+
+    .account .row .insideForm {
+        padding: 20px;
+    }
+
+        .account .row .insideForm .dados_cliente {
+            flex-direction: column;
+        }
+
+            .account .row .insideForm .dados_cliente .dados_pessoais {
+                padding-right: 0;
+            }
 }
+/* LOGIN */
+
+.login .row section {
+    padding: 10px;
+}
+
+.login .row section .title {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+    .login .row section .title span {
+        margin: 0;
+    }
+
 
 @media screen and (max-width: 880px) {
     .manuais .card-group {
@@ -923,7 +1034,7 @@ footer .copyright .container {
             .navbar-nav
             .nav-item
             .nav-link
-            a{
+            a {
                 color: #fff;
             }
 
