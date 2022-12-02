@@ -8,7 +8,7 @@
 
 <div align=center>
 
-   💻 **See project demo [here](https://lojadeferramentas.azurewebsites.net/)**
+   💻 **See project demo [here](https://ecommerceaspnet.azurewebsites.net/)**
    
 </div>
 
