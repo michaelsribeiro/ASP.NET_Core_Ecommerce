@@ -6,22 +6,44 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Olá @User.Identity.Name!</a>
+    var nome = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).Nome;
+    var index = nome.IndexOf(" ");
+    var primeiroNome = nome.Substring(0, index);
+
+    <div class="dropdown account-item">
+        <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="account-btn">
+                <i class="fa fa-user"></i>
+                <div class="login">
+                    <span>Bem vindo(a)</span>
+                    <span><strong>@primeiroNome</strong></span>
+                </div>
+            </div>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Perfil</a></li>
+            <li>
+                <fiv class="dropdown-item">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link text-dark">Sair</button>
+                    </form>
+                </fiv>
+            </li>
+        </ul>
     </div>
-    <fiv class="item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Sair</button>
-        </form>
-    </fiv>
 }
 else
 {
-    <div class="item d-flex align-items-center">
-        <a class="nav-link text-dark" style="font-size: .8rem;" asp-area="Identity" asp-page="/Account/Register">Cadastrar</a>
-    </div>
-    <div class="item d-flex align-items-center">
-        <a class="nav-link text-dark" style="font-size: .8rem;" asp-area="Identity" asp-page="/Account/Login">Entrar</a>
+    <div class="account-item">
+        <a class="nav-link text-dark" style="font-size: .8rem;" asp-area="Identity" asp-page="/Account/Login">
+            <div class="account-btn">
+                <i class="fa fa-user"></i>
+                <div class="login">
+                    <span>Entrar ou</span>
+                    <span><strong>Cadastrar</strong></span>
+                </div>
+            </div>
+        </a>
     </div>
 }
 

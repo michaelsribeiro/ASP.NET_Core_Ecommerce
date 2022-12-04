@@ -376,7 +376,7 @@ footer .copyright .container {
         margin-top: 50px;
     }
 
-/* REGISTER AND LOGIN PAGES */
+/* CADASTRO */
 
 .account {
     margin: 60px auto;
@@ -503,10 +503,10 @@ footer .copyright .container {
             margin-right: 15px;
         }
 
-        .login .row section form .input label#email {
-            margin-right: 18px;
-            height:18px;
-        }
+            .login .row section form .input label#email {
+                margin-right: 18px;
+                height: 18px;
+            }
 
         .login .row section form .input #email {
             max-width: 380px;
@@ -538,6 +538,107 @@ footer .copyright .container {
         margin-left: 65px;
         text-decoration: none;
     }
+
+/* LOGIN PARTIAL */
+
+.account-item {
+    width: 160px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+    .account-item a .account-btn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #545454;
+    }
+
+    .account-item a .account-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .account-item a .account-btn .fa {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .account-item a .account-btn .login {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            font-size: .8rem;
+        }
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+
+.dropdown-item {
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer
+}
+
+    .dropdown-item:hover {
+        background-color: #fdb827;
+        color: #fff;
+        border-radius: 2px;
+    }
+
+    .dropdown-item button {
+        padding: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 26px;
+        text-align: left;
+        transition: all 0s ease;
+    }
+
+.dropdown-menu li .dropdown-item button:hover {
+    color: #fff !important;
+}
+
+.dropdown-menu {
+    padding: 0.5rem 10px;
+}
+
+/* CAROUSEL */
+
+.carousel {
+    width: 100%;
+}
+
+.carousel-item,
+.carousel-inner {
+    height: 100%;
+    width: auto;
+}
+
+    .carousel-inner .carousel-item {
+        width: 100%;
+        height: 600px;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+.img1 {
+    background: url(../images/banner-top.jpg) no-repeat center center;
+}
+
+.img2 {
+    background: url(../images/Banner-2.png) no-repeat center center;
+}
+
+.img3 {
+    background: url(../images/Banner-3.png) no-repeat center center;
+}
 
 /* CARRINHO */
 .carrinho {
@@ -837,6 +938,7 @@ footer .copyright .container {
     .botao-carrinho .btn {
         color: #545454;
         box-shadow: none;
+        font-size: 1.2rem;
     }
 
 
@@ -850,6 +952,14 @@ footer .copyright .container {
         .header .searchbox {
             display: none;
         }
+
+    .carousel {
+        height: 400px;
+    }
+
+    .carousel-inner .carousel-item {
+        height: 400px;
+    }
 
     footer .container-fluid .container {
         grid-template-areas: "link-group link-group";
@@ -926,6 +1036,10 @@ footer .copyright .container {
                 font-size: 1.15rem;
             }
 
+    .botao-carrinho .btn {
+        font-size: 1.4rem;
+    }
+
     /* REGISTER */
 
     .account .row .title {
@@ -951,30 +1065,55 @@ footer .copyright .container {
             .account .row .insideForm .dados_cliente .dados_pessoais {
                 padding-right: 0;
             }
-}
-/* LOGIN */
 
-.login .row section {
-    padding: 10px;
-}
+    /* LOGIN */
 
-.login .row section .title {
-    flex-direction: column;
-    align-items: flex-start;
-}
+    .login .row section {
+        padding: 10px;
+    }
 
-    .login .row section .title span {
-        margin: 0;
+        .login .row section .title {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+    .account-item {
+        width: 100%;
     }
 
 
+    .options-header {
+        margin-right: -200px;
+    }
+}
+
 @media screen and (max-width: 880px) {
+    .carousel {
+        height: 300px;
+    }
+
+    .carousel-inner .carousel-item {
+        height: 300px;
+    }
+
     .manuais .card-group {
         grid-template-areas: "card card";
+    }
+
+    .options-header {
+        margin-right: -100px;
     }
 }
 
 @media screen and (max-width: 580px) {
+    .carousel {
+        height: 195px;
+    }
+
+    .carousel-inner .carousel-item {
+        height: 195px;
+    }
+
     .mid-banners {
         flex-direction: column;
         justify-content: unset;
@@ -1042,7 +1181,15 @@ footer .copyright .container {
         grid-template-areas: "link-group";
     }
 
-    /* CARRINHO */
+    .account-item a .account-btn .login {
+        display: none;
+    }
 
+    .account-item a .account-btn {
+        margin: 0;
+    }
 
+    .options-header {
+        margin-right: -80px;
+    }
 }
