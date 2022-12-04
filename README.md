@@ -37,19 +37,22 @@
 ### Instalação
 Siga os passos abaixo para ter acesso ao seu ambiente de desenvolvimento:
 
-1. Clone o repositório: `git clone https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce.git`;
+1. Clone o repositório:
+```csharp
+   git clone https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce.git
+```
 
 2. Configure a string de conexão no arquivo **appsettings.json** apontando para o seu banco de dados SQL Server;
 
 3. Para criar o banco de dados SQL Server e suas respectivas tabelas, abra o **Package Manager Console** em seu Visual Studio e digite os comandos: 
     - Criação das tabelas do Identity: 
         ```csharp
-            update-database -verbose -context CustomDbContext
+            update-database -verbose -context ApplicationDbContext
         ```
 
     - Criação das tabelas da camada de negócios: 
         ```csharp
-            update-database -verbose -context ApplicationDbContext
+            update-database -verbose -context CustomDbContext
         ```
 
 4. Pressione `F5 ou Ctrl+F5` para rodar o projeto no seu navegador.
