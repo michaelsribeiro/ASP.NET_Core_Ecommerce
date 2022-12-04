@@ -47,12 +47,12 @@ Siga os passos abaixo para ter acesso ao seu ambiente de desenvolvimento:
             update-database -verbose -context CustomDbContext
         ```
 
-    - Criação das tabelas relacionada a camada de negócios: 
+    - Criação das tabelas da camada de negócios: 
         ```csharp
             update-database -verbose -context ApplicationDbContext
         ```
 
-4. Pressione `F5 ou Ctrl+F5` para rodar o projeto direto no seu navegador.
+4. Pressione `F5 ou Ctrl+F5` para rodar o projeto no seu navegador.
 
 ## Estrutura do Projeto
 
@@ -168,7 +168,7 @@ Para criar uma nova migration, abra o **Package Manager Console** e digite os se
         add-migration nomeMigration -verbose -context ApplicationDbContext
     ```
 
-2. Para adicionar uma nova migration relacionada a camada de negócios: 
+2. Para adicionar uma nova migration da camada de negócios: 
     ```csharp
         add-migration nomeMigration -verbose -context CustomDbContext
     ```
@@ -194,6 +194,6 @@ Para criar uma nova migration, abra o **Package Manager Console** e digite os se
 ## Deixe uma Estrela ⭐
 Se você gostou deste projeto ou se te ajudou em algo, por favor, **deixe uma estrela**. Caso queira contribuir, basta dar um **fork** no projeto e enviar seus **pull-requests**. Caso encontre algum problema, por favor, abra uma **issue**.
 
-## 📝 Licença
+## Licença
 
-- Este repositório está sob a Licença MIT. Mais informações: <a href="https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce/blob/master/LICENSE.txt"> LICENSE </a>
+- Este repositório está sob a Licença MIT. Mais informações: <a href="https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce/blob/master/LICENSE.txt"> LICENÇA </a>
