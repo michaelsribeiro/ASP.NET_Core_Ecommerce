@@ -196,4 +196,4 @@ Se você gostou deste projeto ou se te ajudou em algo, por favor, **deixe uma es
 
 ## Licença
 
-- Este repositório está sob a Licença MIT. Mais informações: <a href="https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce/blob/master/LICENSE.txt"> LICENÇA </a>
+Este repositório está sob a Licença MIT. Mais informações: <a href="https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce/blob/master/LICENSE.txt"> LICENÇA </a>
