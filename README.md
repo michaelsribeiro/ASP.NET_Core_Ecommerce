@@ -41,7 +41,16 @@ Siga os passos abaixo para ter acesso ao seu ambiente de desenvolvimento:
 
 2. Configure a string de conexão no arquivo **appsettings.json** apontando para o seu banco de dados SQL Server;
 
-3. Para rodar o SQL Server, abra o **Package Manager Console** em seu Visual Studio e digite os comandos `update-database -verbose -context CustomDbContext` e `update-database -verbose -context ApplicationDbContext` para criar o banco e suas respectivas tabelas;
+3. Para criar o banco de dados SQL Server e suas respectivas tabelas, abra o **Package Manager Console** em seu Visual Studio e digite os comandos: 
+    - Criação das tabelas do Identity: 
+        ```csharp
+            update-database -verbose -context CustomDbContext
+        ```
+
+    - Criação das tabelas relacionada a camada de negócios: 
+        ```csharp
+            update-database -verbose -context ApplicationDbContext
+        ```
 
 4. Pressione `F5 ou Ctrl+F5` para rodar o projeto direto no seu navegador.
 
@@ -187,4 +196,4 @@ Se você gostou deste projeto ou se te ajudou em algo, por favor, **deixe uma es
 
 ## 📝 Licença
 
-- This repo is under MIT Licence. You can see that <a href="https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce/blob/master/LICENSE.txt"> LICENSE </a> for more details. 😉
+- Este repositório está sob a Licença MIT. Mais informações: <a href="https://github.com/michaelsribeiro/ASP.NET_Core_Ecommerce/blob/master/LICENSE.txt"> LICENSE </a>
