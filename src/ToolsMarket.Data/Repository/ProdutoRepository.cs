@@ -2,12 +2,25 @@
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
 using ToolsMarket.Data.Context;
+using Dapper;
 
 namespace ToolsMarket.Data.Repository
 {
     public class ProdutoRepository : Repository<Produto>, IProdutoRepository
     {
         public ProdutoRepository(CustomDbContext db) : base(db) {}
+
+        public async Task<IEnumerable<Produto>> ObterTodosOsProdutos()
+        {
+            var cn = Db.Database.GetDbConnection();
+
+            var sql = @"SELECT 
+                        FROM PRODUTOS P
+                        LEFT JOIN FORNECEDORES F ON P.FORNECEDORID = F.ID
+                        LEFT JOIN CATEGORIAS C ON P.CATEGORIAID = C.ID";
+
+            return await cn.QueryAsync<Produto>(sql);
+        }
 
         public async Task<Produto> ObterProdutoPorId(Guid id)
         {

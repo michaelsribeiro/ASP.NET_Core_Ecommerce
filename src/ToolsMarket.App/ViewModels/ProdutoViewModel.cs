@@ -69,6 +69,5 @@ namespace ToolsMarket.App.ViewModels
                 return ValorUnitario / QuantidadeParcelas;
             }
         }
-
     }
 }

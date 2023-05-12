@@ -1,5 +1,6 @@
 ﻿using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
+using ToolsMarket.Business.Models.Enum;
 using ToolsMarket.Business.Models.Validations;
 
 namespace ToolsMarket.Business.Services
@@ -26,11 +27,18 @@ namespace ToolsMarket.Business.Services
             await _produtoRepository.Adicionar(produto);
         }
 
-        public async Task Atualizar(Produto produto)
+        public async Task Atualizar(Guid id, Guid fornecedor, Guid categoria, string marca, int qtd, string descricao, string? imagem, string nome, decimal? precoVenda, int qtdParcelas,
+                                    StatusProduto? status, decimal valorUnitario)    
         {
-            if (!ExecutaValidacao(new ProdutoValidation(), produto)) return;
+            var produtoBanco = await _produtoRepository.ObterPorId(id);
 
-            await _produtoRepository.Atualizar(produto);
+            produtoBanco.EditarProduto(id, fornecedor, categoria, marca, qtd, descricao, nome, precoVenda, qtdParcelas, status, valorUnitario);
+
+            if(imagem is not null) produtoBanco.DefinirImagem(imagem);
+
+            if (!ExecutaValidacao(new ProdutoValidation(), produtoBanco)) return;
+
+            await _produtoRepository.Atualizar(produtoBanco);
         }
 
         public async Task Remover(Guid id)

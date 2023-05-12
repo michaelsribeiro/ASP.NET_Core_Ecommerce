@@ -37,7 +37,22 @@ namespace ToolsMarket.App.Controllers
         [Route("produtos")]
         public async Task<IActionResult> Index()
         {
-            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos()));
+            var result = await _produtoRepository.ObterTodos();
+
+            foreach(var item in result)
+            {
+                var fornecedor = await _fornecedorRepository.ObterPorId(item.FornecedorId);
+
+                var categoria = await _categoriaRepository.ObterPorId(item.CategoriaId);
+
+                item.DefinirFornecedor(fornecedor);
+
+                item.DefinirCategoria(categoria);
+            }
+            
+            var viewModel = _mapper.Map<IEnumerable<ProdutoViewModel>>(result);
+
+            return View(viewModel);
         }
 
         [AllowAnonymous]
@@ -115,9 +130,9 @@ namespace ToolsMarket.App.Controllers
         {
             var produto= await ObterCategorias(new ProdutoViewModel());
 
-            var produtoViewModel = await ObterProdutoFornecedor(id);
+            var produtoViewModel = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedor(id));
             produtoViewModel.Categorias = produto.Categorias;
-            produtoViewModel.Fornecedores = produto.Fornecedores;
+            produtoViewModel.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
 
             if (produtoViewModel == null) return NotFound();
 
@@ -132,11 +147,6 @@ namespace ToolsMarket.App.Controllers
         {
             if (id != produtoViewModel.Id) return NotFound();
 
-            var produtoAtualizacao = await ObterProdutoFornecedor(id);
-            produtoViewModel.Fornecedor = produtoAtualizacao.Fornecedor;
-            produtoViewModel.Categoria = produtoAtualizacao.Categoria;
-            produtoViewModel.Imagem = produtoAtualizacao.Imagem;
-
             if (!ModelState.IsValid) return NotFound();
 
             if (produtoViewModel.ImageProduto != null)
@@ -147,14 +157,13 @@ namespace ToolsMarket.App.Controllers
                     return View(produtoViewModel);
                 }
 
-                produtoAtualizacao.Imagem = imgPrefixo + produtoViewModel.ImageProduto.FileName;
+                produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImageProduto.FileName;
             }
 
-            produtoAtualizacao.Nome = produtoViewModel.Nome;
-            produtoAtualizacao.Descricao = produtoViewModel.Descricao;
-            produtoAtualizacao.ValorUnitario = produtoViewModel.ValorUnitario;
-
-            await _produtoService.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));
+            await _produtoService.Atualizar(produtoViewModel.Id, produtoViewModel.FornecedorId, produtoViewModel.CategoriaId,
+                                            produtoViewModel.Marca, produtoViewModel.Quantidade, produtoViewModel.Descricao,
+                                            produtoViewModel.Imagem, produtoViewModel.Nome, produtoViewModel.PrecoVenda,
+                                            produtoViewModel.QuantidadeParcelas, produtoViewModel.Status, produtoViewModel.ValorUnitario);
 
             if (!OperacaoValida()) return View(produtoViewModel);
 

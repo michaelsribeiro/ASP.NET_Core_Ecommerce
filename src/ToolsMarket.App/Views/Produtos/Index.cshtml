@@ -6,28 +6,19 @@
 
 <div class="container pt-5 pb-5">
     <vc:notificacoes></vc:notificacoes>
-    <h4>@ViewData["Title"]</h4>
 
     <p>
-        <a class="btn btn-primary mb-4 mt-4" asp-action="Create">Novo Produto</a>
+        <a class="btn btn-success" style="font-size: .8rem !important;" asp-action="Create">+ Adicionar produto</a>
     </p>
     <table class="table table-hover">
         <thead class="table-dark">
             <tr>
-                <th class="fw-normal text-center">
-                </th>
-                <th class="fw-normal text-center">
-                    @Html.DisplayNameFor(model => model.Nome)
-                </th>
-                <th class="fw-normal text-center">
-                    @Html.DisplayNameFor(model => model.Categoria)
-                </th>
-                <th class="fw-normal text-center">
-                    @Html.DisplayNameFor(model => model.Fornecedor)
-                </th>
-                <th class="fw-normal text-center">
-                    @Html.DisplayNameFor(model => model.ValorUnitario)
-                </th>
+                <th class="fw-normal text-center"></th>
+                <th class="fw-normal text-center" style="font-size: .7rem !important;">Nome Produto</th>
+                <th class="fw-normal text-center" style="font-size: .7rem !important;">Quantidade</th>
+                <th class="fw-normal text-center" style="font-size: .7rem !important;">Categoria</th>
+                <th class="fw-normal text-center" style="font-size: .7rem !important;">Fornecedor</th>
+                <th class="fw-normal text-center" style="font-size: .7rem !important;">Preço Venda</th>
                 <th></th>
             </tr>
         </thead>
@@ -36,21 +27,24 @@
             {
                 <tr>
                     <td class="text-center">
-                        <img style="width: 90px; height: 90px" src="~/images/produtos/@item.Imagem" alt="@item.Imagem" />
+                        <img style="width: 55px; height: 55px" src="~/images/produtos/@item.Imagem" alt="@item.Imagem" />
                     </td>
-                    <td class="text-center">
+                    <td style="font-size: .7rem !important; vertical-align: middle;">
                         @Html.DisplayFor(modelItem => item.Nome)
                     </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
+                    <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.Quantidade)
                     </td>
-                    <td class="text-center">
+                    <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
                         @Html.DisplayFor(modelItem => item.Categoria.NomeCategoria)
                     </td>
-                    <td class="text-center">
-                        @item.ValorUnitario.ToString("C")
+                    <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
                     </td>
-                    <td class="text-center">
+                    <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
+                        <strong>@item.ValorUnitario.ToString("C")</strong>
+                    </td>
+                    <td class="text-center" style="vertical-align: middle;">
                         <a class="btn-sm btn-info text-decoration-none" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-search"></span></a>
                         <a class="btn-sm btn-warning text-decoration-none" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-edit"></span></a>
                         <a class="btn-sm btn-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
