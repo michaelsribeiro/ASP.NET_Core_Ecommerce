@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using ToolsMarket.App.Extensions;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
 using ToolsMarket.Business.Models;
@@ -27,6 +28,28 @@ namespace ToolsMarket.App.Controllers
             _produtoRepository = produtoRepository;
             _mapper = mapper;
             _itemPedidoRepository = itemPedidoRepository;
+        }
+
+        [ClaimsAuthorize("Pedido", "Visualizar")]
+        [Route("pedidos")]
+        public async Task<IActionResult> PedidoIndex()
+        {
+            var result = await _pedidoRepository.ObterTodos();
+
+            //foreach (var item in result)
+            //{
+            //    var fornecedor = await _fornecedorRepository.ObterPorId(item.FornecedorId);
+
+            //    var categoria = await _categoriaRepository.ObterPorId(item.CategoriaId);
+
+            //    item.DefinirFornecedor(fornecedor);
+
+            //    item.DefinirCategoria(categoria);
+            //}
+
+            var viewModel = _mapper.Map<IEnumerable<PedidoViewModel>>(result);
+
+            return View(viewModel);
         }
 
 

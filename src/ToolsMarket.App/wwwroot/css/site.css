@@ -539,8 +539,27 @@ footer .copyright .container {
         text-decoration: none;
     }
 
-/* LOGIN PARTIAL */
+    .login .row section .input .btn {
+        width: 220px;
+        height: 60px;
+        background-color: #e6e6e6;
+        color: #868686;
+        font-size: .8rem;
+        font-weight: bold;
+        box-shadow: none;
+        line-height: 2;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
 
+    .inputCadastrar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 160px;
+    }
+/* LOGIN PARTIAL */
 .account-item {
     width: 160px;
     display: flex;
@@ -942,8 +961,42 @@ footer .copyright .container {
     }
 
 
-/* MEDIA QUERYS */
+.row-form {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin: 15px 0;
+}
 
+.form-group {
+    flex: 1;
+}
+
+.image {
+    max-width: 49% !important;
+}
+
+.control-label {
+    font-size: .8rem;
+    font-weight: bold !important:
+}
+
+.form-control {
+    padding: 8px !important;
+}
+
+.botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.botao-acao {
+    padding: 7px 20px !important;
+}
+
+/* MEDIA QUERYS */
 @media screen and (max-width: 1000px) {
     .header {
         padding: 20px;

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ToolsMarket.App.ViewModels.PedidoViewModel>
+
+@{
+    ViewData["Title"] = "Painel de Vendas -";
+}
+
+<div class="container pt-5 pb-5">
+    <vc:notificacoes></vc:notificacoes>
+
+    <h6 style="text-align: center;">Painel de Vendas</h6>
+
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th class="fw-normal text-center" style="font-size: .7rem !important;">Nome Comprador</th>
+                <th class="fw-normal text-center" style="font-size: .7rem !important;">Data da Compra</th>
+                <th class="fw-normal text-center" style="font-size: .7rem !important;">Valor Total</th>
+                <th class="fw-normal text-center" style="font-size: .7rem !important;">Status da Venda</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.Cliente.Nome)
+                    </td>
+                    <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.DataVenda)
+                    </td>
+                    <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.ValorTotal)
+                    </td>
+                    <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
+                        @Html.DisplayFor(modelItem => item.StatusPedido)
+                    </td>
+                    <td class="text-center" style="vertical-align: middle;">
+                        <a class="btn-sm btn-warning text-decoration-none" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-edit"></span></a>
+                        <a class="btn-sm btn-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
