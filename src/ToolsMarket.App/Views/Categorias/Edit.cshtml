@@ -4,29 +4,24 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>CategoriaViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="NomeCategoria" class="control-label"></label>
-                <input asp-for="NomeCategoria" class="form-control" />
-                <span asp-validation-for="NomeCategoria" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+<div class="container account">
+    <h5 style="text-align: center;">Editar Categoria</h5>
+    <div class="row">
+        <form enctype="multipart-formdata" asp-action="Edit">
+            <input type="hidden" asp-for="Id" />            
+            <div class="row-form">
+                <div class="form-group">
+                    <label asp-for="NomeCategoria" class="control-label"></label>
+                    <input asp-for="NomeCategoria" class="form-control" />
+                    <span asp-validation-for="NomeCategoria" class="text-danger"></span>
+                </div>
+            </div>            
+            <div class="form-group botao">
+                <a class="btn btn-primary botao-acao" asp-action="Index">Voltar</a>
+                <button type="submit" value="Atualizar" class="btn btn-success botao-acao">Atualizar</button>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

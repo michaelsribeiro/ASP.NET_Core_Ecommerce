@@ -23,7 +23,7 @@ namespace ToolsMarket.App.Controllers
         }
 
         [ClaimsAuthorize("Categoria", "Visualizar")]
-        [Route("todas-as-categorias")]
+        [Route("categorias")]
         public async Task<IActionResult> Index()
         {
               return View(_mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterCategorias()));

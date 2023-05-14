@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ToolsMarket.App.ViewModels.PedidoViewModel>
+﻿@model ToolsMarket.App.ViewModels.AdminViewModel
 
 @{
     ViewData["Title"] = "Painel Administrativo -";
@@ -6,8 +6,24 @@
 
 <div class="container account">
     <h4 style="font-weight: 600;">Dashboard</h4>
-    <div class="row mt-5">
+    <div class="row mt-4">
         <div class="cards">
+            <a style="text-decoration: none; color: #000;" href="https://localhost:44316/pedidos">
+                <div class="card" style="width: 18rem; padding: 25px 15px;">
+                    <div class="card-body" style="display: flex; flex-direction: row;">
+                        <div class="icon-body" style="display: flex; align-content: center; justify-content: center; padding-right: 5px;">
+                            <div class="icon-card">
+                                <span>R$</span>
+                            </div>
+                        </div>
+                        <div class="data-body" style="padding-left: 5px;">
+                            <h5 class="card-title">Total de Vendas</h5>
+                            <p class="card-text">@Model.TotalVendido.ToString("C")</p>
+                            <p class="card-subtitle"><span>+5,45%</span> de Aumento</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
             <div class="card" style="width: 18rem; padding: 25px 15px;">
                 <div class="card-body" style="display: flex; flex-direction: row;">
                     <div class="icon-body" style="display: flex; align-content: center; justify-content: center; padding-right: 5px;">
@@ -16,11 +32,28 @@
                         </div>
                     </div>
                     <div class="data-body" style="padding-left: 5px;">
-                        <h5 class="card-title">Total de Vendas</h5>
-                        <p class="card-text">@Model.ValorTotal</p>
+                        <h5 class="card-title">Novos Clientes</h5>
+                        <p class="card-text">@Model.TotalUsuarios</p>
+                        <p class="card-subtitle"><span>+2,00%</span> (30 dias)</p>
                     </div>
                 </div>
             </div>
+            <a style="text-decoration: none; color: #000;" href="https://localhost:44316/pedidos">
+                <div class="card" style="width: 18rem; padding: 25px 15px;">
+                    <div class="card-body" style="display: flex; flex-direction: row;">
+                        <div class="icon-body" style="display: flex; align-content: center; justify-content: center; padding-right: 5px;">
+                            <div class="icon-card">
+                                <span>R$</span>
+                            </div>
+                        </div>
+                        <div class="data-body" style="padding-left: 5px;">
+                            <h5 class="card-title">Pedidos</h5>
+                            <p class="card-text">@Model.TotalPedidos</p>
+                            <p class="card-subtitle"><span>+10,54%</span> de Aumento</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>

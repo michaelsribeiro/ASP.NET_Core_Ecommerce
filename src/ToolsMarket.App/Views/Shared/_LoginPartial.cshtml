@@ -22,6 +22,10 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Perfil</a></li>
+            @if (primeiroNome.Equals("Michael"))
+            {                
+                <li><a class="dropdown-item" href="https://localhost:44316/admin">Painel Admin</a></li>
+            }
             <li>
                 <fiv class="dropdown-item">
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

@@ -1008,6 +1008,18 @@ footer .copyright .container {
     font-weight: 600;
 }
 
+.cards {
+    margin: 0 10px !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card {
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    cursor: pointer;
+}
+
 .icon-card {
     width: 100%;
     display: flex;
@@ -1024,10 +1036,23 @@ footer .copyright .container {
     }
 
 .card-title {
-    font-size: 1.1rem;
+    font-size: .9rem;
+    font-weight: 600;
+    margin-bottom: 10px !important;
+}
+
+.card-text {
+    font-size: 1.5rem;
     font-weight: 600;
 }
 
+.card-subtitle {
+    font-size: .8rem;
+}
+
+    .card-subtitle span {
+        color: #127a4a;
+    }
 
 /* MEDIA QUERYS */
 @media screen and (max-width: 1000px) {

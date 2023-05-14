@@ -56,8 +56,6 @@ namespace ToolsMarket.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(FornecedorViewModel fornecedorViewModel)
         {
-            if (!ModelState.IsValid) return View(fornecedorViewModel);
-
             await _fornecedorService.Adicionar(_mapper.Map<Fornecedor>(fornecedorViewModel));
 
             if (!OperacaoValida()) return View(fornecedorViewModel);
@@ -67,7 +65,8 @@ namespace ToolsMarket.App.Controllers
 
         [ClaimsAuthorize("Fornecedor", "Editar")]
         [Route("editar-fornecedor/{id:guid}")]
-        public async Task<IActionResult> Edit(Guid id)        {
+        public async Task<IActionResult> Edit(Guid id)        
+        {
 
             var fornecedorViewModel = await ObterFornecedorProduto(id);
 
@@ -89,6 +88,8 @@ namespace ToolsMarket.App.Controllers
             await _fornecedorService.Atualizar(_mapper.Map<Fornecedor>(fornecedorViewModel));
 
             if (!OperacaoValida()) return View(fornecedorViewModel);
+
+            TempData["Sucesso"] = "Fornecedor atualizado com sucesso";
 
             return RedirectToAction(nameof(Index));
         }
