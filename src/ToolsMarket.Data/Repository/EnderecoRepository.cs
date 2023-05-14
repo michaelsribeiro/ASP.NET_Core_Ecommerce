@@ -25,8 +25,8 @@ namespace ToolsMarket.Data.Repository
         public async Task<Endereco> ObterEnderecoUsuario(Guid id)
         {
             return await Db.Enderecos.AsNoTracking()
-                                     .Include(u => u.Cliente)
-                                     .FirstOrDefaultAsync(e => e.Id == id);
+                                     .Where(e => e.Id == id)
+                                     .FirstOrDefaultAsync();
         }
     }
 }

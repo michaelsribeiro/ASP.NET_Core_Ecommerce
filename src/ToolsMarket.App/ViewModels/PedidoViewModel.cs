@@ -20,6 +20,7 @@ namespace ToolsMarket.App.ViewModels
 
         [DisplayName("Status do Pedido")]
         public StatusPedido StatusPedido { get; set; }
+        public int Status { get; set; }
         public decimal ValorTotal { get; set; }
         public ApplicationUserModel Cliente { get; set; }
         [DisplayName("Cliente")]

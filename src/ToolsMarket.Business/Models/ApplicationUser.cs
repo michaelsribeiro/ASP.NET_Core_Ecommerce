@@ -13,11 +13,20 @@ namespace ToolsMarket.App.Data
         public string Email { get; set; }
         public string? Imagem { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
-
         public Endereco Endereco { get; set; }
         public Guid EnderecoId { get; set; }
-
         public IEnumerable<Pedido>? Pedido { get; set; }
         public Guid? PedidoId { get; set; }
+
+        public ApplicationUser() { }
+
+        public ApplicationUser(string nome, string cpf, string genero, string telefone, string email) 
+        {
+            Nome = nome;
+            Cpf = cpf;
+            Genero = genero;
+            Telefone = telefone;
+            Email = email;
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using ToolsMarket.App.Data;
 using ToolsMarket.App.Extensions;
 using ToolsMarket.App.ViewModels;
 using ToolsMarket.Business.Interfaces;
@@ -16,18 +18,27 @@ namespace ToolsMarket.App.Controllers
         private readonly IPedidoRepository _pedidoRepository;
         private readonly IProdutoRepository _produtoRepository;
         private readonly IItemPedidoRepository _itemPedidoRepository;
+        private readonly IEnderecoRepository _enderecoRepository;
+        private readonly UserManager<ApplicationUserModel> _userManager;
+        private readonly IPedidoService _pedidoService;
         private readonly IMapper _mapper;
 
         public PedidosController(IPedidoRepository pedidoRepository,
                                  IProdutoRepository produtoRepository,
                                  IItemPedidoRepository itemPedidoRepository,
+                                 IEnderecoRepository enderecoRepository,
+                                 UserManager<ApplicationUserModel> userManager,
+                                 IPedidoService pedidoService,
                                  IMapper mapper,
                                  INotificador notificador) : base(notificador)
         {
             _pedidoRepository = pedidoRepository;
             _produtoRepository = produtoRepository;
+            _userManager = userManager;
             _mapper = mapper;
             _itemPedidoRepository = itemPedidoRepository;
+            _enderecoRepository = enderecoRepository;
+            _pedidoService = pedidoService;
         }
 
         [ClaimsAuthorize("Pedido", "Visualizar")]
@@ -36,22 +47,61 @@ namespace ToolsMarket.App.Controllers
         {
             var result = await _pedidoRepository.ObterTodos();
 
-            //foreach (var item in result)
-            //{
-            //    var fornecedor = await _fornecedorRepository.ObterPorId(item.FornecedorId);
+            foreach (var item in result)
+            {
+                var clienteBanco = _userManager.Users.FirstOrDefault(m => m.Id == item.ClienteId.ToString());
 
-            //    var categoria = await _categoriaRepository.ObterPorId(item.CategoriaId);
+                var cliente = new ApplicationUser(clienteBanco.Nome, clienteBanco.Cpf, clienteBanco.Genero.ToString(), clienteBanco.Telefone, clienteBanco.Email);
 
-            //    item.DefinirFornecedor(fornecedor);
-
-            //    item.DefinirCategoria(categoria);
-            //}
+                item.DefinirCliente(cliente);
+            }
 
             var viewModel = _mapper.Map<IEnumerable<PedidoViewModel>>(result);
 
             return View(viewModel);
         }
 
+        [ClaimsAuthorize("Pedido", "Editar")]
+        [Route("editar-pedido/{id:guid}")]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var pedido = await _pedidoRepository.ObterPedidoPorId(id);
+
+            var cliente = _userManager.Users.FirstOrDefault(m => m.Id == pedido.ClienteId.ToString());
+
+            var domain = new ApplicationUser(cliente.Nome, cliente.Cpf, cliente.Genero.ToString(), cliente.Telefone, cliente.Email);
+
+            var endereco = await _enderecoRepository.ObterEnderecoUsuario(cliente.EnderecoId);
+
+            var itensPedido = await _itemPedidoRepository.ObterItemPedidoProduto(pedido.ItensPedido.Select(x => x.Id).First());
+
+            pedido.DefinirCliente(domain);
+
+            pedido.DefinirEndereco(endereco);
+
+            var pedidoViewModel = _mapper.Map<PedidoViewModel>(pedido);
+
+            if (pedidoViewModel == null) return NotFound();
+
+            return View(pedidoViewModel);
+        }
+
+        [ClaimsAuthorize("Pedido", "Editar")]
+        [Route("editar-pedido/{id:guid}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid id, PedidoViewModel pedidoViewModel)
+        {
+            var statusPedido = (StatusPedido)pedidoViewModel.Status;
+
+            await _pedidoService.AtualizarStatus(id, statusPedido);
+
+            if (!OperacaoValida()) return RedirectToAction(nameof(PedidoIndex));
+
+            TempData["Sucesso"] = "Pedido atualizado com sucesso.";
+
+            return RedirectToAction(nameof(PedidoIndex));
+        }
 
         [Route("carrinho")]
         public async Task<IActionResult> Index(Guid id)

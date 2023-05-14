@@ -9,10 +9,10 @@
 
     <h6 style="text-align: center;">Painel de Vendas</h6>
 
-    <table class="table table-hover">
+    <table class="table table-hover mt-3">
         <thead class="table-dark">
             <tr>
-                <th class="fw-normal text-center" style="font-size: .7rem !important;">Nome Comprador</th>
+                <th class="fw-normal text-center" style="font-size: .7rem !important;">Nome Cliente</th>
                 <th class="fw-normal text-center" style="font-size: .7rem !important;">Data da Compra</th>
                 <th class="fw-normal text-center" style="font-size: .7rem !important;">Valor Total</th>
                 <th class="fw-normal text-center" style="font-size: .7rem !important;">Status da Venda</th>
@@ -30,15 +30,17 @@
                         @Html.DisplayFor(modelItem => item.DataVenda)
                     </td>
                     <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
-                        @Html.DisplayFor(modelItem => item.ValorTotal)
+                        @item.ValorTotal.ToString("C")
                     </td>
                     <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
                         @Html.DisplayFor(modelItem => item.StatusPedido)
                     </td>
-                    <td class="text-center" style="vertical-align: middle;">
-                        <a class="btn-sm btn-warning text-decoration-none" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-edit"></span></a>
-                        <a class="btn-sm btn-danger text-decoration-none" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
-                    </td>
+                    @if (!item.StatusPedido.Equals("Finalizado") || !item.StatusPedido.Equals("Cancelado"))
+                    {
+                        <td class="text-center" style="vertical-align: middle;">
+                            <a class="btn-sm btn-info text-decoration-none text-white" asp-action="Edit" asp-route-id="@item.Id">Detalhes</a>
+                        </td>
+                    }
                 </tr>
             }
         </tbody>

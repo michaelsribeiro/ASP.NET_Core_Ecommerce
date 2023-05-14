@@ -1,49 +1,125 @@
 ﻿@model ToolsMarket.App.ViewModels.PedidoViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Detalhes da Venda -";
 }
 
-<h1>Edit</h1>
+<div class="container account">
+    <h5 style="text-align: center;">Detalhes da Venda</h5>
+    <div class="row">
+        <form enctype="multipart-formdata" asp-action="Edit">
+            <input type="hidden" asp-for="Id" />   
+            <div class="row-form">
+                <div class="form-group" style="display: flex; flex-direction: column; align-content: center; justify-content:end;">
+                    <label asp-for="Status" class="control-label"></label>
+                    <select asp-for="Status" style="width: 200px;" class="form-control">
+                        <option>@Model.StatusPedido</option>
+                        <option value="2">Processando</option>
+                        <option value="3">Finalizado</option>
+                        <option value="4">Cancelado</option>
+                    </select>
+                    <span asp-validation-for="StatusPedido" class="text-danger"></span>
+                </div>
+            </div>
+            <h6 style="margin: 20px 0 0;">Dados do Comprador</h6>
+            <div class="row-form">
+                <div class="item-pedido">
+                    <label asp-for="Cliente.Nome" class="label-item"></label>
+                    <span>@Model.Cliente.Nome</span>
+                </div>
+                <div class="item-pedido">
+                    <label asp-for="Cliente.Cpf" class="label-item"></label>
+                    <span>@Model.Cliente.Cpf</span>
+                </div> 
+                <div class="item-pedido">
+                    <label asp-for="Cliente.Email" class="label-item"></label>
+                    <span>@Model.Cliente.Email</span>
+                </div> 
+                <div class="item-pedido">
+                    <label asp-for="Cliente.Telefone" class="label-item"></label>
+                    <span>@Model.Cliente.Telefone</span>
+                </div>
+            </div>
+            <h6 style="margin: 40px 0 0;">Dados de Endereço</h6>
+            <div class="row-form d-flex flex-column">
+                <div class="item-pedido">
+                    <label asp-for="Cliente.Endereco.Logradouro" class="label-item"></label>
+                    <span>@Model.Cliente.Endereco.Logradouro</span>
+                </div>
+            </div>
+            <div class="row-form">
+                <div class="item-pedido">
+                    <label asp-for="Cliente.Endereco.Cep" class="label-item"></label>
+                    <span>@Model.Cliente.Endereco.Cep</span>
+                </div>
+                <div class="item-pedido">
+                    <label asp-for="Cliente.Endereco.Bairro" class="label-item"></label>
+                    <span>@Model.Cliente.Endereco.Bairro</span>
+                </div>
+                <div class="item-pedido">
+                    <label asp-for="Cliente.Endereco.Cidade" class="label-item"></label>
+                    <span>@Model.Cliente.Endereco.Cidade</span>
+                </div>
+                <div class="item-pedido">
+                    <label asp-for="Cliente.Endereco.Numero" class="label-item"></label>
+                    <span>@Model.Cliente.Endereco.Numero</span>
+                </div>
+                <div class="item-pedido">
+                    <label asp-for="Cliente.Endereco.Uf" class="label-item"></label>
+                    <span>@Model.Cliente.Endereco.Uf</span>
+                </div>
+            </div>        
+            <div class="row-form d-flex flex-column">
+                <h6 style="margin: 20px 0 -20px;">Carrinho</h6>
 
-<h4>PedidoViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="ClienteId" class="control-label"></label>
-                <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
-                <span asp-validation-for="ClienteId" class="text-danger"></span>
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="fw-normal text-center"></th>
+                            <th class="fw-normal text-center" style="padding: 10px; font-size: .7rem !important;">Nome Produto</th>
+                            <th class="fw-normal text-center" style="padding: 10px; font-size: .7rem !important;">Quantidade</th>
+                            <th class="fw-normal text-center" style="padding: 10px; font-size: .7rem !important;">Preço Unitário</th>
+                            <th class="fw-normal text-center" style="padding: 10px; font-size: .7rem !important;">Sub Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ItensPedido)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <img style="width: 55px; height: 55px" src="~/images/produtos/@item.Produto.Imagem" alt="@item.Produto.Imagem" />
+                                </td>
+                                <td style="font-size: .7rem !important; vertical-align: middle;">
+                                    @Html.DisplayFor(modelItem => item.Produto.Nome)
+                                </td>
+                                <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
+                                    @Html.DisplayFor(modelItem => item.Quantidade)
+                                </td>
+                                <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
+                                    @item.ValorUnitario.ToString("C")
+                                </td>
+                                    <td class="text-center" style="font-size: .8rem !important; vertical-align: middle;">
+                                    @item.SubTotal.ToString("C")
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
-            <div class="form-group">
-                <label asp-for="DataVenda" class="control-label"></label>
-                <input asp-for="DataVenda" class="form-control" />
-                <span asp-validation-for="DataVenda" class="text-danger"></span>
+            <div style="width: 100%; display: flex; flex-direction: row; align-content: center; justify-content:end; gap:10px;">
+                <span style="color: #888; font-size: .9rem; font-weight: 600;">Total</span><h6 style="color: #fdb827; font-weight: 600;">@Model.ValorTotal.ToString("C")</h6>
             </div>
-            <div class="form-group">
-                <label asp-for="Frete" class="control-label"></label>
-                <input asp-for="Frete" class="form-control" />
-                <span asp-validation-for="Frete" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StatusPedido" class="control-label"></label>
-                <select asp-for="StatusPedido" class="form-control"></select>
-                <span asp-validation-for="StatusPedido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group botao">
+                <a class="btn btn-primary botao-acao" asp-action="PedidoIndex">Voltar</a>
+                <button type="submit" value="Salvar" class="btn btn-success botao-acao">Salvar</button>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
