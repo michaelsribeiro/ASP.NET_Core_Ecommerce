@@ -37,7 +37,11 @@ namespace ToolsMarket.App.Controllers
         [Route("admin")]
         public async Task<IActionResult> Index()
         {
-            var result = await _pedidoRepository.ObterTodos();            
+            var result = await _pedidoRepository.ObterTodos();
+
+            var totalVendas = result.Sum(x => x.ValorTotal);
+
+            var adminViewModel = new AdminViewModel();
 
             var viewModel = _mapper.Map<IEnumerable<PedidoViewModel>>(result);
 
