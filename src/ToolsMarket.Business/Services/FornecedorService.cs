@@ -30,11 +30,11 @@ namespace ToolsMarket.Business.Services
         {
             if (!ExecutaValidacao(new FornecedorValidation(), fornecedor)) return;
 
-            if (_fornecedorRepository.Buscar(f => f.Cnpj == fornecedor.Cnpj && f.Id == fornecedor.Id).Result.Any())
-            {
-                Notificar("Já existe um fornecedor com este CNPJ.");
-                return;
-            }
+            //if (_fornecedorRepository.Buscar(f => f.Cnpj == fornecedor.Cnpj && f.Id == fornecedor.Id).Result.Any())
+            //{
+            //    Notificar("Já existe um fornecedor com este CNPJ.");
+            //    return;
+            //}
 
             await _fornecedorRepository.Atualizar(fornecedor);
         }

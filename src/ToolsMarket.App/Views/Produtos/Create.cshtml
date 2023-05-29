@@ -7,7 +7,7 @@
 <div class="container account">
     <h5 style="text-align: center;">Adicionar Produto</h5>
     <div class="row">
-        <form enctype="multipart-formdata" asp-action="Create">
+        <form method="post" enctype="multipart/form-data" asp-action="Create">
             <input type="hidden" asp-for="Id" />
             <div class="row-form">
                 <div class="form-group">
@@ -68,7 +68,7 @@
             </div>
             <div class="form-group botao">
                 <a class="btn btn-primary botao-acao" asp-action="Index">Voltar</a>
-                <button type="submit" value="Atualizar" class="btn btn-success botao-acao">Atualizar</button>
+                <button type="submit" value="Salvar" class="btn btn-success botao-acao">Salvar</button>
             </div>
         </form>
     </div>

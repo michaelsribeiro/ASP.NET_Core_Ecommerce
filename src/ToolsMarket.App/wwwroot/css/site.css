@@ -822,7 +822,7 @@ footer .copyright .container {
             width: 100%;
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            gap: 30px;
         }
 
             .carrinho .table tbody .frete .frete-campos .frete-title {

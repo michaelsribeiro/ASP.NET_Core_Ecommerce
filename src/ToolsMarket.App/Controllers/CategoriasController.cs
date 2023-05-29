@@ -53,8 +53,6 @@ namespace ToolsMarket.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoriaViewModel categoriaViewModel)
         {
-            if (!ModelState.IsValid) return View(categoriaViewModel);
-
             await _categoriaService.Adicionar(_mapper.Map<Categoria>(categoriaViewModel));
 
             if (!OperacaoValida()) return View(categoriaViewModel);

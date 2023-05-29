@@ -129,7 +129,9 @@ namespace ToolsMarket.App.Controllers
             var produto= await ObterCategorias(new ProdutoViewModel());
 
             var produtoViewModel = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedor(id));
+
             produtoViewModel.Categorias = produto.Categorias;
+
             produtoViewModel.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
 
             if (produtoViewModel == null) return NotFound();
